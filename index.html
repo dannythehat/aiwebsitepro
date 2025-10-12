@@ -15,6 +15,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: #1f2937;
+            padding-top: 80px; /* Add padding to prevent menu overlap */
         }
         
         .header {
@@ -104,6 +105,8 @@
             padding: 120px 0 80px;
             text-align: center;
             display: block;
+            margin-top: -80px; /* Compensate for body padding */
+            padding-top: 200px; /* Add extra padding for hero */
         }
         
         .hero h1 {
@@ -425,6 +428,14 @@
         }
         
         @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .hero {
+                padding-top: 150px;
+            }
+            
             .nav-menu {
                 display: none;
                 position: absolute;
@@ -676,9 +687,9 @@
 
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">👨‍💻</div>
-                    <h3>Expert Leadership</h3>
-                    <p>Led by Daniel Allan, a seasoned web developer with years of experience in creating professional websites for businesses of all sizes.</p>
+                    <div class="service-icon">👥</div>
+                    <h3>Expert Team</h3>
+                    <p>We are a team of seasoned web developers with years of experience in creating professional websites for businesses of all sizes.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🤖</div>
@@ -867,7 +878,7 @@
             <div class="contact-info" style="margin-top: 60px;">
                 <div class="contact-item">
                     <span>📧</span>
-                    <a href="mailto:danny@ai-on-auto.com" style="color: #3b82f6; text-decoration: none;">danny@ai-on-auto.com</a>
+                    <a href="mailto:contact@aiwebsitepro.com" style="color: #3b82f6; text-decoration: none;">contact@aiwebsitepro.com</a>
                 </div>
                 <div class="contact-item">
                     <span>⚡</span>
@@ -977,7 +988,7 @@
             <div class="contact-info">
                 <div class="contact-item">
                     <span>📧</span>
-                    <a href="mailto:danny@ai-on-auto.com" style="color: white; text-decoration: none;">danny@ai-on-auto.com</a>
+                    <a href="mailto:contact@aiwebsitepro.com" style="color: white; text-decoration: none;">contact@aiwebsitepro.com</a>
                 </div>
                 <div class="contact-item">
                     <span>⚡</span>
@@ -990,7 +1001,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2024 AI Website Builder Pro. All rights reserved. | Created by Daniel Allan</p>
+                <p>&copy; 2024 AI Website Builder Pro. All rights reserved. | Created by AI Website Pro Team</p>
             </div>
         </div>
     </footer>
@@ -1077,7 +1088,7 @@
             // 2. Use Stripe to process the payment
             // 3. Redirect to consultation form after successful payment
             
-            alert(`Payment integration coming soon! You selected ${packageType} package for €${amount}. Please contact danny@ai-on-auto.com to proceed.`);
+            alert(`Payment integration coming soon! You selected ${packageType} package for €${amount}. Please contact contact@aiwebsitepro.com to proceed.`);
             
             // For now, redirect to contact form
             showSection('contact');
@@ -1102,7 +1113,7 @@ Package: ${data.package || 'Not specified'}
 Message:
 ${data.message || 'No additional message'}`;
             
-            const mailtoLink = `mailto:danny@ai-on-auto.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            const mailtoLink = `mailto:contact@aiwebsitepro.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             window.location.href = mailtoLink;
         });
 
