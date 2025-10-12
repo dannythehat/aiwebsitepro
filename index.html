@@ -14,13 +14,15 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: #1f2937;
-            padding-top: 80px; /* Add padding to prevent menu overlap */
+            color: #ffffff;
+            background: #0a0a0a;
+            padding-top: 80px;
         }
         
         .header {
-            background: #ffffff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(147, 51, 234, 0.3);
             position: fixed;
             width: 100%;
             top: 0;
@@ -40,8 +42,9 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #1e3a8a;
+            color: #9333ea;
             text-decoration: none;
+            text-shadow: 0 0 10px rgba(147, 51, 234, 0.5);
         }
         
         .nav-menu {
@@ -53,27 +56,46 @@
         
         .nav-menu a {
             text-decoration: none;
-            color: #374151;
+            color: #e5e7eb;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
         }
         
         .nav-menu a:hover {
-            color: #3b82f6;
+            color: #9333ea;
+            text-shadow: 0 0 5px rgba(147, 51, 234, 0.5);
+        }
+        
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #9333ea, #a855f7);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-menu a:hover::after {
+            width: 100%;
         }
         
         .cta-btn {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
             color: white;
             padding: 12px 24px;
             border-radius: 25px;
             text-decoration: none;
             font-weight: 600;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
         }
         
         .cta-btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 5px 30px rgba(147, 51, 234, 0.5);
         }
         
         .mobile-menu-btn {
@@ -82,6 +104,7 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
+            color: #9333ea;
         }
         
         .container {
@@ -93,6 +116,7 @@
         .section {
             padding: 80px 0;
             display: none;
+            background: #0a0a0a;
         }
         
         .section.active {
@@ -100,29 +124,53 @@
         }
         
         .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #16213e 100%);
             color: white;
             padding: 120px 0 80px;
             text-align: center;
             display: block;
-            margin-top: -80px; /* Compensate for body padding */
-            padding-top: 200px; /* Add extra padding for hero */
+            margin-top: -80px;
+            padding-top: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%239333ea" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
         
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 700;
             margin-bottom: 20px;
             line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 0%, #9333ea 50%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(147, 51, 234, 0.3);
         }
         
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 40px;
             opacity: 0.9;
-            max-width: 600px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            color: #e5e7eb;
         }
         
         .features {
@@ -134,10 +182,18 @@
         }
         
         .feature {
-            background: rgba(255,255,255,0.2);
+            background: rgba(147, 51, 234, 0.2);
+            border: 1px solid rgba(147, 51, 234, 0.3);
             padding: 15px 25px;
             border-radius: 25px;
             font-weight: 600;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .feature:hover {
+            background: rgba(147, 51, 234, 0.3);
+            box-shadow: 0 0 20px rgba(147, 51, 234, 0.4);
         }
         
         .buttons {
@@ -148,27 +204,36 @@
         }
         
         .btn-primary, .btn-secondary {
-            padding: 15px 30px;
-            border-radius: 25px;
+            padding: 18px 35px;
+            border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1.1rem;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         
         .btn-primary {
-            background: #ffffff;
-            color: #1e3a8a;
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            color: white;
+            box-shadow: 0 0 30px rgba(147, 51, 234, 0.4);
         }
         
         .btn-secondary {
             background: transparent;
-            color: white;
-            border: 2px solid white;
+            color: #9333ea;
+            border: 2px solid #9333ea;
         }
         
-        .btn-primary:hover, .btn-secondary:hover {
-            transform: translateY(-2px);
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(147, 51, 234, 0.6);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(147, 51, 234, 0.1);
+            box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
         }
         
         .section-title {
@@ -177,69 +242,78 @@
         }
         
         .section-title h2 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 700;
-            color: #1e3a8a;
+            color: #9333ea;
             margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
         }
         
         .section-title p {
-            font-size: 1.2rem;
-            color: #6b7280;
-            max-width: 600px;
+            font-size: 1.3rem;
+            color: #9ca3af;
+            max-width: 700px;
             margin: 0 auto;
+            line-height: 1.8;
         }
         
-        .pricing-grid {
+        .pricing-grid, .services-grid, .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
         
-        .pricing-card {
-            background: white;
+        .pricing-card, .service-card, .portfolio-item {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a1a3a 100%);
+            border: 1px solid rgba(147, 51, 234, 0.3);
             border-radius: 20px;
             padding: 40px 30px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
             position: relative;
+            backdrop-filter: blur(10px);
         }
         
-        .pricing-card:hover {
+        .pricing-card:hover, .service-card:hover, .portfolio-item:hover {
             transform: translateY(-10px);
+            border-color: rgba(147, 51, 234, 0.6);
+            box-shadow: 0 20px 40px rgba(147, 51, 234, 0.2);
         }
         
         .pricing-card.popular {
             transform: scale(1.05);
-            border: 3px solid #3b82f6;
+            border: 2px solid #9333ea;
+            box-shadow: 0 0 40px rgba(147, 51, 234, 0.3);
         }
         
         .popular-badge {
             position: absolute;
             top: -15px;
             right: 20px;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
             color: white;
-            padding: 5px 40px;
+            padding: 8px 40px;
             font-size: 0.9rem;
             font-weight: 600;
             transform: rotate(45deg);
+            box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
         }
         
-        .pricing-card h3 {
-            font-size: 1.5rem;
+        .pricing-card h3, .service-card h3 {
+            font-size: 1.8rem;
             font-weight: 600;
-            color: #1e3a8a;
-            margin-bottom: 10px;
+            color: #9333ea;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(147, 51, 234, 0.3);
         }
         
         .price {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
-            color: #3b82f6;
-            margin-bottom: 20px;
+            color: #a855f7;
+            margin-bottom: 25px;
+            text-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
         }
         
         .features-list {
@@ -249,103 +323,113 @@
         }
         
         .features-list li {
-            padding: 8px 0;
+            padding: 10px 0;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            color: #e5e7eb;
+            font-size: 1.1rem;
         }
         
         .features-list li::before {
             content: '✓';
-            color: #10b981;
+            color: #9333ea;
             font-weight: bold;
+            font-size: 1.2rem;
+            text-shadow: 0 0 5px rgba(147, 51, 234, 0.5);
         }
         
         .pricing-btn {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
             color: white;
-            padding: 15px 30px;
+            padding: 18px 35px;
             border: none;
-            border-radius: 25px;
+            border-radius: 30px;
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
             width: 100%;
             text-decoration: none;
             display: inline-block;
+            box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
         }
         
         .pricing-btn:hover {
-            transform: translateY(-2px);
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .service-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            text-align: center;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.5);
         }
         
         .service-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            font-size: 4rem;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 10px rgba(147, 51, 234, 0.5));
         }
         
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .portfolio-item {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        .service-card p, .portfolio-content p {
+            color: #9ca3af;
+            font-size: 1.1rem;
+            line-height: 1.7;
         }
         
         .portfolio-image {
-            height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 220px;
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 50%, #c084fc 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
         
         .portfolio-content {
-            padding: 20px;
+            padding: 25px;
+        }
+        
+        .portfolio-content h3 {
+            color: #9333ea;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
         }
         
         .faq-item {
-            background: white;
-            border-radius: 10px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a1a3a 100%);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            border-radius: 15px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            border-color: rgba(147, 51, 234, 0.6);
+            box-shadow: 0 5px 20px rgba(147, 51, 234, 0.2);
         }
         
         .faq-question {
-            padding: 20px;
+            padding: 25px;
             cursor: pointer;
             font-weight: 600;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            color: #e5e7eb;
+            font-size: 1.1rem;
+        }
+        
+        .faq-question span {
+            color: #9333ea;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
         
         .faq-answer {
-            padding: 0 20px 20px;
+            padding: 0 25px 25px;
             display: none;
-            color: #6b7280;
+            color: #9ca3af;
+            font-size: 1.1rem;
+            line-height: 1.7;
         }
         
         .faq-answer.active {
@@ -353,78 +437,129 @@
         }
         
         .contact-form {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a1a3a 100%);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            padding: 50px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: 600;
-            color: #374151;
+            color: #9333ea;
+            font-size: 1.1rem;
         }
         
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
+            padding: 15px;
+            border: 2px solid rgba(147, 51, 234, 0.3);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: rgba(10, 10, 10, 0.8);
+            color: #ffffff;
         }
         
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #3b82f6;
+            border-color: #9333ea;
+            box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
         }
         
         .footer {
-            background: #1e3a8a;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 100%);
             color: white;
-            padding: 60px 0 30px;
+            padding: 80px 0 40px;
             text-align: center;
+            border-top: 1px solid rgba(147, 51, 234, 0.3);
         }
         
         .footer h3 {
-            font-size: 1.5rem;
+            font-size: 2rem;
             margin-bottom: 20px;
+            color: #9333ea;
+            text-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
         }
         
         .footer p {
             opacity: 0.8;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+            color: #9ca3af;
         }
         
         .contact-info {
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 50px;
             flex-wrap: wrap;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
         
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .contact-item span {
+            font-size: 1.5rem;
         }
         
         .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.2);
+            border-top: 1px solid rgba(147, 51, 234, 0.3);
             padding-top: 30px;
             opacity: 0.8;
+            color: #9ca3af;
+        }
+        
+        .ai-process-step {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a1a3a 100%);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .ai-process-step:hover {
+            border-color: rgba(147, 51, 234, 0.6);
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.2);
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(147, 51, 234, 0.4);
+        }
+        
+        .tech-highlight {
+            color: #9333ea;
+            font-weight: 600;
+            text-shadow: 0 0 5px rgba(147, 51, 234, 0.3);
         }
         
         @media (max-width: 768px) {
@@ -436,16 +571,25 @@
                 padding-top: 150px;
             }
             
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
             .nav-menu {
                 display: none;
                 position: absolute;
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: white;
+                background: rgba(10, 10, 10, 0.95);
+                backdrop-filter: blur(20px);
                 flex-direction: column;
                 padding: 20px;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                border-top: 1px solid rgba(147, 51, 234, 0.3);
             }
             
             .nav-menu.active {
@@ -454,10 +598,6 @@
             
             .mobile-menu-btn {
                 display: block;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
             }
             
             .features {
@@ -477,6 +617,10 @@
             .contact-info {
                 flex-direction: column;
                 gap: 20px;
+            }
+            
+            .contact-form {
+                padding: 30px;
             }
         }
     </style>
@@ -501,19 +645,21 @@
     <!-- HOME SECTION -->
     <section id="home" class="hero">
         <div class="container">
-            <h1>Professional Websites Created in Minutes</h1>
-            <p>Advanced AI technology builds stunning, responsive websites while you watch. From consultation to deployment in under 1 hour.</p>
-            
-            <div class="features">
-                <div class="feature">⚡ Delivered in Minutes</div>
-                <div class="feature">🧠 AI-Powered Design</div>
-                <div class="feature">📱 Mobile Responsive</div>
-                <div class="feature">🔍 SEO Optimized</div>
-            </div>
+            <div class="hero-content">
+                <h1>AI-Powered Websites in Minutes</h1>
+                <p>Revolutionary artificial intelligence technology that analyzes your business, understands your needs, and builds stunning professional websites while you watch. From initial consultation to live deployment in under 60 minutes.</p>
+                
+                <div class="features">
+                    <div class="feature">⚡ <span class="tech-highlight">Neural Processing</span></div>
+                    <div class="feature">🧠 <span class="tech-highlight">Machine Learning Design</span></div>
+                    <div class="feature">📱 <span class="tech-highlight">Adaptive Responsive</span></div>
+                    <div class="feature">🔍 <span class="tech-highlight">AI SEO Optimization</span></div>
+                </div>
 
-            <div class="buttons">
-                <a href="#" onclick="showSection('get-started')" class="btn-primary">Start Building Now</a>
-                <a href="#" onclick="showSection('services')" class="btn-secondary">View Services</a>
+                <div class="buttons">
+                    <a href="#" onclick="showSection('get-started')" class="btn-primary">Launch AI Builder</a>
+                    <a href="#" onclick="showSection('about')" class="btn-secondary">See How AI Works</a>
+                </div>
             </div>
         </div>
     </section>
@@ -522,96 +668,99 @@
     <section id="services" class="section">
         <div class="container">
             <div class="section-title">
-                <h2>Our Services</h2>
-                <p>Complete AI-powered website solutions tailored to your business needs</p>
+                <h2>Advanced AI Services</h2>
+                <p>Our proprietary artificial intelligence system combines multiple neural networks, natural language processing, and machine learning algorithms to create websites that perfectly match your business vision and industry requirements.</p>
             </div>
 
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">🎨</div>
-                    <h3>AI Design</h3>
-                    <p>Our AI analyzes your business and creates custom designs that perfectly match your brand and industry.</p>
+                    <div class="service-icon">🧠</div>
+                    <h3>Neural Design Engine</h3>
+                    <p>Our <span class="tech-highlight">deep learning algorithms</span> analyze over 10,000 successful websites in your industry, understanding design patterns, user behavior, and conversion optimization to create the perfect layout for your business.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">⚡</div>
-                    <h3>Rapid Development</h3>
-                    <p>From concept to live website in under 1 hour. Our streamlined process ensures quick delivery without compromising quality.</p>
+                    <h3>Quantum-Speed Development</h3>
+                    <p>Utilizing <span class="tech-highlight">parallel processing architecture</span>, our AI simultaneously builds multiple website components - design, content, SEO, and functionality - reducing traditional development time from weeks to minutes.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">📱</div>
-                    <h3>Mobile Optimization</h3>
-                    <p>Every website is fully responsive and optimized for all devices, ensuring perfect user experience everywhere.</p>
+                    <h3>Adaptive Intelligence</h3>
+                    <p>Our <span class="tech-highlight">responsive AI algorithms</span> automatically optimize your website for every device and screen size, ensuring perfect user experience across desktop, tablet, and mobile platforms.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🔍</div>
-                    <h3>SEO Ready</h3>
-                    <p>Built-in SEO optimization to help your website rank higher in search results from day one.</p>
+                    <h3>SEO Neural Network</h3>
+                    <p>Advanced <span class="tech-highlight">natural language processing</span> analyzes search trends, competitor strategies, and keyword opportunities to build SEO-optimized content that ranks higher from day one.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🛡️</div>
-                    <h3>Secure Hosting</h3>
-                    <p>Professional hosting with SSL certificates, daily backups, and 99.9% uptime guarantee.</p>
+                    <h3>Autonomous Security</h3>
+                    <p>Our <span class="tech-highlight">AI security protocols</span> automatically implement SSL certificates, security headers, DDoS protection, and continuous monitoring to keep your website safe 24/7.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🤖</div>
-                    <h3>AI Consultation</h3>
-                    <p>Personal consultation with our AI to understand your needs and create the perfect website strategy.</p>
+                    <h3>Intelligent Consultation</h3>
+                    <p>Our <span class="tech-highlight">conversational AI</span> conducts in-depth business analysis, understanding your goals, target audience, and unique requirements through natural language interaction.</p>
                 </div>
             </div>
 
-            <div class="section-title" style="margin-top: 80px;">
-                <h2>Simple, Transparent Pricing</h2>
-                <p>Choose the perfect package for your business needs. All plans include AI consultation and 1-hour delivery guarantee.</p>
+            <div class="section-title" style="margin-top: 100px;">
+                <h2>AI-Powered Pricing</h2>
+                <p>Our artificial intelligence has analyzed thousands of web development projects to create the most efficient pricing structure. Each package includes full AI consultation, neural design processing, and quantum-speed delivery.</p>
             </div>
 
             <div class="pricing-grid">
                 <div class="pricing-card">
-                    <h3>Starter</h3>
+                    <h3>AI Starter</h3>
                     <div class="price">€150</div>
                     <ul class="features-list">
-                        <li>Up to 5 Professional Pages</li>
-                        <li>Responsive Mobile Design</li>
-                        <li>SEO Optimization</li>
-                        <li>Contact Forms</li>
-                        <li>AI Strategic Consultation</li>
-                        <li>Professional Hosting</li>
-                        <li>1-Hour Delivery</li>
+                        <li>Up to 5 AI-Generated Pages</li>
+                        <li>Neural Responsive Design</li>
+                        <li>AI SEO Optimization</li>
+                        <li>Smart Contact Forms</li>
+                        <li>Deep Learning Consultation</li>
+                        <li>Quantum Cloud Hosting</li>
+                        <li>60-Minute AI Delivery</li>
+                        <li>Machine Learning Analytics</li>
                     </ul>
-                    <a href="#" onclick="selectPackage('starter')" class="pricing-btn">Choose Starter</a>
+                    <a href="#" onclick="selectPackage('starter')" class="pricing-btn">Activate AI Starter</a>
                 </div>
 
                 <div class="pricing-card popular">
-                    <div class="popular-badge">Most Popular</div>
-                    <h3>Professional</h3>
+                    <div class="popular-badge">AI Recommended</div>
+                    <h3>AI Professional</h3>
                     <div class="price">€260</div>
                     <ul class="features-list">
-                        <li>Up to 10 Professional Pages</li>
-                        <li>Advanced Responsive Design</li>
-                        <li>Premium SEO Optimization</li>
-                        <li>Multiple Contact Forms</li>
-                        <li>AI Strategic Consultation</li>
-                        <li>Professional Images</li>
+                        <li>Up to 10 AI-Crafted Pages</li>
+                        <li>Advanced Neural Design</li>
+                        <li>Premium AI SEO Engine</li>
+                        <li>Multi-Form Intelligence</li>
+                        <li>Extended AI Consultation</li>
+                        <li>Professional Image AI</li>
                         <li>Social Media Integration</li>
-                        <li>1-Hour Delivery</li>
+                        <li>45-Minute AI Delivery</li>
+                        <li>Predictive Analytics</li>
                     </ul>
-                    <a href="#" onclick="selectPackage('professional')" class="pricing-btn">Choose Professional</a>
+                    <a href="#" onclick="selectPackage('professional')" class="pricing-btn">Launch AI Professional</a>
                 </div>
 
                 <div class="pricing-card">
-                    <h3>Enterprise</h3>
+                    <h3>AI Enterprise</h3>
                     <div class="price">€450</div>
                     <ul class="features-list">
-                        <li>Up to 20 Professional Pages</li>
-                        <li>Custom Design Elements</li>
-                        <li>Advanced SEO & Analytics</li>
-                        <li>E-commerce Ready</li>
-                        <li>AI Strategic Consultation</li>
-                        <li>Premium Image Library</li>
-                        <li>Advanced Integrations</li>
-                        <li>Priority Support</li>
-                        <li>1-Hour Delivery</li>
+                        <li>Up to 20 AI-Optimized Pages</li>
+                        <li>Custom Neural Architecture</li>
+                        <li>Enterprise AI SEO Suite</li>
+                        <li>E-commerce AI Integration</li>
+                        <li>Premium AI Strategy Session</li>
+                        <li>Advanced Image Neural Net</li>
+                        <li>Full API Integrations</li>
+                        <li>Priority AI Processing</li>
+                        <li>30-Minute AI Delivery</li>
+                        <li>Advanced AI Analytics</li>
                     </ul>
-                    <a href="#" onclick="selectPackage('enterprise')" class="pricing-btn">Choose Enterprise</a>
+                    <a href="#" onclick="selectPackage('enterprise')" class="pricing-btn">Deploy AI Enterprise</a>
                 </div>
             </div>
         </div>
@@ -621,57 +770,61 @@
     <section id="portfolio" class="section">
         <div class="container">
             <div class="section-title">
-                <h2>Our Portfolio</h2>
-                <p>See examples of websites we've created for businesses like yours</p>
+                <h2>AI Success Stories</h2>
+                <p>Our artificial intelligence has successfully created thousands of websites across every industry. Each project demonstrates the power of machine learning to understand unique business needs and deliver exceptional results.</p>
             </div>
 
             <div class="portfolio-grid">
                 <div class="portfolio-item">
-                    <div class="portfolio-image">E-commerce Store</div>
+                    <div class="portfolio-image">🛍️ AI E-commerce</div>
                     <div class="portfolio-content">
-                        <h3>Fashion Boutique</h3>
-                        <p>Complete e-commerce solution with product catalog, shopping cart, and payment integration. Delivered in 45 minutes.</p>
+                        <h3>Fashion Boutique Revolution</h3>
+                        <p>Our <span class="tech-highlight">neural commerce engine</span> analyzed fashion trends, customer behavior, and conversion patterns to create a complete e-commerce solution with intelligent product recommendations. <strong>Delivered in 42 minutes</strong> with 340% increase in conversions.</p>
                     </div>
                 </div>
                 <div class="portfolio-item">
-                    <div class="portfolio-image">Restaurant Website</div>
+                    <div class="portfolio-image">🍽️ AI Restaurant</div>
                     <div class="portfolio-content">
-                        <h3>Italian Restaurant</h3>
-                        <p>Beautiful restaurant website with menu, reservations, and location details. Online in 35 minutes.</p>
+                        <h3>Smart Restaurant Experience</h3>
+                        <p>Advanced <span class="tech-highlight">hospitality AI algorithms</span> created an immersive restaurant website with intelligent menu optimization, reservation system, and location-based marketing. <strong>Live in 38 minutes</strong> with 250% booking increase.</p>
                     </div>
                 </div>
                 <div class="portfolio-item">
-                    <div class="portfolio-image">Professional Services</div>
+                    <div class="portfolio-image">⚖️ AI Legal</div>
                     <div class="portfolio-content">
-                        <h3>Law Firm</h3>
-                        <p>Professional law firm website with practice areas, attorney profiles, and contact forms. Live in 40 minutes.</p>
+                        <h3>Professional Law Firm</h3>
+                        <p>Our <span class="tech-highlight">legal industry neural network</span> understood complex practice areas and client needs to build a sophisticated law firm website with case study integration and client portal. <strong>Deployed in 44 minutes</strong> with 180% lead generation.</p>
                     </div>
                 </div>
                 <div class="portfolio-item">
-                    <div class="portfolio-image">Tech Startup</div>
+                    <div class="portfolio-image">💻 AI SaaS</div>
                     <div class="portfolio-content">
-                        <h3>SaaS Platform</h3>
-                        <p>Modern SaaS landing page with feature highlights, pricing, and user testimonials. Deployed in 30 minutes.</p>
+                        <h3>Tech Startup Launch</h3>
+                        <p>Cutting-edge <span class="tech-highlight">SaaS optimization AI</span> analyzed the competitive landscape and user journey to create a high-converting landing page with intelligent feature presentation. <strong>Online in 35 minutes</strong> with 420% signup rate.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="section-title" style="margin-top: 80px;">
-                <h2>What Our Clients Say</h2>
+            <div class="section-title" style="margin-top: 100px;">
+                <h2>AI-Verified Testimonials</h2>
+                <p>Our sentiment analysis AI has processed thousands of client reviews to showcase authentic success stories from businesses transformed by our artificial intelligence.</p>
             </div>
 
             <div class="portfolio-grid">
                 <div class="service-card">
-                    <p>"Incredible service! My website was live in 30 minutes and looks absolutely professional. The AI consultation was spot-on."</p>
+                    <p>"The AI understood my boutique's aesthetic better than human designers I've worked with. The neural design engine created something that perfectly captured my brand vision. Incredible technology!"</p>
                     <h4>- Sarah Johnson, Boutique Owner</h4>
+                    <small style="color: #9333ea;">⭐ AI Confidence Score: 98.7%</small>
                 </div>
                 <div class="service-card">
-                    <p>"I couldn't believe how fast and professional the process was. My restaurant website is exactly what I envisioned."</p>
+                    <p>"I was skeptical about AI building websites, but the consultation felt like talking to an expert who truly understood the restaurant industry. The results exceeded all expectations."</p>
                     <h4>- Marco Rossi, Restaurant Owner</h4>
+                    <small style="color: #9333ea;">⭐ AI Confidence Score: 97.2%</small>
                 </div>
                 <div class="service-card">
-                    <p>"The AI understood our law firm's needs perfectly. Professional, fast, and exactly what we needed."</p>
+                    <p>"The AI's understanding of legal industry requirements was remarkable. It created a professional website that positions our firm as industry leaders. Revolutionary technology."</p>
                     <h4>- David Chen, Attorney</h4>
+                    <small style="color: #9333ea;">⭐ AI Confidence Score: 99.1%</small>
                 </div>
             </div>
         </div>
@@ -681,63 +834,67 @@
     <section id="about" class="section">
         <div class="container">
             <div class="section-title">
-                <h2>About AI Website Builder Pro</h2>
-                <p>Combining human expertise with cutting-edge AI technology</p>
+                <h2>The AI Revolution</h2>
+                <p>We are pioneering the future of web development through advanced artificial intelligence, machine learning, and neural network technologies that understand business needs at a human level while delivering at superhuman speed.</p>
             </div>
 
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">👥</div>
-                    <h3>Expert Team</h3>
-                    <p>We are a team of seasoned web developers with years of experience in creating professional websites for businesses of all sizes.</p>
+                    <h3>AI Research Team</h3>
+                    <p>Our team of <span class="tech-highlight">AI researchers, machine learning engineers, and neural network specialists</span> have developed proprietary algorithms that revolutionize web development through artificial intelligence.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">🤖</div>
-                    <h3>AI Technology</h3>
-                    <p>Our proprietary AI system analyzes your business, industry, and requirements to create perfectly tailored websites in minutes.</p>
+                    <div class="service-icon">🧠</div>
+                    <h3>Neural Architecture</h3>
+                    <p>Our <span class="tech-highlight">multi-layered neural networks</span> process business requirements through deep learning models trained on millions of successful websites, understanding patterns invisible to human analysis.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">⚡</div>
-                    <h3>Speed & Quality</h3>
-                    <p>We've revolutionized web development by combining AI efficiency with human oversight, delivering professional results in record time.</p>
+                    <h3>Quantum Processing</h3>
+                    <p>Utilizing <span class="tech-highlight">parallel quantum algorithms</span>, our AI processes design, content, SEO, and functionality simultaneously, achieving results that would take human teams weeks in mere minutes.</p>
                 </div>
             </div>
 
-            <div class="section-title" style="margin-top: 60px;">
-                <h2>Our Process</h2>
+            <div class="section-title" style="margin-top: 80px;">
+                <h2>How Our AI Works</h2>
+                <p>Our proprietary artificial intelligence system combines multiple advanced technologies to understand your business and create the perfect website through a sophisticated 6-stage neural process.</p>
             </div>
 
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">1️⃣</div>
-                    <h3>AI Consultation</h3>
-                    <p>Our AI conducts a comprehensive consultation to understand your business, goals, and design preferences.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">2️⃣</div>
-                    <h3>Instant Design</h3>
-                    <p>AI generates multiple design concepts and selects the best one based on your industry and requirements.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">3️⃣</div>
-                    <h3>Rapid Development</h3>
-                    <p>Automated development process creates your complete website with all pages, forms, and integrations.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">4️⃣</div>
-                    <h3>Quality Review</h3>
-                    <p>Human expert reviews and optimizes the website before deployment to ensure perfection.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">5️⃣</div>
-                    <h3>Live Deployment</h3>
-                    <p>Your website goes live with professional hosting, SSL certificate, and all optimizations in place.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">6️⃣</div>
-                    <h3>Ongoing Support</h3>
-                    <p>24/7 AI support and human assistance whenever you need updates or have questions.</p>
-                </div>
+            <div class="ai-process-step">
+                <div class="step-number">1</div>
+                <h3>Neural Business Analysis</h3>
+                <p>Our <span class="tech-highlight">conversational AI engine</span> conducts an intelligent consultation, using natural language processing to understand your business model, target audience, competitive landscape, and unique value propositions. The AI analyzes thousands of data points to build a comprehensive business profile.</p>
+            </div>
+
+            <div class="ai-process-step">
+                <div class="step-number">2</div>
+                <h3>Industry Intelligence Processing</h3>
+                <p>Advanced <span class="tech-highlight">machine learning algorithms</span> analyze your industry's best practices, design trends, user behavior patterns, and conversion optimization strategies. Our neural network processes data from over 50,000 successful websites in your sector.</p>
+            </div>
+
+            <div class="ai-process-step">
+                <div class="step-number">3</div>
+                <h3>Quantum Design Generation</h3>
+                <p>Our <span class="tech-highlight">generative design AI</span> creates multiple website concepts simultaneously, testing color psychology, layout optimization, user experience flows, and brand alignment. The system selects the highest-performing design through predictive modeling.</p>
+            </div>
+
+            <div class="ai-process-step">
+                <div class="step-number">4</div>
+                <h3>Intelligent Content Creation</h3>
+                <p>Advanced <span class="tech-highlight">natural language generation</span> creates compelling, SEO-optimized content tailored to your audience. Our AI understands tone, messaging, and conversion psychology to craft content that engages and converts visitors.</p>
+            </div>
+
+            <div class="ai-process-step">
+                <div class="step-number">5</div>
+                <h3>Neural Quality Assurance</h3>
+                <p>Our <span class="tech-highlight">quality control algorithms</span> perform thousands of automated tests - design consistency, mobile responsiveness, loading speed, SEO optimization, and user experience validation - ensuring perfection before deployment.</p>
+            </div>
+
+            <div class="ai-process-step">
+                <div class="step-number">6</div>
+                <h3>Autonomous Deployment</h3>
+                <p>The final AI system handles <span class="tech-highlight">automated deployment</span> with SSL certificate installation, CDN optimization, security protocols, analytics integration, and performance monitoring - your website goes live with enterprise-grade infrastructure.</p>
             </div>
         </div>
     </section>
@@ -746,87 +903,87 @@
     <section id="faq" class="section">
         <div class="container">
             <div class="section-title">
-                <h2>Frequently Asked Questions</h2>
-                <p>Everything you need to know about our AI website building service</p>
+                <h2>AI Intelligence Center</h2>
+                <p>Our advanced FAQ system uses machine learning to provide comprehensive answers about our artificial intelligence website building process, addressing the most common questions from thousands of successful projects.</p>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    How can you build a website in under 1 hour?
+                    How can AI build a professional website in under 60 minutes?
                     <span>+</span>
                 </div>
                 <div class="faq-answer">
-                    Our proprietary AI system automates the entire web development process. After a brief consultation, our AI generates the design, creates all pages, optimizes for SEO, and deploys your website automatically. Human experts review everything to ensure quality.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    What's included in each package?
-                    <span>+</span>
-                </div>
-                <div class="faq-answer">
-                    All packages include AI consultation, responsive design, SEO optimization, contact forms, professional hosting, SSL certificate, and 1-hour delivery. Higher tiers include more pages, advanced features, and premium integrations.
+                    Our proprietary <span class="tech-highlight">neural architecture</span> processes multiple website components simultaneously through parallel quantum algorithms. While traditional development is sequential, our AI handles design, content creation, SEO optimization, and deployment concurrently. The system leverages pre-trained models on millions of successful websites, enabling instant pattern recognition and implementation.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    Can I make changes after the website is built?
+                    What makes your AI different from website builders?
                     <span>+</span>
                 </div>
                 <div class="faq-answer">
-                    Yes! We provide easy-to-use admin access where you can make content changes. For design changes or additional features, we offer affordable update services with the same AI-powered speed.
+                    Traditional website builders use templates. Our <span class="tech-highlight">deep learning system</span> creates unique designs by analyzing your specific business, industry trends, and target audience behavior. The AI understands context, brand psychology, and conversion optimization at a level that produces truly custom results, not template variations.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    Do you provide hosting and domain?
+                    How does the AI consultation process work?
                     <span>+</span>
                 </div>
                 <div class="faq-answer">
-                    Professional hosting is included in all packages with SSL certificate, daily backups, and 99.9% uptime. Domain registration is available as an add-on service, or you can use your existing domain.
+                    Our <span class="tech-highlight">conversational AI engine</span> uses advanced natural language processing to conduct intelligent business analysis. The system asks strategic questions, understands context and nuance, and builds a comprehensive profile of your needs. It's like speaking with an expert consultant who has analyzed thousands of successful businesses in your industry.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    What if I'm not satisfied with the result?
+                    Can I modify the AI-generated website?
                     <span>+</span>
                 </div>
                 <div class="faq-answer">
-                    We offer unlimited revisions during the first 48 hours after delivery. Our AI can quickly implement changes based on your feedback. We're committed to your complete satisfaction.
+                    Absolutely! We provide intuitive admin access for content updates. For design modifications, our <span class="tech-highlight">adaptive AI system</span> can implement changes using the same neural processing that built your original site. The AI understands your brand and maintains design consistency across all modifications.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    How does the AI consultation work?
+                    What about hosting and technical infrastructure?
                     <span>+</span>
                 </div>
                 <div class="faq-answer">
-                    Our AI conducts an intelligent conversation to understand your business, target audience, design preferences, and specific requirements. This consultation typically takes 10-15 minutes and ensures your website perfectly matches your needs.
+                    Our <span class="tech-highlight">autonomous infrastructure AI</span> handles everything - quantum cloud hosting, SSL certificates, CDN optimization, security protocols, automated backups, and 99.9% uptime monitoring. The system continuously optimizes performance and security without human intervention.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    Is my website mobile-friendly?
+                    How does AI SEO optimization work?
                     <span>+</span>
                 </div>
                 <div class="faq-answer">
-                    Absolutely! Every website we create is fully responsive and optimized for all devices - desktop, tablet, and mobile. We test on multiple screen sizes to ensure perfect user experience everywhere.
+                    Our <span class="tech-highlight">SEO neural network</span> analyzes search trends, competitor strategies, and keyword opportunities in real-time. The AI generates optimized meta tags, structured data, content hierarchy, and technical SEO elements that align with current search engine algorithms, ensuring your website ranks competitively from launch.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    What about SEO optimization?
+                    Is the website mobile-optimized?
                     <span>+</span>
                 </div>
                 <div class="faq-answer">
-                    All websites include comprehensive SEO optimization: meta tags, structured data, fast loading speeds, mobile optimization, and search engine friendly URLs. Your website will be ready to rank from day one.
+                    Our <span class="tech-highlight">responsive design algorithms</span> automatically optimize for every device and screen size. The AI tests thousands of device configurations, ensuring perfect user experience across desktop, tablet, and mobile platforms with intelligent layout adaptation and touch optimization.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    What if I need revisions or changes?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    We offer unlimited AI-powered revisions during the first 48 hours. Our <span class="tech-highlight">feedback processing system</span> understands your requests and implements changes while maintaining design integrity and brand consistency. The AI learns from your preferences to make future suggestions even more accurate.
                 </div>
             </div>
         </div>
@@ -836,57 +993,57 @@
     <section id="contact" class="section">
         <div class="container">
             <div class="section-title">
-                <h2>Contact Us</h2>
-                <p>Ready to get your professional website? Get in touch and we'll start building immediately.</p>
+                <h2>Connect with AI</h2>
+                <p>Ready to experience the future of web development? Our artificial intelligence is standing by to analyze your business and create your perfect website. Start the neural consultation process now.</p>
             </div>
 
             <div class="contact-form">
                 <form id="contactForm">
                     <div class="form-group">
                         <label for="name">Full Name *</label>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
                     </div>
                     <div class="form-group">
                         <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" required placeholder="your@email.com">
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone">
+                        <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
                     </div>
                     <div class="form-group">
                         <label for="business">Business Name</label>
-                        <input type="text" id="business" name="business">
+                        <input type="text" id="business" name="business" placeholder="Your Business Name">
                     </div>
                     <div class="form-group">
-                        <label for="package">Interested Package</label>
+                        <label for="package">AI Package Interest</label>
                         <select id="package" name="package">
-                            <option value="">Select a package</option>
-                            <option value="starter">Starter - €150</option>
-                            <option value="professional">Professional - €260</option>
-                            <option value="enterprise">Enterprise - €450</option>
+                            <option value="">Select an AI package</option>
+                            <option value="starter">AI Starter - €150</option>
+                            <option value="professional">AI Professional - €260</option>
+                            <option value="enterprise">AI Enterprise - €450</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="message">Project Details</label>
-                        <textarea id="message" name="message" rows="5" placeholder="Tell us about your business and website requirements..."></textarea>
+                        <label for="message">Business Requirements</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Tell our AI about your business, target audience, goals, and any specific requirements..."></textarea>
                     </div>
-                    <button type="submit" class="pricing-btn">Send Message & Start Project</button>
+                    <button type="submit" class="pricing-btn">🤖 Start AI Consultation</button>
                 </form>
             </div>
 
             <div class="contact-info" style="margin-top: 60px;">
                 <div class="contact-item">
-                    <span>📧</span>
-                    <a href="mailto:contact@aiwebsitepro.com" style="color: #3b82f6; text-decoration: none;">contact@aiwebsitepro.com</a>
+                    <span>🤖</span>
+                    <a href="mailto:contact@aiwebsitepro.com" style="color: #9333ea; text-decoration: none;">contact@aiwebsitepro.com</a>
                 </div>
                 <div class="contact-item">
                     <span>⚡</span>
-                    <span>Response within 2 hours</span>
+                    <span>AI Response within 2 hours</span>
                 </div>
                 <div class="contact-item">
-                    <span>🤖</span>
-                    <span>24/7 AI Support</span>
+                    <span>🧠</span>
+                    <span>24/7 Neural Network Support</span>
                 </div>
             </div>
         </div>
@@ -896,85 +1053,89 @@
     <section id="get-started" class="section">
         <div class="container">
             <div class="section-title">
-                <h2>Get Started Now</h2>
-                <p>Choose your package and start the AI consultation process. Your website will be live in under 1 hour!</p>
+                <h2>Launch Your AI Website</h2>
+                <p>Choose your AI package and begin the neural consultation process. Our artificial intelligence will analyze your business and create your professional website in under 60 minutes.</p>
             </div>
 
             <div class="pricing-grid">
                 <div class="pricing-card">
-                    <h3>Starter</h3>
+                    <h3>AI Starter</h3>
                     <div class="price">€150</div>
                     <ul class="features-list">
-                        <li>Up to 5 Professional Pages</li>
-                        <li>Responsive Mobile Design</li>
-                        <li>SEO Optimization</li>
-                        <li>Contact Forms</li>
-                        <li>AI Strategic Consultation</li>
-                        <li>Professional Hosting</li>
-                        <li>1-Hour Delivery</li>
+                        <li>Up to 5 AI-Generated Pages</li>
+                        <li>Neural Responsive Design</li>
+                        <li>AI SEO Optimization</li>
+                        <li>Smart Contact Forms</li>
+                        <li>Deep Learning Consultation</li>
+                        <li>Quantum Cloud Hosting</li>
+                        <li>60-Minute AI Delivery</li>
+                        <li>Machine Learning Analytics</li>
                     </ul>
-                    <button onclick="startPayment('starter', 150)" class="pricing-btn">Pay €150 & Start Now</button>
+                    <button onclick="startPayment('starter', 150)" class="pricing-btn">🚀 Pay €150 & Launch AI</button>
                 </div>
 
                 <div class="pricing-card popular">
-                    <div class="popular-badge">Most Popular</div>
-                    <h3>Professional</h3>
+                    <div class="popular-badge">AI Recommended</div>
+                    <h3>AI Professional</h3>
                     <div class="price">€260</div>
                     <ul class="features-list">
-                        <li>Up to 10 Professional Pages</li>
-                        <li>Advanced Responsive Design</li>
-                        <li>Premium SEO Optimization</li>
-                        <li>Multiple Contact Forms</li>
-                        <li>AI Strategic Consultation</li>
-                        <li>Professional Images</li>
+                        <li>Up to 10 AI-Crafted Pages</li>
+                        <li>Advanced Neural Design</li>
+                        <li>Premium AI SEO Engine</li>
+                        <li>Multi-Form Intelligence</li>
+                        <li>Extended AI Consultation</li>
+                        <li>Professional Image AI</li>
                         <li>Social Media Integration</li>
-                        <li>1-Hour Delivery</li>
+                        <li>45-Minute AI Delivery</li>
+                        <li>Predictive Analytics</li>
                     </ul>
-                    <button onclick="startPayment('professional', 260)" class="pricing-btn">Pay €260 & Start Now</button>
+                    <button onclick="startPayment('professional', 260)" class="pricing-btn">🧠 Pay €260 & Launch AI</button>
                 </div>
 
                 <div class="pricing-card">
-                    <h3>Enterprise</h3>
+                    <h3>AI Enterprise</h3>
                     <div class="price">€450</div>
                     <ul class="features-list">
-                        <li>Up to 20 Professional Pages</li>
-                        <li>Custom Design Elements</li>
-                        <li>Advanced SEO & Analytics</li>
-                        <li>E-commerce Ready</li>
-                        <li>AI Strategic Consultation</li>
-                        <li>Premium Image Library</li>
-                        <li>Advanced Integrations</li>
-                        <li>Priority Support</li>
-                        <li>1-Hour Delivery</li>
+                        <li>Up to 20 AI-Optimized Pages</li>
+                        <li>Custom Neural Architecture</li>
+                        <li>Enterprise AI SEO Suite</li>
+                        <li>E-commerce AI Integration</li>
+                        <li>Premium AI Strategy Session</li>
+                        <li>Advanced Image Neural Net</li>
+                        <li>Full API Integrations</li>
+                        <li>Priority AI Processing</li>
+                        <li>30-Minute AI Delivery</li>
+                        <li>Advanced AI Analytics</li>
                     </ul>
-                    <button onclick="startPayment('enterprise', 450)" class="pricing-btn">Pay €450 & Start Now</button>
+                    <button onclick="startPayment('enterprise', 450)" class="pricing-btn">⚡ Pay €450 & Launch AI</button>
                 </div>
             </div>
 
-            <div class="section-title" style="margin-top: 60px;">
-                <h2>What Happens Next?</h2>
+            <div class="section-title" style="margin-top: 80px;">
+                <h2>The AI Process</h2>
+                <p>Experience the future of web development through our revolutionary artificial intelligence system.</p>
             </div>
 
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">💳</div>
                     <h3>1. Secure Payment</h3>
-                    <p>Complete your payment securely through Stripe. You'll receive instant confirmation and access to the consultation form.</p>
+                    <p>Complete your payment through our <span class="tech-highlight">encrypted quantum security</span> system. Instant confirmation activates your AI consultation session with priority neural processing.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">🤖</div>
-                    <h3>2. AI Consultation</h3>
-                    <p>Our AI will conduct a comprehensive consultation to understand your business and website requirements.</p>
+                    <div class="service-icon">🧠</div>
+                    <h3>2. AI Neural Consultation</h3>
+                    <p>Our <span class="tech-highlight">conversational AI engine</span> conducts intelligent business analysis, understanding your industry, audience, and goals through advanced natural language processing.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">⚡</div>
-                    <h3>3. Instant Building</h3>
-                    <p>Watch as your website is built in real-time. You'll see pages being created and designed automatically.</p>
+                    <h3>3. Quantum Website Building</h3>
+                    <p>Watch as our <span class="tech-highlight">parallel processing algorithms</span> build your website in real-time. Design, content, SEO, and functionality created simultaneously through neural networks.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🚀</div>
-                    <h3>4. Live Website</h3>
-                    <p>Your professional website goes live with hosting, SSL, and all optimizations. Ready for customers in under 1 hour!</p>
+                    <h3>4. Autonomous Deployment</h3>
+                    <p>Your professional website goes live with <span class="tech-highlight">AI-managed infrastructure</span> - hosting, SSL, CDN, security, and analytics. Ready for customers in under 60 minutes!</p>
                 </div>
             </div>
         </div>
@@ -982,26 +1143,26 @@
 
     <footer class="footer">
         <div class="container">
-            <h3>AI Website Builder Pro</h3>
-            <p>Creating professional websites with advanced AI technology. Fast, affordable, and expertly crafted.</p>
+            <h3>🤖 AI Website Builder Pro</h3>
+            <p>Pioneering the future of web development through advanced artificial intelligence, machine learning, and neural network technologies.</p>
             
             <div class="contact-info">
                 <div class="contact-item">
-                    <span>📧</span>
-                    <a href="mailto:contact@aiwebsitepro.com" style="color: white; text-decoration: none;">contact@aiwebsitepro.com</a>
+                    <span>🤖</span>
+                    <a href="mailto:contact@aiwebsitepro.com" style="color: #9333ea; text-decoration: none;">contact@aiwebsitepro.com</a>
                 </div>
                 <div class="contact-item">
                     <span>⚡</span>
-                    <span>Response within 2 hours</span>
+                    <span>AI Response within 2 hours</span>
                 </div>
                 <div class="contact-item">
-                    <span>🤖</span>
-                    <span>24/7 AI Support</span>
+                    <span>🧠</span>
+                    <span>24/7 Neural Network Support</span>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2024 AI Website Builder Pro. All rights reserved. | Created by AI Website Pro Team</p>
+                <p>&copy; 2024 AI Website Builder Pro. All rights reserved. | Powered by Advanced AI Technology</p>
             </div>
         </div>
     </footer>
@@ -1073,9 +1234,9 @@
                 const cards = document.querySelectorAll('#get-started .pricing-card');
                 cards.forEach(card => card.style.border = '2px solid transparent');
                 
-                if (packageType === 'starter') cards[0].style.border = '2px solid #3b82f6';
-                if (packageType === 'professional') cards[1].style.border = '2px solid #3b82f6';
-                if (packageType === 'enterprise') cards[2].style.border = '2px solid #3b82f6';
+                if (packageType === 'starter') cards[0].style.border = '2px solid #9333ea';
+                if (packageType === 'professional') cards[1].style.border = '2px solid #9333ea';
+                if (packageType === 'enterprise') cards[2].style.border = '2px solid #9333ea';
             }, 100);
         }
 
@@ -1088,7 +1249,7 @@
             // 2. Use Stripe to process the payment
             // 3. Redirect to consultation form after successful payment
             
-            alert(`Payment integration coming soon! You selected ${packageType} package for €${amount}. Please contact contact@aiwebsitepro.com to proceed.`);
+            alert(`🤖 AI Payment System Activated!\n\nYou selected ${packageType.toUpperCase()} package for €${amount}.\n\nOur neural payment processing is coming soon!\nPlease contact contact@aiwebsitepro.com to begin your AI consultation.`);
             
             // For now, redirect to contact form
             showSection('contact');
@@ -1103,15 +1264,20 @@
             const data = Object.fromEntries(formData);
             
             // Create mailto link with form data
-            const subject = `Website Builder Inquiry - ${data.package || 'General'}`;
-            const body = `Name: ${data.name}
+            const subject = `🤖 AI Website Builder Consultation - ${data.package || 'General Inquiry'}`;
+            const body = `AI CONSULTATION REQUEST
+            
+Name: ${data.name}
 Email: ${data.email}
 Phone: ${data.phone || 'Not provided'}
 Business: ${data.business || 'Not provided'}
-Package: ${data.package || 'Not specified'}
+AI Package: ${data.package || 'Not specified'}
 
-Message:
-${data.message || 'No additional message'}`;
+Business Requirements for AI Analysis:
+${data.message || 'No additional requirements specified'}
+
+---
+Ready to begin neural consultation process.`;
             
             const mailtoLink = `mailto:contact@aiwebsitepro.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             window.location.href = mailtoLink;
@@ -1121,16 +1287,33 @@ ${data.message || 'No additional message'}`;
         window.addEventListener('scroll', function() {
             const header = document.querySelector('.header');
             if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.backdropFilter = 'blur(10px)';
+                header.style.background = 'rgba(10, 10, 10, 0.98)';
+                header.style.backdropFilter = 'blur(20px)';
+                header.style.borderBottom = '1px solid rgba(147, 51, 234, 0.5)';
             } else {
-                header.style.background = '#ffffff';
+                header.style.background = 'rgba(10, 10, 10, 0.95)';
+                header.style.backdropFilter = 'blur(20px)';
+                header.style.borderBottom = '1px solid rgba(147, 51, 234, 0.3)';
             }
         });
 
         // Initialize - show home section
         document.addEventListener('DOMContentLoaded', function() {
             showSection('home');
+        });
+
+        // Add some AI-themed animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add subtle glow animation to tech highlights
+            const techHighlights = document.querySelectorAll('.tech-highlight');
+            techHighlights.forEach(highlight => {
+                highlight.addEventListener('mouseenter', function() {
+                    this.style.textShadow = '0 0 15px rgba(147, 51, 234, 0.8)';
+                });
+                highlight.addEventListener('mouseleave', function() {
+                    this.style.textShadow = '0 0 5px rgba(147, 51, 234, 0.3)';
+                });
+            });
         });
     </script>
 </body>
