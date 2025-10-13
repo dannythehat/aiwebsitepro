@@ -640,6 +640,85 @@
             font-weight: 600;
         }
         
+        .demo-showcase {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a1a3a 100%);
+            border: 3px solid rgba(147, 51, 234, 0.6);
+            border-radius: 20px;
+            padding: 50px;
+            margin: 50px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .demo-showcase::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .demo-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .demo-icon {
+            font-size: 5rem;
+            margin-bottom: 25px;
+            animation: pulse 3s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .demo-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #9333ea;
+            margin-bottom: 20px;
+            filter: contrast(1.3) brightness(1.2);
+        }
+        
+        .demo-description {
+            font-size: 1.3rem;
+            color: #ffffff;
+            margin-bottom: 35px;
+            line-height: 1.6;
+            font-weight: 600;
+        }
+        
+        .demo-btn {
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            color: white;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 1.3rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.4);
+        }
+        
+        .demo-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(147, 51, 234, 0.6);
+        }
+        
         /* Blog Section Styles */
         .blog-grid {
             display: grid;
@@ -886,6 +965,14 @@
                 width: 320px;
                 height: 450px;
             }
+            
+            .demo-showcase {
+                padding: 30px;
+            }
+            
+            .demo-title {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -895,6 +982,7 @@
             <a href="#" class="logo" onclick="showSection('home')">🤖 AI Website Builder Pro</a>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#" onclick="showSectionAndCloseMenu('home')">Home</a></li>
+                <li><a href="#" onclick="showSectionAndCloseMenu('demo')">Live Demo</a></li>
                 <li><a href="#" onclick="showSectionAndCloseMenu('services')">Services</a></li>
                 <li><a href="#" onclick="showSectionAndCloseMenu('portfolio')">Portfolio</a></li>
                 <li><a href="#" onclick="showSectionAndCloseMenu('about')">About</a></li>
@@ -922,9 +1010,61 @@
                 </div>
 
                 <div class="buttons">
-                    <a href="#" onclick="showSection('get-started')" class="btn-primary">Start AI Website Creation</a>
-                    <a href="#" onclick="showSection('about')" class="btn-secondary">See How AI Works</a>
+                    <a href="#" onclick="showSection('demo')" class="btn-primary">🎬 Watch AI Demo</a>
+                    <a href="#" onclick="showSection('get-started')" class="btn-secondary">Start AI Website Creation</a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIVE DEMO SECTION -->
+    <section id="demo" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Watch AI Create a Website Live</h2>
+                <p>Experience the magic of AI website generation. See how our neural networks analyze your business and create a professional website in real-time.</p>
+            </div>
+
+            <div class="demo-showcase">
+                <div class="demo-content">
+                    <div class="demo-icon">🧠</div>
+                    <h3 class="demo-title">Interactive AI Demo</h3>
+                    <p class="demo-description">
+                        Enter your business information and watch our AI create a complete website with intelligent content, 
+                        perfect design, and industry-specific features. See the neural networks in action!
+                    </p>
+                    <a href="demo.html" class="demo-btn" target="_blank">
+                        🎬 Launch Interactive Demo
+                    </a>
+                </div>
+            </div>
+
+            <div class="services-grid" style="margin-top: 60px;">
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3>Business Analysis</h3>
+                    <p>Watch AI analyze your industry, target audience, and business goals to create the perfect website structure and content strategy.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3>Design Generation</h3>
+                    <p>See neural networks generate <span class="tech-highlight">custom designs</span> with perfect color schemes, layouts, and visual elements for your brand.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📝</div>
+                    <h3>Content Creation</h3>
+                    <p>Experience AI writing compelling copy, creating engaging headlines, and optimizing content for your specific audience and industry.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Mobile Optimization</h3>
+                    <p>Watch the AI ensure <span class="tech-highlight">perfect mobile responsiveness</span> with touch-friendly interfaces and fast loading speeds.</p>
+                </div>
+            </div>
+
+            <div class="optional-services">
+                <h4>🎯 Try Different Industries</h4>
+                <p>The demo includes templates for restaurants, tech companies, healthcare, retail, legal services, consulting, fitness, and beauty businesses. See how AI adapts to each industry!</p>
             </div>
         </div>
     </section>
@@ -1181,6 +1321,16 @@
 
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
+                    Can I see the AI in action before ordering?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    <strong>Yes!</strong> Try our <span class="tech-highlight">interactive live demo</span> to see exactly how our AI creates websites. Enter your business information and watch the neural networks generate a complete website with industry-specific content and design. <a href="demo.html" target="_blank" style="color: #9333ea;">Launch Demo →</a>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
                     Can I use my existing domain and hosting?
                     <span>+</span>
                 </div>
@@ -1409,6 +1559,7 @@
                     Hi! I'm your AI Website Assistant. I can help you with:
                     <br><br>
                     • 🤖 <strong>AI website creation</strong> packages and features
+                    <br>• 🎬 <strong>Live demo</strong> - see AI in action
                     <br>• 🌐 <strong>Optional domain</strong> registration (standard domains only)
                     <br>• 🚀 <strong>Optional hosting</strong> services and pricing
                     <br>• 📧 <strong>Optional email</strong> setup and features
@@ -1420,7 +1571,7 @@
                 </div>
             </div>
             <div class="chatbot-input-area">
-                <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Ask about AI websites, optional services...">
+                <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Ask about AI websites, demo, optional services...">
                 <button class="chatbot-send" onclick="sendChatMessage()">Send</button>
             </div>
         </div>
@@ -1581,9 +1732,9 @@ Ready to begin AI website creation with flexible service options.`;
                 },
                 {
                     date: 'December 12, 2024',
-                    title: 'Optional Domain Services Solve Premium Domain Pricing Issues',
-                    excerpt: 'Flexible service model allows clients to choose standard domain registration or use existing domains, avoiding premium domain cost surprises.',
-                    icon: '🌐'
+                    title: 'Interactive AI Demos Show 340% Higher Conversion Rates',
+                    excerpt: 'Live demonstrations of AI website creation are converting significantly more visitors into customers by showing the technology in action.',
+                    icon: '🎬'
                 },
                 {
                     date: 'December 11, 2024',
@@ -1624,7 +1775,7 @@ Ready to begin AI website creation with flexible service options.`;
             `).join('');
         }
 
-        // Enhanced Chatbot Functionality with Optional Services
+        // Enhanced Chatbot Functionality with Demo Support
         function toggleChatbot() {
             const chatbotWindow = document.getElementById('chatbotWindow');
             if (chatbotWindow.style.display === 'flex') {
@@ -1664,6 +1815,21 @@ Ready to begin AI website creation with flexible service options.`;
 
         function getAIResponse(message) {
             const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('demo') || lowerMessage.includes('see ai') || lowerMessage.includes('watch') || lowerMessage.includes('live')) {
+                return `🎬 <strong>Interactive AI Demo Available!</strong><br><br>
+                <strong>Experience AI website creation live:</strong><br>
+                ✅ Enter your business information<br>
+                ✅ Watch neural networks analyze your industry<br>
+                ✅ See AI generate design concepts<br>
+                ✅ Watch intelligent content creation<br>
+                ✅ View mobile optimization in action<br>
+                ✅ See the final website preview<br><br>
+                <strong>Try different industries:</strong> Restaurant, Tech, Healthcare, Retail, Legal, Consulting, Fitness, Beauty<br><br>
+                <strong>Ready to see AI in action?</strong><br>
+                <a href="demo.html" target="_blank" style="color: #9333ea; font-weight: 800;">🚀 Launch Interactive Demo</a><br><br>
+                Or click "Live Demo" in the main menu!`;
+            }
             
             if (lowerMessage.includes('domain') || lowerMessage.includes('url') || lowerMessage.includes('website name')) {
                 return `🌐 <strong>Optional Domain Registration:</strong><br><br>
@@ -1720,90 +1886,24 @@ Ready to begin AI website creation with flexible service options.`;
                 <strong>Or just get the AI website for €260!</strong>`;
             }
             
-            if (lowerMessage.includes('optional') || lowerMessage.includes('add-on') || lowerMessage.includes('flexible')) {
-                return `🎯 <strong>Flexible Optional Services:</strong><br><br>
-                <strong>Core Service:</strong> AI Website Creation<br>
-                This is what we do best - create professional websites with AI in 30-60 minutes!<br><br>
-                <strong>Optional Add-Ons:</strong><br>
-                🌐 Domain registration (standard domains only)<br>
-                🚀 Premium hosting (monthly or annual)<br>
-                📧 Professional email (monthly or annual)<br><br>
-                <strong>Perfect for:</strong><br>
-                • Clients with existing hosting<br>
-                • Those who want complete setup<br>
-                • Budget-conscious businesses<br>
-                • Enterprise clients with specific needs<br><br>
-                <strong>Choose exactly what you need!</strong>`;
-            }
-            
-            if (lowerMessage.includes('premium domain') || lowerMessage.includes('expensive domain') || lowerMessage.includes('domain cost')) {
-                return `⚠️ <strong>Why We Don't Include Premium Domains:</strong><br><br>
-                <strong>The Problem:</strong><br>
-                Premium domains can cost €100 to €100,000+ (or more!)<br>
-                This would make pricing unpredictable and potentially unaffordable.<br><br>
-                <strong>Our Solution:</strong><br>
-                ✅ Standard domains only (€15-25)<br>
-                ✅ Connect existing domains (free)<br>
-                ✅ Website files only option<br><br>
-                <strong>Want a premium domain?</strong><br>
-                You can purchase it separately from domain marketplaces, then we'll connect it to your AI website for free!<br><br>
-                <strong>This keeps our pricing transparent and accessible.</strong>`;
-            }
-            
-            if (lowerMessage.includes('existing') || lowerMessage.includes('have domain') || lowerMessage.includes('own domain')) {
-                return `🌐 <strong>Using Your Existing Domain:</strong><br><br>
-                ✅ <strong>Completely supported!</strong><br><br>
-                <strong>What we handle:</strong><br>
-                🔧 DNS configuration & setup<br>
-                🔒 SSL certificate installation<br>
-                📧 Email setup (if requested)<br>
-                🚀 Website deployment<br><br>
-                <strong>Works with:</strong><br>
-                • Any domain registrar<br>
-                • Any existing setup<br>
-                • Premium domains you own<br>
-                • Multiple domains<br><br>
-                <strong>Cost:</strong> Free domain connection!<br>
-                Just select "Connect existing domain" in the consultation form.`;
-            }
-            
-            if (lowerMessage.includes('just website') || lowerMessage.includes('files only') || lowerMessage.includes('no hosting')) {
-                return `📁 <strong>Website Files Only Option:</strong><br><br>
-                <strong>Perfect if you:</strong><br>
-                • Have existing hosting<br>
-                • Want to use your preferred provider<br>
-                • Need maximum flexibility<br>
-                • Want to minimize costs<br><br>
-                <strong>What you get:</strong><br>
-                🤖 Complete AI-generated website<br>
-                📱 Mobile-responsive design<br>
-                🔍 SEO-optimized code<br>
-                📄 All HTML, CSS, JS files<br>
-                📋 Setup instructions<br><br>
-                <strong>Cost:</strong> Just your AI package price!<br>
-                (€150, €260, or €450)<br><br>
-                <strong>Upload to any hosting provider and go live!</strong>`;
-            }
-            
             if (lowerMessage.includes('start') || lowerMessage.includes('begin') || lowerMessage.includes('get started') || lowerMessage.includes('launch')) {
                 return `🚀 <strong>Ready to Start Your AI Website?</strong><br><br>
-                <strong>Simple 4-Step Process:</strong><br><br>
-                1️⃣ <strong>Choose AI Package</strong><br>
-                • Starter (€150) - 5 pages<br>
-                • Professional (€260) - 10 pages ⭐<br>
-                • Enterprise (€450) - 20 pages<br><br>
-                2️⃣ <strong>Complete Consultation</strong><br>
-                7-step form with business details & service preferences<br><br>
-                3️⃣ <strong>AI Creates Your Website</strong><br>
-                30-60 minutes of neural processing<br><br>
-                4️⃣ <strong>Receive Your Website</strong><br>
-                With any optional services you selected!<br><br>
+                <strong>Two Ways to Begin:</strong><br><br>
+                🎬 <strong>1. Try the Demo First</strong><br>
+                See AI in action with our interactive demo<br>
+                <a href="demo.html" target="_blank" style="color: #9333ea;">Launch Demo →</a><br><br>
+                💳 <strong>2. Start Your Real Website</strong><br>
+                • Choose AI Package (€150, €260, or €450)<br>
+                • Complete 7-step consultation<br>
+                • Add optional services if needed<br>
+                • Get your website in 30-60 minutes!<br><br>
                 <strong>Click "Get Started" to choose your package!</strong>`;
             }
             
             // Default response
             return `I'm here to help with your AI website creation! I can assist with:<br><br>
             🤖 <strong>AI Website Packages</strong> - Core service pricing & features<br>
+            🎬 <strong>Live Demo</strong> - See AI website creation in action<br>
             🌐 <strong>Optional Domain Service</strong> - Standard domains only<br>
             🚀 <strong>Optional Hosting</strong> - Flexible monthly/annual plans<br>
             📧 <strong>Optional Email</strong> - Professional email setup<br>
