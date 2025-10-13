@@ -286,6 +286,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
         .website-logo {
@@ -307,6 +310,7 @@
         .website-menu {
             display: flex;
             gap: 30px;
+            align-items: center;
         }
         
         .website-menu a {
@@ -323,6 +327,36 @@
         .website-menu a.active {
             background: #9333ea;
             color: white;
+        }
+        
+        .cart-icon {
+            position: relative;
+            background: #9333ea;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .cart-icon:hover {
+            background: #7c3aed;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
         }
         
         .page-content {
@@ -384,6 +418,309 @@
             box-shadow: 0 8px 25px rgba(147, 51, 234, 0.4);
         }
         
+        /* Product Grid Styles */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: #f8f9fa;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #9333ea;
+            margin-bottom: 10px;
+        }
+        
+        .product-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .product-options {
+            margin-bottom: 15px;
+        }
+        
+        .option-group {
+            margin-bottom: 10px;
+        }
+        
+        .option-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .size-options,
+        .color-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .size-option,
+        .color-option {
+            padding: 6px 12px;
+            border: 2px solid #e5e5e5;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .size-option:hover,
+        .color-option:hover,
+        .size-option.selected,
+        .color-option.selected {
+            border-color: #9333ea;
+            background: #9333ea;
+            color: white;
+        }
+        
+        .add-to-cart-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .add-to-cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(147, 51, 234, 0.4);
+        }
+        
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .cart-sidebar.open {
+            right: 0;
+        }
+        
+        .cart-header {
+            background: #9333ea;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cart-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .cart-items {
+            padding: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        
+        .cart-item-info {
+            flex: 1;
+        }
+        
+        .cart-item-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-details {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-price {
+            font-weight: 700;
+            color: #9333ea;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .qty-btn {
+            background: #f0f0f0;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cart-total {
+            padding: 20px;
+            border-top: 2px solid #e5e5e5;
+            background: #f8f9fa;
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .total-final {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #9333ea;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+        
+        /* Checkout Page */
+        .checkout-form {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .checkout-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+        }
+        
+        .checkout-section h3 {
+            color: #9333ea;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .form-field {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-field label {
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-field input,
+        .form-field select {
+            padding: 12px;
+            border: 2px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .form-field input:focus,
+        .form-field select:focus {
+            outline: none;
+            border-color: #9333ea;
+        }
+        
+        .order-summary {
+            background: white;
+            border: 2px solid #e5e5e5;
+        }
+        
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -420,79 +757,6 @@
         .feature-desc {
             color: #666;
             line-height: 1.6;
-        }
-        
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-        
-        .about-content h2 {
-            color: #9333ea;
-            margin-bottom: 20px;
-            font-size: 2rem;
-        }
-        
-        .about-content p {
-            margin-bottom: 20px;
-            color: #555;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-        
-        .service-item {
-            background: #f8f9ff;
-            padding: 25px;
-            border-radius: 12px;
-            border-left: 4px solid #9333ea;
-        }
-        
-        .service-item h3 {
-            color: #9333ea;
-            margin-bottom: 10px;
-        }
-        
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .form-field {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .form-field label {
-            margin-bottom: 5px;
-            font-weight: 600;
-            color: #333;
-        }
-        
-        .form-field input,
-        .form-field textarea {
-            padding: 12px;
-            border: 2px solid #e5e5e5;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-        
-        .form-field input:focus,
-        .form-field textarea:focus {
-            outline: none;
-            border-color: #9333ea;
         }
         
         /* Fullscreen Modal */
@@ -631,6 +895,19 @@
                 flex-wrap: wrap;
                 justify-content: center;
             }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .checkout-form {
+                grid-template-columns: 1fr;
+            }
         }
         
         .typing-effect {
@@ -642,14 +919,29 @@
             0%, 50% { border-color: #9333ea; }
             51%, 100% { border-color: transparent; }
         }
+        
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+        
+        .cart-overlay.show {
+            display: block;
+        }
     </style>
 </head>
 <body>
     <div class="demo-container">
         <!-- Demo Header -->
         <div class="demo-header">
-            <h1>🤖 Live AI Website Demo</h1>
-            <p>Watch our AI create a fully functional, clickable website tailored to your business in real-time. Each generation is unique and intelligent!</p>
+            <h1>🤖 Live AI E-Commerce Demo</h1>
+            <p>Watch our AI create a fully functional online store with products, shopping cart, and checkout - tailored to your business in real-time!</p>
         </div>
 
         <!-- Demo Interface -->
@@ -658,60 +950,60 @@
             <div class="demo-input">
                 <h2 class="section-title">
                     <span>⚙️</span>
-                    <span>Configure Your Website</span>
+                    <span>Configure Your Store</span>
                 </h2>
                 
                 <div class="form-group">
-                    <label for="businessName">Business Name *</label>
-                    <input type="text" id="businessName" placeholder="e.g., Bella's Italian Restaurant">
+                    <label for="businessName">Store Name *</label>
+                    <input type="text" id="businessName" placeholder="e.g., Urban Hat Co.">
                 </div>
                 
                 <div class="form-group">
-                    <label for="industry">Industry *</label>
+                    <label for="industry">Store Type *</label>
                     <select id="industry">
-                        <option value="">Select Industry</option>
-                        <option value="restaurant">Restaurant & Food</option>
-                        <option value="technology">Technology & Software</option>
-                        <option value="healthcare">Healthcare & Medical</option>
-                        <option value="retail">Retail & E-commerce</option>
-                        <option value="legal">Legal Services</option>
-                        <option value="consulting">Business Consulting</option>
-                        <option value="fitness">Fitness & Wellness</option>
-                        <option value="beauty">Beauty & Spa</option>
-                        <option value="education">Education & Training</option>
-                        <option value="realestate">Real Estate</option>
-                        <option value="automotive">Automotive</option>
-                        <option value="finance">Finance & Insurance</option>
+                        <option value="">Select Store Type</option>
+                        <option value="clothing">Clothing & Fashion</option>
+                        <option value="hats">Hats & Accessories</option>
+                        <option value="shoes">Shoes & Footwear</option>
+                        <option value="jewelry">Jewelry & Watches</option>
+                        <option value="electronics">Electronics & Gadgets</option>
+                        <option value="books">Books & Media</option>
+                        <option value="home">Home & Garden</option>
+                        <option value="sports">Sports & Fitness</option>
+                        <option value="beauty">Beauty & Cosmetics</option>
+                        <option value="toys">Toys & Games</option>
+                        <option value="food">Gourmet Food</option>
+                        <option value="art">Art & Crafts</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label for="description">Business Description</label>
-                    <textarea id="description" rows="3" placeholder="Describe your business, services, and what makes you unique..."></textarea>
+                    <label for="description">Store Description</label>
+                    <textarea id="description" rows="3" placeholder="Describe your products, target audience, and brand style..."></textarea>
                 </div>
                 
                 <div class="form-group">
                     <label for="style">Design Style</label>
                     <select id="style">
                         <option value="modern">Modern & Clean</option>
-                        <option value="elegant">Elegant & Sophisticated</option>
-                        <option value="bold">Bold & Creative</option>
+                        <option value="elegant">Elegant & Luxury</option>
+                        <option value="bold">Bold & Trendy</option>
                         <option value="minimal">Minimal & Simple</option>
-                        <option value="professional">Professional & Corporate</option>
+                        <option value="vintage">Vintage & Classic</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label for="features">Key Features (Optional)</label>
-                    <input type="text" id="features" placeholder="e.g., Online booking, E-commerce, Contact forms">
+                    <label for="features">Special Features</label>
+                    <input type="text" id="features" placeholder="e.g., Size guide, Wishlist, Reviews, Live chat">
                 </div>
                 
                 <button class="demo-btn" id="generateBtn" onclick="startAIDemo()">
-                    🚀 Generate Website with AI
+                    🚀 Generate Store with AI
                 </button>
                 
                 <button class="demo-btn secondary" onclick="fillSampleData()">
-                    ⚡ Try Sample Data
+                    ⚡ Try Sample Store
                 </button>
             </div>
 
@@ -727,27 +1019,27 @@
                     <div class="ai-steps">
                         <div class="ai-step" id="step1">
                             <span class="step-icon">🔍</span>
-                            <span>Analyzing business information</span>
+                            <span>Analyzing store requirements</span>
                         </div>
                         <div class="ai-step" id="step2">
                             <span class="step-icon">🎨</span>
-                            <span>Generating design concepts</span>
+                            <span>Generating product catalog</span>
                         </div>
                         <div class="ai-step" id="step3">
-                            <span class="step-icon">✍️</span>
-                            <span>Creating intelligent content</span>
+                            <span class="step-icon">🛍️</span>
+                            <span>Creating shopping experience</span>
                         </div>
                         <div class="ai-step" id="step4">
-                            <span class="step-icon">📱</span>
-                            <span>Optimizing for all devices</span>
+                            <span class="step-icon">💳</span>
+                            <span>Setting up checkout system</span>
                         </div>
                         <div class="ai-step" id="step5">
-                            <span class="step-icon">🔍</span>
-                            <span>Implementing SEO optimization</span>
+                            <span class="step-icon">📱</span>
+                            <span>Optimizing for mobile shopping</span>
                         </div>
                         <div class="ai-step" id="step6">
                             <span class="step-icon">✨</span>
-                            <span>Finalizing website</span>
+                            <span>Finalizing online store</span>
                         </div>
                     </div>
                 </div>
@@ -756,8 +1048,8 @@
                 <div class="website-preview" id="websitePreview">
                     <div class="preview-header">
                         <div style="display: flex; align-items: center; gap: 10px;">
-                            <span>🌐</span>
-                            <span>Your AI-Generated Website</span>
+                            <span>🛒</span>
+                            <span>Your AI-Generated Store</span>
                         </div>
                         <div class="preview-controls">
                             <button class="preview-btn" onclick="resetDemo()">🔄 Generate New</button>
@@ -774,8 +1066,8 @@
                 <div id="initialState">
                     <div style="text-align: center; padding: 60px 20px; opacity: 0.6;">
                         <div style="font-size: 4rem; margin-bottom: 20px;">🤖</div>
-                        <p style="font-size: 1.2rem; color: #9333ea; font-weight: 700;">AI Ready to Generate Your Website</p>
-                        <p style="margin-top: 10px;">Fill in your business details and click "Generate Website with AI"</p>
+                        <p style="font-size: 1.2rem; color: #9333ea; font-weight: 700;">AI Ready to Generate Your Store</p>
+                        <p style="margin-top: 10px;">Fill in your store details and click "Generate Store with AI"</p>
                     </div>
                 </div>
             </div>
@@ -784,34 +1076,51 @@
         <!-- Demo Stats -->
         <div class="demo-stats">
             <div class="stat-card">
-                <div class="stat-number">2.3</div>
-                <div class="stat-label">Minutes Average Generation Time</div>
+                <div class="stat-number">3.2</div>
+                <div class="stat-label">Minutes Average Store Creation</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">1,247</div>
-                <div class="stat-label">Websites Created This Month</div>
+                <div class="stat-number">847</div>
+                <div class="stat-label">E-commerce Sites Created</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">98.7%</div>
-                <div class="stat-label">Client Satisfaction Rate</div>
+                <div class="stat-number">99.2%</div>
+                <div class="stat-label">Mobile Optimization Score</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">24/7</div>
-                <div class="stat-label">AI Availability</div>
+                <div class="stat-label">AI Store Generation</div>
             </div>
         </div>
 
         <!-- Call to Action -->
         <div class="demo-actions">
-            <h2 style="color: #9333ea; margin-bottom: 30px; font-size: 2.5rem; font-weight: 900;">Ready to Create Your Real Website?</h2>
-            <p style="font-size: 1.3rem; margin-bottom: 40px; color: #ffffff;">This was just a demo. Get your actual AI-generated website in 30-60 minutes!</p>
+            <h2 style="color: #9333ea; margin-bottom: 30px; font-size: 2.5rem; font-weight: 900;">Ready to Launch Your Real Store?</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 40px; color: #ffffff;">This was just a demo. Get your actual AI-generated e-commerce website with full functionality!</p>
             
-            <a href="consultation.html?package=professional" class="action-btn">
-                🚀 Create My Real Website - €260
+            <a href="consultation.html?package=ecommerce" class="action-btn">
+                🚀 Create My Real Store - €460
             </a>
             <a href="index.html" class="action-btn secondary">
                 ← Back to Main Site
             </a>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button class="cart-close" onclick="closeCart()">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="cart-total" id="cartTotal">
+            <!-- Cart total will be calculated here -->
         </div>
     </div>
 
@@ -820,8 +1129,8 @@
         <div class="fullscreen-content">
             <div class="fullscreen-header">
                 <div style="display: flex; align-items: center; gap: 10px;">
-                    <span>🌐</span>
-                    <span id="fullscreenTitle">Your AI-Generated Website</span>
+                    <span>🛒</span>
+                    <span id="fullscreenTitle">Your AI-Generated Store</span>
                 </div>
                 <button class="close-fullscreen" onclick="closeFullscreen()">×</button>
             </div>
@@ -832,93 +1141,217 @@
     </div>
 
     <script>
-        // Enhanced industry templates with more detailed content
-        const industryTemplates = {
-            restaurant: {
-                title: "Authentic Italian Cuisine",
-                subtitle: "Experience the finest Italian dining with fresh ingredients and traditional recipes passed down through generations",
-                heroImage: "https://agents-storage.nyc3.digitaloceanspaces.com/images/37e3c697.png",
-                logoImage: "https://agents-storage.nyc3.digitaloceanspaces.com/images/c0a0819b.png",
-                features: [
-                    { icon: "🍝", title: "Fresh Pasta", desc: "Made daily with authentic Italian recipes and premium ingredients" },
-                    { icon: "🍷", title: "Wine Selection", desc: "Curated Italian wines to perfectly complement your dining experience" },
-                    { icon: "👨‍🍳", title: "Expert Chefs", desc: "Trained in traditional Italian cooking methods and modern techniques" }
-                ],
-                about: "Founded in 1985, our family restaurant has been serving authentic Italian cuisine for over three decades. We pride ourselves on using only the freshest ingredients, imported directly from Italy, and traditional recipes that have been passed down through generations.",
-                services: [
-                    { title: "Dine-In Experience", desc: "Enjoy our cozy atmosphere with live music on weekends" },
-                    { title: "Private Events", desc: "Host your special occasions in our private dining room" },
-                    { title: "Catering Services", desc: "Bring authentic Italian flavors to your events" },
-                    { title: "Cooking Classes", desc: "Learn to make traditional Italian dishes from our chefs" }
+        // Enhanced e-commerce templates with full product catalogs
+        const ecommerceTemplates = {
+            hats: {
+                title: "Premium Hat Collection",
+                subtitle: "Discover our curated selection of stylish hats for every occasion and season",
+                heroImage: "https://agents-storage.nyc3.digitaloceanspaces.com/images/0ff94ee0.png",
+                logoImage: "https://agents-storage.nyc3.digitaloceanspaces.com/images/ea8958a1.png",
+                products: [
+                    {
+                        id: 1,
+                        name: "Classic Baseball Cap",
+                        price: 29.99,
+                        image: "https://agents-storage.nyc3.digitaloceanspaces.com/images/0ff94ee0.png",
+                        description: "Premium cotton baseball cap with adjustable strap",
+                        sizes: ["S", "M", "L", "XL"],
+                        colors: ["Black", "Navy", "White", "Red"]
+                    },
+                    {
+                        id: 2,
+                        name: "Wool Fedora",
+                        price: 89.99,
+                        image: "https://agents-storage.nyc3.digitaloceanspaces.com/images/0ff94ee0.png",
+                        description: "Elegant wool fedora perfect for formal occasions",
+                        sizes: ["S", "M", "L", "XL"],
+                        colors: ["Black", "Brown", "Grey"]
+                    },
+                    {
+                        id: 3,
+                        name: "Cozy Beanie",
+                        price: 19.99,
+                        image: "https://agents-storage.nyc3.digitaloceanspaces.com/images/0ff94ee0.png",
+                        description: "Soft knit beanie for cold weather comfort",
+                        sizes: ["One Size"],
+                        colors: ["Black", "Grey", "Navy", "Burgundy", "Cream"]
+                    },
+                    {
+                        id: 4,
+                        name: "Summer Bucket Hat",
+                        price: 34.99,
+                        image: "https://agents-storage.nyc3.digitaloceanspaces.com/images/0ff94ee0.png",
+                        description: "Lightweight bucket hat with UV protection",
+                        sizes: ["S", "M", "L"],
+                        colors: ["Khaki", "Navy", "Olive", "Black"]
+                    },
+                    {
+                        id: 5,
+                        name: "Vintage Newsboy Cap",
+                        price: 49.99,
+                        image: "https://agents-storage.nyc3.digitaloceanspaces.com/images/0ff94ee0.png",
+                        description: "Classic newsboy cap with vintage charm",
+                        sizes: ["S", "M", "L", "XL"],
+                        colors: ["Brown", "Grey", "Black"]
+                    },
+                    {
+                        id: 6,
+                        name: "Wide Brim Sun Hat",
+                        price: 39.99,
+                        image: "https://agents-storage.nyc3.digitaloceanspaces.com/images/0ff94ee0.png",
+                        description: "Stylish sun hat with wide brim protection",
+                        sizes: ["S", "M", "L"],
+                        colors: ["Natural", "Black", "Navy"]
+                    }
                 ]
             },
-            technology: {
-                title: "Innovative Tech Solutions",
-                subtitle: "Cutting-edge technology services to transform your business operations and drive digital innovation",
+            clothing: {
+                title: "Modern Fashion Collection",
+                subtitle: "Trendy clothing for the modern lifestyle - comfort meets style",
+                heroImage: "https://agents-storage.nyc3.digitaloceanspaces.com/images/02cad362.png",
+                logoImage: "https://agents-storage.nyc3.digitaloceanspaces.com/images/c0a0819b.png",
+                products: [
+                    {
+                        id: 1,
+                        name: "Premium Cotton T-Shirt",
+                        price: 24.99,
+                        image: "https://agents-storage.nyc3.digitaloceanspaces.com/images/6a77931e.png",
+                        description: "Soft, breathable cotton tee perfect for everyday wear",
+                        sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+                        colors: ["White", "Black", "Navy", "Grey", "Red"]
+                    },
+                    {
+                        id: 2,
+                        name: "Slim Fit Jeans",
+                        price: 79.99,
+                        image: "https://agents-storage.nyc3.digitaloceanspaces.com/images/6a77931e.png",
+                        description: "Modern slim fit jeans with stretch comfort",
+                        sizes: ["28", "30", "32", "34", "36", "38"],
+                        colors: ["Dark Blue", "Light Blue", "Black", "Grey"]
+                    },
+                    {
+                        id: 3,
+                        name: "Casual Hoodie",
+                        price: 49.99,
+                        image: "https://agents-storage.nyc3.digitaloceanspaces.com/images/6a77931e.png",
+                        description: "Cozy hoodie with kangaroo pocket and drawstring hood",
+                        sizes: ["S", "M", "L", "XL", "XXL"],
+                        colors: ["Grey", "Black", "Navy", "Burgundy"]
+                    },
+                    {
+                        id: 4,
+                        name: "Summer Dress",
+                        price: 59.99,
+                        image: "https://agents-storage.nyc3.digitaloceanspaces.com/images/6a77931e.png",
+                        description: "Flowy summer dress perfect for warm weather",
+                        sizes: ["XS", "S", "M", "L", "XL"],
+                        colors: ["Floral", "Solid Blue", "White", "Pink"]
+                    },
+                    {
+                        id: 5,
+                        name: "Button-Up Shirt",
+                        price: 39.99,
+                        image: "https://agents-storage.nyc3.digitaloceanspaces.com/images/6a77931e.png",
+                        description: "Classic button-up shirt for professional or casual wear",
+                        sizes: ["S", "M", "L", "XL", "XXL"],
+                        colors: ["White", "Blue", "Black", "Striped"]
+                    },
+                    {
+                        id: 6,
+                        name: "Athletic Shorts",
+                        price: 29.99,
+                        image: "https://agents-storage.nyc3.digitaloceanspaces.com/images/6a77931e.png",
+                        description: "Lightweight athletic shorts with moisture-wicking fabric",
+                        sizes: ["S", "M", "L", "XL"],
+                        colors: ["Black", "Navy", "Grey", "Red"]
+                    }
+                ]
+            },
+            shoes: {
+                title: "Step Into Style",
+                subtitle: "Premium footwear collection for every step of your journey",
+                heroImage: "https://agents-storage.nyc3.digitaloceanspaces.com/images/02cad362.png",
+                logoImage: "https://agents-storage.nyc3.digitaloceanspaces.com/images/c0a0819b.png",
+                products: [
+                    {
+                        id: 1,
+                        name: "Classic Sneakers",
+                        price: 89.99,
+                        image: "https://agents-storage.nyc3.digitaloceanspaces.com/images/6a77931e.png",
+                        description: "Comfortable everyday sneakers with premium materials",
+                        sizes: ["6", "7", "8", "9", "10", "11", "12"],
+                        colors: ["White", "Black", "Navy", "Red"]
+                    },
+                    {
+                        id: 2,
+                        name: "Leather Boots",
+                        price: 149.99,
+                        image: "https://agents-storage.nyc3.digitaloceanspaces.com/images/6a77931e.png",
+                        description: "Durable leather boots perfect for any weather",
+                        sizes: ["6", "7", "8", "9", "10", "11", "12"],
+                        colors: ["Brown", "Black", "Tan"]
+                    },
+                    {
+                        id: 3,
+                        name: "Running Shoes",
+                        price: 119.99,
+                        image: "https://agents-storage.nyc3.digitaloceanspaces.com/images/6a77931e.png",
+                        description: "High-performance running shoes with advanced cushioning",
+                        sizes: ["6", "7", "8", "9", "10", "11", "12"],
+                        colors: ["Black/White", "Blue/Grey", "Red/Black"]
+                    }
+                ]
+            },
+            electronics: {
+                title: "Tech Innovation Hub",
+                subtitle: "Cutting-edge electronics and gadgets for the modern lifestyle",
                 heroImage: "https://agents-storage.nyc3.digitaloceanspaces.com/images/9ce5d648.png",
                 logoImage: "https://agents-storage.nyc3.digitaloceanspaces.com/images/c0a0819b.png",
-                features: [
-                    { icon: "💻", title: "Custom Software", desc: "Tailored solutions designed specifically for your business needs" },
-                    { icon: "☁️", title: "Cloud Services", desc: "Scalable cloud infrastructure and seamless migration services" },
-                    { icon: "🔒", title: "Cybersecurity", desc: "Advanced security solutions and 24/7 monitoring services" }
-                ],
-                about: "We are a leading technology consulting firm with over 15 years of experience in delivering innovative solutions. Our team of expert developers, architects, and consultants work closely with clients to understand their unique challenges and deliver customized technology solutions.",
-                services: [
-                    { title: "Web Development", desc: "Modern, responsive websites and web applications" },
-                    { title: "Mobile Apps", desc: "Native and cross-platform mobile application development" },
-                    { title: "Cloud Migration", desc: "Seamless transition to cloud infrastructure" },
-                    { title: "IT Consulting", desc: "Strategic technology planning and implementation" }
-                ]
-            },
-            healthcare: {
-                title: "Comprehensive Healthcare",
-                subtitle: "Quality medical care with compassionate service, advanced treatments, and patient-centered approach",
-                heroImage: "https://agents-storage.nyc3.digitaloceanspaces.com/images/37e3c697.png",
-                logoImage: "https://agents-storage.nyc3.digitaloceanspaces.com/images/c0a0819b.png",
-                features: [
-                    { icon: "🏥", title: "Modern Facilities", desc: "State-of-the-art medical equipment and comfortable patient rooms" },
-                    { icon: "👩‍⚕️", title: "Expert Staff", desc: "Board-certified physicians and experienced healthcare professionals" },
-                    { icon: "📅", title: "Easy Scheduling", desc: "Convenient online appointment booking and telemedicine options" }
-                ],
-                about: "Our healthcare facility has been serving the community for over 25 years, providing comprehensive medical services with a focus on preventive care and patient wellness. We combine advanced medical technology with personalized, compassionate care.",
-                services: [
-                    { title: "Primary Care", desc: "Comprehensive health maintenance and preventive care" },
-                    { title: "Specialist Consultations", desc: "Access to board-certified specialists in various fields" },
-                    { title: "Diagnostic Services", desc: "Advanced imaging and laboratory testing on-site" },
-                    { title: "Telemedicine", desc: "Virtual consultations for convenient healthcare access" }
-                ]
-            },
-            fitness: {
-                title: "Transform Your Fitness Journey",
-                subtitle: "Professional training and wellness programs designed to help you achieve your health and fitness goals",
-                heroImage: "https://agents-storage.nyc3.digitaloceanspaces.com/images/9ce5d648.png",
-                logoImage: "https://agents-storage.nyc3.digitaloceanspaces.com/images/c0a0819b.png",
-                features: [
-                    { icon: "💪", title: "Personal Training", desc: "One-on-one coaching with certified fitness professionals" },
-                    { icon: "🏋️", title: "Modern Equipment", desc: "State-of-the-art fitness equipment and spacious workout areas" },
-                    { icon: "📱", title: "Fitness Tracking", desc: "Advanced progress monitoring and personalized workout plans" }
-                ],
-                about: "Our fitness center has been helping people achieve their health and wellness goals for over 10 years. We offer a comprehensive approach to fitness that includes personalized training, nutrition guidance, and ongoing support.",
-                services: [
-                    { title: "Group Classes", desc: "High-energy group fitness classes for all levels" },
-                    { title: "Nutrition Coaching", desc: "Personalized meal plans and dietary guidance" },
-                    { title: "Wellness Programs", desc: "Holistic health and wellness coaching" },
-                    { title: "Corporate Fitness", desc: "Workplace wellness programs for businesses" }
+                products: [
+                    {
+                        id: 1,
+                        name: "Wireless Headphones",
+                        price: 199.99,
+                        image: "https://agents-storage.nyc3.digitaloceanspaces.com/images/9ce5d648.png",
+                        description: "Premium wireless headphones with noise cancellation",
+                        sizes: ["One Size"],
+                        colors: ["Black", "White", "Silver"]
+                    },
+                    {
+                        id: 2,
+                        name: "Smart Watch",
+                        price: 299.99,
+                        image: "https://agents-storage.nyc3.digitaloceanspaces.com/images/9ce5d648.png",
+                        description: "Advanced smartwatch with health tracking features",
+                        sizes: ["38mm", "42mm"],
+                        colors: ["Black", "Silver", "Gold"]
+                    },
+                    {
+                        id: 3,
+                        name: "Portable Speaker",
+                        price: 79.99,
+                        image: "https://agents-storage.nyc3.digitaloceanspaces.com/images/9ce5d648.png",
+                        description: "Compact Bluetooth speaker with powerful sound",
+                        sizes: ["One Size"],
+                        colors: ["Black", "Blue", "Red"]
+                    }
                 ]
             }
         };
 
-        // AI Demo Steps with enhanced descriptions
-        const aiSteps = [
-            { id: 'step1', status: 'Analyzing business information and market positioning...', duration: 2500 },
-            { id: 'step2', status: 'Generating unique design concepts and color schemes...', duration: 3000 },
-            { id: 'step3', status: 'Creating intelligent, industry-specific content...', duration: 3500 },
-            { id: 'step4', status: 'Optimizing for mobile devices and accessibility...', duration: 2500 },
-            { id: 'step5', status: 'Implementing SEO optimization and performance tuning...', duration: 2800 },
-            { id: 'step6', status: 'Finalizing website and adding interactive features...', duration: 2200 }
-        ];
-
+        // Shopping cart state
+        let cart = [];
         let currentWebsiteData = null;
+
+        // AI Demo Steps
+        const aiSteps = [
+            { id: 'step1', status: 'Analyzing store requirements and target market...', duration: 2500 },
+            { id: 'step2', status: 'Generating intelligent product catalog...', duration: 3500 },
+            { id: 'step3', status: 'Creating seamless shopping experience...', duration: 3000 },
+            { id: 'step4', status: 'Setting up secure checkout system...', duration: 2800 },
+            { id: 'step5', status: 'Optimizing for mobile shopping experience...', duration: 2500 },
+            { id: 'step6', status: 'Finalizing your online store...', duration: 2200 }
+        ];
 
         function startAIDemo() {
             const businessName = document.getElementById('businessName').value;
@@ -928,9 +1361,12 @@
             const features = document.getElementById('features').value;
             
             if (!businessName || !industry) {
-                alert('Please fill in at least the business name and industry to see the AI demo!');
+                alert('Please fill in at least the store name and type to see the AI demo!');
                 return;
             }
+
+            // Reset cart
+            cart = [];
 
             // Hide initial state and show AI thinking
             document.getElementById('initialState').style.display = 'none';
@@ -982,7 +1418,7 @@
             document.getElementById('aiThinking').style.display = 'none';
             
             // Get industry template or create custom one
-            const template = industryTemplates[industry] || generateCustomTemplate(industry, description);
+            const template = ecommerceTemplates[industry] || generateCustomTemplate(industry, description);
             
             // Store current website data
             currentWebsiteData = {
@@ -1002,41 +1438,56 @@
             
             // Reset button
             document.getElementById('generateBtn').disabled = false;
-            document.getElementById('generateBtn').textContent = '🔄 Generate Another Website';
+            document.getElementById('generateBtn').textContent = '🔄 Generate Another Store';
         }
 
         function generateCustomTemplate(industry, description) {
-            // AI-like content generation for industries not in templates
-            const customTemplates = {
-                education: {
-                    title: "Excellence in Education",
-                    subtitle: "Empowering students with knowledge, skills, and confidence for future success",
-                    features: [
-                        { icon: "📚", title: "Expert Faculty", desc: "Qualified educators with years of experience" },
-                        { icon: "💻", title: "Modern Learning", desc: "Technology-enhanced learning environments" },
-                        { icon: "🎓", title: "Career Support", desc: "Comprehensive career guidance and placement assistance" }
-                    ]
-                },
-                realestate: {
-                    title: "Your Dream Home Awaits",
-                    subtitle: "Professional real estate services to help you buy, sell, or invest in properties",
-                    features: [
-                        { icon: "🏠", title: "Property Listings", desc: "Extensive database of residential and commercial properties" },
-                        { icon: "📊", title: "Market Analysis", desc: "Detailed market insights and property valuations" },
-                        { icon: "🤝", title: "Expert Guidance", desc: "Experienced agents to guide you through every step" }
-                    ]
-                }
+            // Generate products based on industry
+            const customProducts = generateProductsForIndustry(industry);
+            
+            return {
+                title: `Premium ${industry.charAt(0).toUpperCase() + industry.slice(1)} Collection`,
+                subtitle: description || `Discover our curated selection of quality ${industry} products`,
+                heroImage: "https://agents-storage.nyc3.digitaloceanspaces.com/images/02cad362.png",
+                logoImage: "https://agents-storage.nyc3.digitaloceanspaces.com/images/c0a0819b.png",
+                products: customProducts
             };
+        }
 
-            return customTemplates[industry] || {
-                title: `Professional ${industry.charAt(0).toUpperCase() + industry.slice(1)} Services`,
-                subtitle: description || "Quality services tailored to meet your specific needs and requirements",
-                features: [
-                    { icon: "⭐", title: "Quality Service", desc: "Committed to delivering exceptional results" },
-                    { icon: "🎯", title: "Focused Approach", desc: "Tailored solutions for your unique needs" },
-                    { icon: "💼", title: "Professional Team", desc: "Experienced professionals you can trust" }
+        function generateProductsForIndustry(industry) {
+            const productTemplates = {
+                jewelry: [
+                    { name: "Diamond Ring", price: 299.99, desc: "Elegant diamond ring with premium setting" },
+                    { name: "Gold Necklace", price: 199.99, desc: "Beautiful gold necklace for special occasions" },
+                    { name: "Silver Earrings", price: 79.99, desc: "Stylish silver earrings with modern design" }
+                ],
+                books: [
+                    { name: "Bestseller Novel", price: 19.99, desc: "Captivating story that will keep you reading" },
+                    { name: "Self-Help Guide", price: 24.99, desc: "Transform your life with practical advice" },
+                    { name: "Cookbook Collection", price: 29.99, desc: "Delicious recipes for every occasion" }
+                ],
+                home: [
+                    { name: "Decorative Vase", price: 49.99, desc: "Beautiful ceramic vase for home decoration" },
+                    { name: "Throw Pillow Set", price: 39.99, desc: "Comfortable pillows to enhance your living space" },
+                    { name: "Wall Art Print", price: 29.99, desc: "Stunning artwork to beautify your walls" }
                 ]
             };
+
+            const templates = productTemplates[industry] || [
+                { name: `Premium ${industry} Item`, price: 49.99, desc: `High-quality ${industry} product` },
+                { name: `Deluxe ${industry} Set`, price: 79.99, desc: `Complete ${industry} collection` },
+                { name: `Classic ${industry} Choice`, price: 29.99, desc: `Traditional ${industry} option` }
+            ];
+
+            return templates.map((template, index) => ({
+                id: index + 1,
+                name: template.name,
+                price: template.price,
+                image: "https://agents-storage.nyc3.digitaloceanspaces.com/images/6a77931e.png",
+                description: template.desc,
+                sizes: ["S", "M", "L", "XL"],
+                colors: ["Black", "White", "Blue", "Red"]
+            }));
         }
 
         function generateWebsiteContent(data) {
@@ -1045,14 +1496,18 @@
             const websiteHTML = `
                 <div class="website-nav">
                     <div class="website-logo">
-                        <img src="${template.logoImage || 'https://agents-storage.nyc3.digitaloceanspaces.com/images/c0a0819b.png'}" alt="${businessName}" class="logo-image">
+                        <img src="${template.logoImage}" alt="${businessName}" class="logo-image">
                         ${businessName}
                     </div>
                     <div class="website-menu">
                         <a href="#" class="nav-link active" data-page="home">Home</a>
+                        <a href="#" class="nav-link" data-page="products">Products</a>
                         <a href="#" class="nav-link" data-page="about">About</a>
-                        <a href="#" class="nav-link" data-page="services">Services</a>
                         <a href="#" class="nav-link" data-page="contact">Contact</a>
+                        <div class="cart-icon" onclick="openCart()">
+                            🛒
+                            <span class="cart-count" id="cartCount">0</span>
+                        </div>
                     </div>
                 </div>
 
@@ -1061,50 +1516,83 @@
                     <div class="hero-section">
                         <h1 class="hero-title">${template.title}</h1>
                         <p class="hero-subtitle">${template.subtitle}</p>
-                        <img src="${template.heroImage || 'https://agents-storage.nyc3.digitaloceanspaces.com/images/37e3c697.png'}" alt="${businessName}" class="hero-image">
+                        <img src="${template.heroImage}" alt="${businessName}" class="hero-image">
                         <br>
-                        <button class="cta-button">Get Started Today</button>
+                        <button class="cta-button" onclick="showPage('products'); setActiveNav('products')">Shop Now</button>
                     </div>
                     
                     <div class="features-grid">
-                        ${template.features.map(feature => `
-                            <div class="feature-card">
-                                <div class="feature-icon">${feature.icon}</div>
-                                <h3 class="feature-title">${feature.title}</h3>
-                                <p class="feature-desc">${feature.desc}</p>
-                            </div>
-                        `).join('')}
+                        <div class="feature-card">
+                            <div class="feature-icon">🚚</div>
+                            <h3 class="feature-title">Free Shipping</h3>
+                            <p class="feature-desc">Free shipping on orders over $50</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">↩️</div>
+                            <h3 class="feature-title">Easy Returns</h3>
+                            <p class="feature-desc">30-day hassle-free return policy</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🔒</div>
+                            <h3 class="feature-title">Secure Payment</h3>
+                            <p class="feature-desc">Your payment information is safe with us</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Page -->
+                <div class="page-content" id="page-products">
+                    <div style="padding: 40px;">
+                        <h2 style="text-align: center; color: #9333ea; margin-bottom: 40px; font-size: 2.5rem;">Our Products</h2>
+                        <div class="products-grid">
+                            ${template.products.map(product => `
+                                <div class="product-card">
+                                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                                    <div class="product-info">
+                                        <h3 class="product-name">${product.name}</h3>
+                                        <div class="product-price">$${product.price}</div>
+                                        <p class="product-description">${product.description}</p>
+                                        
+                                        <div class="product-options">
+                                            ${product.sizes.length > 1 ? `
+                                                <div class="option-group">
+                                                    <div class="option-label">Size:</div>
+                                                    <div class="size-options">
+                                                        ${product.sizes.map(size => `
+                                                            <span class="size-option" data-product="${product.id}" data-size="${size}">${size}</span>
+                                                        `).join('')}
+                                                    </div>
+                                                </div>
+                                            ` : ''}
+                                            
+                                            <div class="option-group">
+                                                <div class="option-label">Color:</div>
+                                                <div class="color-options">
+                                                    ${product.colors.map(color => `
+                                                        <span class="color-option" data-product="${product.id}" data-color="${color}">${color}</span>
+                                                    `).join('')}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
                     </div>
                 </div>
 
                 <!-- About Page -->
                 <div class="page-content" id="page-about">
                     <div style="padding: 40px;">
-                        <div class="about-content">
-                            <h2>About ${businessName}</h2>
-                            <p>${template.about || 'We are dedicated to providing exceptional service and building lasting relationships with our clients. Our team of professionals brings years of experience and expertise to every project.'}</p>
-                            <p>Our commitment to excellence and customer satisfaction has made us a trusted name in the industry. We believe in delivering quality results that exceed expectations.</p>
-                            <p>Contact us today to learn more about how we can help you achieve your goals.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Services Page -->
-                <div class="page-content" id="page-services">
-                    <div style="padding: 40px;">
-                        <h2 style="text-align: center; color: #9333ea; margin-bottom: 40px; font-size: 2.5rem;">Our Services</h2>
-                        <div class="services-grid">
-                            ${(template.services || [
-                                { title: "Consultation", desc: "Expert advice and strategic planning" },
-                                { title: "Implementation", desc: "Professional execution of solutions" },
-                                { title: "Support", desc: "Ongoing support and maintenance" },
-                                { title: "Training", desc: "Comprehensive training programs" }
-                            ]).map(service => `
-                                <div class="service-item">
-                                    <h3>${service.title}</h3>
-                                    <p>${service.desc}</p>
-                                </div>
-                            `).join('')}
+                        <div style="max-width: 800px; margin: 0 auto; line-height: 1.8;">
+                            <h2 style="color: #9333ea; margin-bottom: 20px; font-size: 2rem;">About ${businessName}</h2>
+                            <p style="margin-bottom: 20px; color: #555;">We are passionate about providing high-quality products that enhance your lifestyle. Our carefully curated collection represents the perfect blend of style, comfort, and functionality.</p>
+                            <p style="margin-bottom: 20px; color: #555;">Founded with a commitment to excellence, we believe that everyone deserves access to premium products at fair prices. Our team works tirelessly to source the finest materials and work with skilled artisans to bring you exceptional quality.</p>
+                            <p style="color: #555;">Customer satisfaction is our top priority. We stand behind every product we sell and are committed to providing outstanding service from browsing to delivery and beyond.</p>
                         </div>
                     </div>
                 </div>
@@ -1113,7 +1601,7 @@
                 <div class="page-content" id="page-contact">
                     <div style="padding: 40px;">
                         <h2 style="text-align: center; color: #9333ea; margin-bottom: 40px; font-size: 2.5rem;">Contact Us</h2>
-                        <div class="contact-form">
+                        <div style="max-width: 600px; margin: 0 auto;">
                             <div class="form-row">
                                 <div class="form-field">
                                     <label>First Name</label>
@@ -1135,10 +1623,94 @@
                                 </div>
                             </div>
                             <div class="form-field">
+                                <label>Subject</label>
+                                <input type="text" placeholder="How can we help you?">
+                            </div>
+                            <div class="form-field">
                                 <label>Message</label>
-                                <textarea rows="5" placeholder="How can we help you?"></textarea>
+                                <textarea rows="5" placeholder="Your message..."></textarea>
                             </div>
                             <button class="cta-button" style="width: 100%; margin-top: 20px;">Send Message</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Checkout Page -->
+                <div class="page-content" id="page-checkout">
+                    <div style="padding: 40px;">
+                        <h2 style="text-align: center; color: #9333ea; margin-bottom: 40px; font-size: 2.5rem;">Checkout</h2>
+                        <div class="checkout-form">
+                            <div class="checkout-section">
+                                <h3>Shipping Information</h3>
+                                <div class="form-row">
+                                    <div class="form-field">
+                                        <label>First Name</label>
+                                        <input type="text" required>
+                                    </div>
+                                    <div class="form-field">
+                                        <label>Last Name</label>
+                                        <input type="text" required>
+                                    </div>
+                                </div>
+                                <div class="form-field">
+                                    <label>Address</label>
+                                    <input type="text" required>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-field">
+                                        <label>City</label>
+                                        <input type="text" required>
+                                    </div>
+                                    <div class="form-field">
+                                        <label>ZIP Code</label>
+                                        <input type="text" required>
+                                    </div>
+                                </div>
+                                
+                                <h3 style="margin-top: 30px;">Payment Information</h3>
+                                <div class="form-field">
+                                    <label>Card Number</label>
+                                    <input type="text" placeholder="1234 5678 9012 3456">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-field">
+                                        <label>Expiry Date</label>
+                                        <input type="text" placeholder="MM/YY">
+                                    </div>
+                                    <div class="form-field">
+                                        <label>CVV</label>
+                                        <input type="text" placeholder="123">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="checkout-section order-summary">
+                                <h3>Order Summary</h3>
+                                <div id="checkoutItems">
+                                    <!-- Order items will be populated here -->
+                                </div>
+                                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
+                                    <div class="total-row">
+                                        <span>Subtotal:</span>
+                                        <span id="checkoutSubtotal">$0.00</span>
+                                    </div>
+                                    <div class="total-row">
+                                        <span>Shipping:</span>
+                                        <span>$9.99</span>
+                                    </div>
+                                    <div class="total-row">
+                                        <span>Tax:</span>
+                                        <span id="checkoutTax">$0.00</span>
+                                    </div>
+                                    <div class="total-row total-final">
+                                        <span>Total:</span>
+                                        <span id="checkoutTotal">$0.00</span>
+                                    </div>
+                                    <button class="checkout-btn" onclick="completeOrder()">
+                                        Complete Order
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1152,10 +1724,19 @@
                     e.preventDefault();
                     const page = this.dataset.page;
                     showPage(page);
+                    setActiveNav(page);
+                });
+            });
+
+            // Add click handlers for product options
+            document.querySelectorAll('.size-option, .color-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from siblings
+                    const siblings = this.parentNode.querySelectorAll('.size-option, .color-option');
+                    siblings.forEach(sibling => sibling.classList.remove('selected'));
                     
-                    // Update active nav
-                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                    this.classList.add('active');
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
                 });
             });
 
@@ -1164,6 +1745,9 @@
             if (titleElement) {
                 typeWriter(titleElement, template.title, 50);
             }
+
+            // Update cart count
+            updateCartCount();
         }
 
         function showPage(pageId) {
@@ -1177,6 +1761,191 @@
             if (targetPage) {
                 targetPage.classList.add('active');
             }
+        }
+
+        function setActiveNav(pageId) {
+            // Update active nav
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.querySelector(`[data-page="${pageId}"]`).classList.add('active');
+        }
+
+        function addToCart(productId) {
+            if (!currentWebsiteData) return;
+            
+            const product = currentWebsiteData.template.products.find(p => p.id === productId);
+            if (!product) return;
+
+            // Get selected options
+            const sizeElement = document.querySelector(`[data-product="${productId}"].size-option.selected`);
+            const colorElement = document.querySelector(`[data-product="${productId}"].color-option.selected`);
+            
+            const selectedSize = sizeElement ? sizeElement.dataset.size : product.sizes[0];
+            const selectedColor = colorElement ? colorElement.dataset.color : product.colors[0];
+
+            // Check if item already exists in cart
+            const existingItem = cart.find(item => 
+                item.id === productId && 
+                item.size === selectedSize && 
+                item.color === selectedColor
+            );
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    size: selectedSize,
+                    color: selectedColor,
+                    quantity: 1
+                });
+            }
+
+            updateCartCount();
+            updateCartDisplay();
+            
+            // Show success message
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = '✓ Added!';
+            button.style.background = '#10b981';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = '';
+            }, 1500);
+        }
+
+        function updateCartCount() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartCountElement = document.getElementById('cartCount');
+            if (cartCountElement) {
+                cartCountElement.textContent = totalItems;
+            }
+        }
+
+        function updateCartDisplay() {
+            const cartItemsElement = document.getElementById('cartItems');
+            const cartTotalElement = document.getElementById('cartTotal');
+            
+            if (!cartItemsElement || !cartTotalElement) return;
+
+            if (cart.length === 0) {
+                cartItemsElement.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;">Your cart is empty</p>';
+                cartTotalElement.innerHTML = '';
+                return;
+            }
+
+            // Display cart items
+            cartItemsElement.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-details">${item.size} • ${item.color}</div>
+                        <div class="cart-item-price">$${item.price}</div>
+                        <div class="quantity-controls">
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, '${item.size}', '${item.color}', -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, '${item.size}', '${item.color}', 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Calculate totals
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = subtotal > 50 ? 0 : 9.99;
+            const tax = subtotal * 0.08;
+            const total = subtotal + shipping + tax;
+
+            cartTotalElement.innerHTML = `
+                <div class="total-row">
+                    <span>Subtotal:</span>
+                    <span>$${subtotal.toFixed(2)}</span>
+                </div>
+                <div class="total-row">
+                    <span>Shipping:</span>
+                    <span>${shipping === 0 ? 'FREE' : '$' + shipping.toFixed(2)}</span>
+                </div>
+                <div class="total-row">
+                    <span>Tax:</span>
+                    <span>$${tax.toFixed(2)}</span>
+                </div>
+                <div class="total-row total-final">
+                    <span>Total:</span>
+                    <span>$${total.toFixed(2)}</span>
+                </div>
+                <button class="checkout-btn" onclick="goToCheckout()">
+                    Proceed to Checkout
+                </button>
+            `;
+        }
+
+        function updateQuantity(productId, size, color, change) {
+            const item = cart.find(item => 
+                item.id === productId && 
+                item.size === size && 
+                item.color === color
+            );
+
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(cartItem => cartItem !== item);
+                }
+                updateCartCount();
+                updateCartDisplay();
+            }
+        }
+
+        function openCart() {
+            document.getElementById('cartSidebar').classList.add('open');
+            document.getElementById('cartOverlay').classList.add('show');
+            updateCartDisplay();
+        }
+
+        function closeCart() {
+            document.getElementById('cartSidebar').classList.remove('open');
+            document.getElementById('cartOverlay').classList.remove('show');
+        }
+
+        function goToCheckout() {
+            closeCart();
+            showPage('checkout');
+            setActiveNav('checkout');
+            updateCheckoutDisplay();
+        }
+
+        function updateCheckoutDisplay() {
+            const checkoutItemsElement = document.getElementById('checkoutItems');
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = subtotal > 50 ? 0 : 9.99;
+            const tax = subtotal * 0.08;
+            const total = subtotal + shipping + tax;
+
+            if (checkoutItemsElement) {
+                checkoutItemsElement.innerHTML = cart.map(item => `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #eee;">
+                        <span>${item.name} (${item.size}, ${item.color}) x${item.quantity}</span>
+                        <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                    </div>
+                `).join('');
+            }
+
+            document.getElementById('checkoutSubtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('checkoutTax').textContent = `$${tax.toFixed(2)}`;
+            document.getElementById('checkoutTotal').textContent = `$${total.toFixed(2)}`;
+        }
+
+        function completeOrder() {
+            alert('🎉 Order completed successfully! This is a demo - no actual payment was processed.');
+            cart = [];
+            updateCartCount();
+            showPage('home');
+            setActiveNav('home');
         }
 
         function typeWriter(element, text, speed) {
@@ -1205,27 +1974,43 @@
                 
                 // Copy website content to fullscreen
                 fullscreenWebsite.innerHTML = document.getElementById('websiteContent').innerHTML;
-                fullscreenTitle.textContent = `${currentWebsiteData.businessName} - Full Website Preview`;
+                fullscreenTitle.textContent = `${currentWebsiteData.businessName} - Full Store Preview`;
                 
-                // Re-add event listeners for fullscreen version
-                fullscreenWebsite.querySelectorAll('.nav-link').forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const page = this.dataset.page;
-                        
-                        // Hide all pages in fullscreen
-                        fullscreenWebsite.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-                        fullscreenWebsite.querySelector(`#page-${page}`).classList.add('active');
-                        
-                        // Update active nav in fullscreen
-                        fullscreenWebsite.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                        this.classList.add('active');
-                    });
-                });
+                // Re-add all event listeners for fullscreen version
+                setupFullscreenEventListeners(fullscreenWebsite);
                 
                 modal.style.display = 'block';
                 document.body.style.overflow = 'hidden';
             }
+        }
+
+        function setupFullscreenEventListeners(container) {
+            // Navigation links
+            container.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.dataset.page;
+                    
+                    // Hide all pages in fullscreen
+                    container.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+                    container.querySelector(`#page-${page}`).classList.add('active');
+                    
+                    // Update active nav in fullscreen
+                    container.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Product options
+            container.querySelectorAll('.size-option, .color-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const siblings = this.parentNode.querySelectorAll('.size-option, .color-option');
+                    siblings.forEach(sibling => sibling.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+
+            // Add to cart buttons (they'll still work with the global addToCart function)
         }
 
         function closeFullscreen() {
@@ -1248,34 +2033,36 @@
             
             // Reset button
             document.getElementById('generateBtn').disabled = false;
-            document.getElementById('generateBtn').textContent = '🚀 Generate Website with AI';
+            document.getElementById('generateBtn').textContent = '🚀 Generate Store with AI';
             
-            // Clear current website data
+            // Clear current website data and cart
             currentWebsiteData = null;
+            cart = [];
+            closeCart();
         }
 
         function fillSampleData() {
             const samples = [
                 {
-                    name: "Bella's Italian Restaurant",
-                    industry: "restaurant",
-                    description: "Authentic Italian restaurant serving fresh pasta, pizza, and traditional dishes with a cozy family atmosphere.",
-                    style: "elegant",
-                    features: "Online reservations, Wine selection, Private dining"
-                },
-                {
-                    name: "TechFlow Solutions",
-                    industry: "technology",
-                    description: "Innovative software development company specializing in web applications, mobile apps, and cloud solutions.",
+                    name: "Urban Hat Co.",
+                    industry: "hats",
+                    description: "Premium hat collection featuring baseball caps, beanies, fedoras, and seasonal styles for every occasion.",
                     style: "modern",
-                    features: "Custom software, Cloud migration, 24/7 support"
+                    features: "Size guide, Wishlist, Customer reviews, Live chat"
                 },
                 {
-                    name: "FitLife Gym",
-                    industry: "fitness",
-                    description: "Modern fitness center with personal training, group classes, and state-of-the-art equipment.",
+                    name: "StyleHub Fashion",
+                    industry: "clothing",
+                    description: "Trendy clothing store offering modern fashion for men and women, from casual wear to formal attire.",
+                    style: "elegant",
+                    features: "Virtual try-on, Size guide, Style recommendations"
+                },
+                {
+                    name: "TechGear Pro",
+                    industry: "electronics",
+                    description: "Cutting-edge electronics and gadgets for tech enthusiasts, featuring the latest innovations and accessories.",
                     style: "bold",
-                    features: "Personal training, Group classes, Nutrition coaching"
+                    features: "Product comparisons, Tech specs, Warranty info"
                 }
             ];
             
@@ -1292,6 +2079,7 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeFullscreen();
+                closeCart();
             }
         });
 
@@ -1300,17 +2088,22 @@
             const stats = document.querySelectorAll('.stat-number');
             stats.forEach(stat => {
                 const originalText = stat.textContent;
-                if (originalText.includes(',')) {
-                    const num = parseInt(originalText.replace(',', ''));
-                    const increment = Math.floor(Math.random() * 10) + 1;
+                if (originalText.includes('.')) {
+                    const num = parseFloat(originalText);
+                    const increment = (Math.random() * 0.2) + 0.1;
+                    const newNum = num + increment;
+                    stat.textContent = newNum.toFixed(1);
+                } else if (!isNaN(originalText)) {
+                    const num = parseInt(originalText);
+                    const increment = Math.floor(Math.random() * 20) + 5;
                     const newNum = num + increment;
                     stat.textContent = newNum.toLocaleString();
                 }
             });
         }
 
-        // Update stats every 30 seconds
-        setInterval(animateStats, 30000);
+        // Update stats every 45 seconds
+        setInterval(animateStats, 45000);
     </script>
 </body>
 </html>
