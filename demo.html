@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live AI Demo - Watch AI Create a Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        .demo-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .demo-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .demo-header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        
+        .demo-header p {
+            font-size: 1.3rem;
+            color: #ffffff;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .demo-interface {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .demo-input {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a1a3a 100%);
+            border: 2px solid rgba(147, 51, 234, 0.4);
+            border-radius: 20px;
+            padding: 40px;
+        }
+        
+        .demo-output {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a1a3a 100%);
+            border: 2px solid rgba(147, 51, 234, 0.4);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #9333ea;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid rgba(147, 51, 234, 0.3);
+            border-radius: 8px;
+            background: rgba(10, 10, 10, 0.8);
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #9333ea;
+            box-shadow: 0 0 15px rgba(147, 51, 234, 0.3);
+        }
+        
+        .demo-btn {
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.6);
+        }
+        
+        .demo-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .ai-thinking {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .ai-brain {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .ai-status {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #9333ea;
+            margin-bottom: 15px;
+        }
+        
+        .ai-progress {
+            width: 100%;
+            height: 8px;
+            background: rgba(147, 51, 234, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .ai-progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .ai-steps {
+            text-align: left;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .ai-step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px 0;
+            opacity: 0.3;
+            transition: all 0.3s ease;
+        }
+        
+        .ai-step.active {
+            opacity: 1;
+            color: #9333ea;
+            font-weight: 700;
+        }
+        
+        .ai-step.completed {
+            opacity: 0.7;
+            color: #10b981;
+        }
+        
+        .step-icon {
+            font-size: 1.2rem;
+        }
+        
+        .website-preview {
+            display: none;
+            border: 2px solid rgba(147, 51, 234, 0.4);
+            border-radius: 15px;
+            overflow: hidden;
+            background: #ffffff;
+            color: #000000;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .preview-header {
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .preview-content {
+            padding: 30px;
+            min-height: 400px;
+        }
+        
+        .preview-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .preview-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #9333ea;
+        }
+        
+        .preview-menu {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .preview-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .preview-menu a:hover {
+            color: #9333ea;
+        }
+        
+        .preview-hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .preview-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .preview-hero p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        .preview-cta {
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        
+        .preview-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .preview-feature {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .preview-feature-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .demo-actions {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .action-btn {
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            color: white;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 0 10px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.6);
+        }
+        
+        .action-btn.secondary {
+            background: rgba(147, 51, 234, 0.1);
+            color: #9333ea;
+            border: 2px solid #9333ea;
+        }
+        
+        .demo-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a1a3a 100%);
+            border: 2px solid rgba(147, 51, 234, 0.4);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #9333ea;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .typing-effect {
+            border-right: 2px solid #9333ea;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { border-color: #9333ea; }
+            51%, 100% { border-color: transparent; }
+        }
+        
+        @media (max-width: 768px) {
+            .demo-interface {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .demo-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .demo-input,
+            .demo-output {
+                padding: 25px;
+            }
+            
+            .preview-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .action-btn {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1>🤖 Watch AI Create a Website Live</h1>
+            <p>Experience the magic of AI website creation. Enter your business details and watch our neural networks generate a professional website in real-time.</p>
+        </div>
+
+        <div class="demo-interface">
+            <!-- Input Section -->
+            <div class="demo-input">
+                <h3 class="section-title">
+                    <span>📝</span> Business Information
+                </h3>
+                
+                <div class="form-group">
+                    <label for="businessName">Business Name</label>
+                    <input type="text" id="businessName" placeholder="e.g., Bella's Italian Restaurant">
+                </div>
+                
+                <div class="form-group">
+                    <label for="industry">Industry</label>
+                    <select id="industry">
+                        <option value="">Select industry</option>
+                        <option value="restaurant">Restaurant & Food</option>
+                        <option value="technology">Technology & Software</option>
+                        <option value="healthcare">Healthcare & Medical</option>
+                        <option value="retail">Retail & E-commerce</option>
+                        <option value="legal">Legal Services</option>
+                        <option value="consulting">Consulting</option>
+                        <option value="fitness">Fitness & Wellness</option>
+                        <option value="beauty">Beauty & Spa</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Business Description</label>
+                    <textarea id="description" rows="3" placeholder="Describe what your business does..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="style">Design Style</label>
+                    <select id="style">
+                        <option value="">Select style</option>
+                        <option value="modern">Modern & Minimalist</option>
+                        <option value="professional">Professional & Corporate</option>
+                        <option value="creative">Creative & Artistic</option>
+                        <option value="elegant">Elegant & Luxury</option>
+                        <option value="fun">Fun & Playful</option>
+                    </select>
+                </div>
+                
+                <button class="demo-btn" id="generateBtn" onclick="startAIDemo()">
+                    🚀 Generate Website with AI
+                </button>
+            </div>
+
+            <!-- Output Section -->
+            <div class="demo-output">
+                <h3 class="section-title">
+                    <span>🤖</span> AI Website Generation
+                </h3>
+                
+                <!-- AI Thinking Animation -->
+                <div class="ai-thinking" id="aiThinking">
+                    <div class="ai-brain">🧠</div>
+                    <div class="ai-status" id="aiStatus">Initializing AI Neural Networks...</div>
+                    <div class="ai-progress">
+                        <div class="ai-progress-bar" id="progressBar"></div>
+                    </div>
+                    <div class="ai-steps">
+                        <div class="ai-step" id="step1">
+                            <span class="step-icon">🔍</span>
+                            <span>Analyzing business information</span>
+                        </div>
+                        <div class="ai-step" id="step2">
+                            <span class="step-icon">🎨</span>
+                            <span>Generating design concepts</span>
+                        </div>
+                        <div class="ai-step" id="step3">
+                            <span class="step-icon">📝</span>
+                            <span>Creating intelligent content</span>
+                        </div>
+                        <div class="ai-step" id="step4">
+                            <span class="step-icon">📱</span>
+                            <span>Optimizing for mobile</span>
+                        </div>
+                        <div class="ai-step" id="step5">
+                            <span class="step-icon">🔍</span>
+                            <span>Implementing SEO optimization</span>
+                        </div>
+                        <div class="ai-step" id="step6">
+                            <span class="step-icon">✨</span>
+                            <span>Finalizing website</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Website Preview -->
+                <div class="website-preview" id="websitePreview">
+                    <div class="preview-header">
+                        <span>🌐</span>
+                        <span>Your AI-Generated Website</span>
+                    </div>
+                    <div class="preview-content">
+                        <div class="preview-nav">
+                            <div class="preview-logo" id="previewLogo">Your Business</div>
+                            <div class="preview-menu">
+                                <a href="#">Home</a>
+                                <a href="#">About</a>
+                                <a href="#">Services</a>
+                                <a href="#">Contact</a>
+                            </div>
+                        </div>
+                        
+                        <div class="preview-hero">
+                            <h1 id="previewTitle">Welcome to Your Business</h1>
+                            <p id="previewSubtitle">Professional services tailored to your needs</p>
+                            <button class="preview-cta">Get Started Today</button>
+                        </div>
+                        
+                        <div class="preview-features" id="previewFeatures">
+                            <!-- Features will be dynamically generated -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Initial State -->
+                <div id="initialState">
+                    <div style="text-align: center; padding: 60px 20px; opacity: 0.6;">
+                        <div style="font-size: 4rem; margin-bottom: 20px;">🤖</div>
+                        <p style="font-size: 1.2rem; color: #9333ea; font-weight: 700;">AI Ready to Generate Your Website</p>
+                        <p style="margin-top: 10px;">Fill in your business details and click "Generate Website with AI"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demo Stats -->
+        <div class="demo-stats">
+            <div class="stat-card">
+                <div class="stat-number">2.3</div>
+                <div class="stat-label">Minutes Average Generation Time</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1,247</div>
+                <div class="stat-label">Websites Created This Month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">98.7%</div>
+                <div class="stat-label">Client Satisfaction Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">AI Availability</div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="demo-actions">
+            <h2 style="color: #9333ea; margin-bottom: 30px; font-size: 2.5rem; font-weight: 900;">Ready to Create Your Real Website?</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 40px; color: #ffffff;">This was just a demo. Get your actual AI-generated website in 30-60 minutes!</p>
+            
+            <a href="consultation.html?package=professional" class="action-btn">
+                🚀 Create My Real Website - €260
+            </a>
+            <a href="index.html" class="action-btn secondary">
+                ← Back to Main Site
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Industry-specific content templates
+        const industryTemplates = {
+            restaurant: {
+                title: "Authentic Italian Cuisine",
+                subtitle: "Experience the finest Italian dining with fresh ingredients and traditional recipes",
+                features: [
+                    { icon: "🍝", title: "Fresh Pasta", desc: "Made daily with authentic Italian recipes" },
+                    { icon: "🍷", title: "Wine Selection", desc: "Curated Italian wines to complement your meal" },
+                    { icon: "👨‍🍳", title: "Expert Chefs", desc: "Trained in traditional Italian cooking methods" }
+                ]
+            },
+            technology: {
+                title: "Innovative Tech Solutions",
+                subtitle: "Cutting-edge technology services to transform your business operations",
+                features: [
+                    { icon: "💻", title: "Custom Software", desc: "Tailored solutions for your business needs" },
+                    { icon: "☁️", title: "Cloud Services", desc: "Scalable cloud infrastructure and migration" },
+                    { icon: "🔒", title: "Cybersecurity", desc: "Advanced security solutions and monitoring" }
+                ]
+            },
+            healthcare: {
+                title: "Comprehensive Healthcare",
+                subtitle: "Quality medical care with compassionate service and advanced treatments",
+                features: [
+                    { icon: "🏥", title: "Modern Facilities", desc: "State-of-the-art medical equipment" },
+                    { icon: "👩‍⚕️", title: "Expert Staff", desc: "Experienced healthcare professionals" },
+                    { icon: "📅", title: "Easy Scheduling", desc: "Convenient appointment booking system" }
+                ]
+            },
+            retail: {
+                title: "Premium Shopping Experience",
+                subtitle: "Discover quality products with exceptional customer service and competitive prices",
+                features: [
+                    { icon: "🛍️", title: "Quality Products", desc: "Carefully curated selection of premium items" },
+                    { icon: "🚚", title: "Fast Shipping", desc: "Quick and reliable delivery nationwide" },
+                    { icon: "💳", title: "Secure Checkout", desc: "Safe and easy online payment options" }
+                ]
+            },
+            legal: {
+                title: "Professional Legal Services",
+                subtitle: "Experienced legal representation with personalized attention to your case",
+                features: [
+                    { icon: "⚖️", title: "Expert Counsel", desc: "Experienced attorneys in multiple practice areas" },
+                    { icon: "📋", title: "Case Management", desc: "Comprehensive legal case tracking and updates" },
+                    { icon: "🤝", title: "Client Focus", desc: "Personalized attention and dedicated service" }
+                ]
+            },
+            consulting: {
+                title: "Strategic Business Consulting",
+                subtitle: "Expert guidance to optimize your business operations and drive growth",
+                features: [
+                    { icon: "📊", title: "Business Analysis", desc: "Comprehensive evaluation of your operations" },
+                    { icon: "🎯", title: "Strategic Planning", desc: "Custom strategies for sustainable growth" },
+                    { icon: "📈", title: "Performance Metrics", desc: "Data-driven insights and KPI tracking" }
+                ]
+            },
+            fitness: {
+                title: "Transform Your Fitness Journey",
+                subtitle: "Professional training and wellness programs to help you achieve your health goals",
+                features: [
+                    { icon: "💪", title: "Personal Training", desc: "One-on-one coaching with certified trainers" },
+                    { icon: "🏋️", title: "Modern Equipment", desc: "State-of-the-art fitness equipment and facilities" },
+                    { icon: "📱", title: "Fitness Tracking", desc: "Advanced progress monitoring and analytics" }
+                ]
+            },
+            beauty: {
+                title: "Luxury Beauty & Wellness",
+                subtitle: "Premium beauty treatments and spa services in a relaxing, rejuvenating environment",
+                features: [
+                    { icon: "💆", title: "Spa Treatments", desc: "Relaxing massages and therapeutic treatments" },
+                    { icon: "💄", title: "Beauty Services", desc: "Professional makeup and skincare treatments" },
+                    { icon: "✨", title: "Wellness Programs", desc: "Holistic wellness and self-care packages" }
+                ]
+            }
+        };
+
+        // AI Demo Steps
+        const aiSteps = [
+            { id: 'step1', status: 'Analyzing business information...', duration: 2000 },
+            { id: 'step2', status: 'Generating design concepts...', duration: 2500 },
+            { id: 'step3', status: 'Creating intelligent content...', duration: 3000 },
+            { id: 'step4', status: 'Optimizing for mobile devices...', duration: 2000 },
+            { id: 'step5', status: 'Implementing SEO optimization...', duration: 2500 },
+            { id: 'step6', status: 'Finalizing your website...', duration: 2000 }
+        ];
+
+        function startAIDemo() {
+            const businessName = document.getElementById('businessName').value;
+            const industry = document.getElementById('industry').value;
+            const description = document.getElementById('description').value;
+            
+            if (!businessName || !industry) {
+                alert('Please fill in at least the business name and industry to see the AI demo!');
+                return;
+            }
+
+            // Hide initial state and show AI thinking
+            document.getElementById('initialState').style.display = 'none';
+            document.getElementById('aiThinking').style.display = 'block';
+            document.getElementById('generateBtn').disabled = true;
+            document.getElementById('generateBtn').textContent = '🤖 AI Generating...';
+
+            // Run AI simulation
+            simulateAIProcess(businessName, industry, description);
+        }
+
+        function simulateAIProcess(businessName, industry, description) {
+            let currentStep = 0;
+            let progress = 0;
+
+            function runStep() {
+                if (currentStep < aiSteps.length) {
+                    const step = aiSteps[currentStep];
+                    
+                    // Update status
+                    document.getElementById('aiStatus').textContent = step.status;
+                    
+                    // Activate current step
+                    document.getElementById(step.id).classList.add('active');
+                    
+                    // Update progress
+                    progress = ((currentStep + 1) / aiSteps.length) * 100;
+                    document.getElementById('progressBar').style.width = progress + '%';
+                    
+                    setTimeout(() => {
+                        // Complete current step
+                        document.getElementById(step.id).classList.remove('active');
+                        document.getElementById(step.id).classList.add('completed');
+                        
+                        currentStep++;
+                        runStep();
+                    }, step.duration);
+                } else {
+                    // AI process complete - show website
+                    showGeneratedWebsite(businessName, industry, description);
+                }
+            }
+
+            runStep();
+        }
+
+        function showGeneratedWebsite(businessName, industry, description) {
+            // Hide AI thinking
+            document.getElementById('aiThinking').style.display = 'none';
+            
+            // Get industry template
+            const template = industryTemplates[industry] || industryTemplates.consulting;
+            
+            // Update preview content
+            document.getElementById('previewLogo').textContent = businessName;
+            document.getElementById('previewTitle').textContent = template.title;
+            document.getElementById('previewSubtitle').textContent = template.subtitle;
+            
+            // Generate features
+            const featuresContainer = document.getElementById('previewFeatures');
+            featuresContainer.innerHTML = template.features.map(feature => `
+                <div class="preview-feature">
+                    <div class="preview-feature-icon">${feature.icon}</div>
+                    <h4>${feature.title}</h4>
+                    <p>${feature.desc}</p>
+                </div>
+            `).join('');
+            
+            // Show website preview
+            document.getElementById('websitePreview').style.display = 'block';
+            
+            // Reset button
+            document.getElementById('generateBtn').disabled = false;
+            document.getElementById('generateBtn').textContent = '🔄 Generate Another Website';
+            
+            // Add typing effect to title
+            typeWriter(document.getElementById('previewTitle'), template.title, 50);
+        }
+
+        function typeWriter(element, text, speed) {
+            element.textContent = '';
+            element.classList.add('typing-effect');
+            let i = 0;
+            
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    element.classList.remove('typing-effect');
+                }
+            }
+            
+            type();
+        }
+
+        // Reset demo function
+        function resetDemo() {
+            document.getElementById('websitePreview').style.display = 'none';
+            document.getElementById('aiThinking').style.display = 'none';
+            document.getElementById('initialState').style.display = 'block';
+            
+            // Reset AI steps
+            document.querySelectorAll('.ai-step').forEach(step => {
+                step.classList.remove('active', 'completed');
+            });
+            
+            // Reset progress
+            document.getElementById('progressBar').style.width = '0%';
+            
+            // Reset button
+            document.getElementById('generateBtn').disabled = false;
+            document.getElementById('generateBtn').textContent = '🚀 Generate Website with AI';
+        }
+
+        // Auto-fill demo data for quick testing
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add sample data button for quick demo
+            const sampleBtn = document.createElement('button');
+            sampleBtn.textContent = '⚡ Try Sample Data';
+            sampleBtn.className = 'demo-btn';
+            sampleBtn.style.background = 'rgba(147, 51, 234, 0.2)';
+            sampleBtn.style.marginTop = '10px';
+            sampleBtn.onclick = function() {
+                document.getElementById('businessName').value = "Bella's Italian Restaurant";
+                document.getElementById('industry').value = "restaurant";
+                document.getElementById('description').value = "Authentic Italian restaurant serving fresh pasta, pizza, and traditional dishes with a cozy atmosphere.";
+                document.getElementById('style').value = "elegant";
+            };
+            
+            document.querySelector('.demo-input').appendChild(sampleBtn);
+        });
+    </script>
+</body>
+</html>
