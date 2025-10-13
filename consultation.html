@@ -268,6 +268,31 @@
             font-weight: 800;
         }
         
+        .optional-service {
+            background: rgba(147, 51, 234, 0.1);
+            border: 2px solid rgba(147, 51, 234, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .optional-service h4 {
+            color: #9333ea;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+        
+        .service-note {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            color: #ffc107;
+            font-weight: 600;
+        }
+        
         .pricing-highlight {
             background: rgba(147, 51, 234, 0.2);
             padding: 15px;
@@ -350,25 +375,6 @@
             filter: contrast(1.3) brightness(1.2);
         }
         
-        .domain-preview {
-            background: rgba(147, 51, 234, 0.1);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            border: 1px solid rgba(147, 51, 234, 0.3);
-            display: none;
-        }
-        
-        .domain-preview.show {
-            display: block;
-        }
-        
-        .domain-suggestion {
-            color: #9333ea;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-        
         @media (max-width: 768px) {
             .consultation-form {
                 padding: 30px;
@@ -401,7 +407,7 @@
     <div class="container">
         <div class="header">
             <h1>🤖 AI Neural Consultation</h1>
-            <p>Our advanced AI needs comprehensive information about your business to create the perfect website with complete online presence setup including domain and hosting.</p>
+            <p>Our advanced AI needs comprehensive information about your business to create the perfect website. Optional domain and hosting services available.</p>
         </div>
 
         <div class="package-info" id="packageInfo">
@@ -700,118 +706,140 @@
                     </div>
                 </div>
 
-                <!-- Step 6: Domain & Hosting Setup -->
+                <!-- Step 6: Optional Domain & Hosting Services -->
                 <div class="form-step" id="step6">
                     <div class="form-section">
-                        <h3>🌐 Domain & Hosting Setup</h3>
-                        <div class="form-group">
-                            <label>Domain Registration *</label>
+                        <h3>🌐 Optional Domain & Hosting Services</h3>
+                        <p style="color: #ffffff; margin-bottom: 25px; font-weight: 600;">These are optional add-on services. Your AI website can be delivered without these.</p>
+                        
+                        <div class="optional-service">
+                            <h4>🌐 Domain Registration Service</h4>
+                            <div class="service-note">
+                                <strong>Note:</strong> We only register standard domains (.com, .net, .org) for €15-25. Premium domains can cost thousands and are not included.
+                            </div>
                             <div class="radio-group">
                                 <div class="radio-item">
-                                    <input type="radio" id="domain-yes" name="needsDomain" value="yes" required>
-                                    <label for="domain-yes">
-                                        <strong>Yes, register a new domain for me</strong><br>
-                                        <small>We'll find and register the perfect domain for your business (+€15)</small>
+                                    <input type="radio" id="domain-no" name="domainService" value="no" checked>
+                                    <label for="domain-no">
+                                        <strong>No domain service needed</strong><br>
+                                        <small>I'll handle domain registration myself or use existing domain</small>
                                     </label>
                                 </div>
                                 <div class="radio-item">
-                                    <input type="radio" id="domain-have" name="needsDomain" value="have" required>
-                                    <label for="domain-have">
-                                        <strong>I already have a domain</strong><br>
-                                        <small>We'll connect your existing domain to your new website</small>
+                                    <input type="radio" id="domain-standard" name="domainService" value="standard">
+                                    <label for="domain-standard">
+                                        <strong>Register standard domain (+€15-25)</strong><br>
+                                        <small>We'll find and register a standard .com/.net/.org domain for you</small>
                                     </label>
                                 </div>
                                 <div class="radio-item">
-                                    <input type="radio" id="domain-later" name="needsDomain" value="later" required>
-                                    <label for="domain-later">
-                                        <strong>I'll handle domain myself later</strong><br>
-                                        <small>Website will be delivered on a temporary preview URL</small>
+                                    <input type="radio" id="domain-existing" name="domainService" value="existing">
+                                    <label for="domain-existing">
+                                        <strong>Connect my existing domain (Free)</strong><br>
+                                        <small>I already own a domain and want to connect it</small>
                                     </label>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="form-group" id="domainPreferences" style="display: none;">
-                            <label for="preferredDomain">Preferred Domain Name</label>
-                            <input type="text" id="preferredDomain" name="preferredDomain" placeholder="yourbusiness.com">
-                            <small>We'll check availability and suggest alternatives if needed</small>
-                            <div class="domain-preview" id="domainPreview">
-                                <div class="domain-suggestion">Suggested: <span id="domainSuggestion"></span></div>
+                            
+                            <div class="form-group" id="domainPreferences" style="display: none; margin-top: 20px;">
+                                <label for="preferredDomain">Preferred Domain Name</label>
+                                <input type="text" id="preferredDomain" name="preferredDomain" placeholder="yourbusiness.com">
+                                <small>We'll check availability for standard domains only</small>
+                            </div>
+                            
+                            <div class="form-group" id="existingDomain" style="display: none; margin-top: 20px;">
+                                <label for="currentDomain">Your Existing Domain</label>
+                                <input type="text" id="currentDomain" name="currentDomain" placeholder="yourbusiness.com">
+                                <small>We'll help configure DNS settings</small>
                             </div>
                         </div>
                         
-                        <div class="form-group" id="existingDomain" style="display: none;">
-                            <label for="currentDomain">Your Existing Domain</label>
-                            <input type="text" id="currentDomain" name="currentDomain" placeholder="yourbusiness.com">
-                            <small>We'll configure DNS settings to connect your domain</small>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Professional Hosting Package *</label>
+                        <div class="optional-service">
+                            <h4>🚀 Professional Hosting Service</h4>
+                            <div class="service-note">
+                                <strong>Note:</strong> Hosting is billed monthly. You can choose monthly or annual billing.
+                            </div>
                             <div class="radio-group">
                                 <div class="radio-item">
-                                    <input type="radio" id="hosting-yes" name="needsHosting" value="yes" checked required>
-                                    <label for="hosting-yes">
-                                        <strong>Yes, include professional hosting</strong><br>
-                                        <small>Premium SSD hosting, SSL certificate, CDN, daily backups, 99.9% uptime (+€19/month)</small>
-                                    </label>
-                                </div>
-                                <div class="radio-item">
-                                    <input type="radio" id="hosting-no" name="needsHosting" value="no" required>
+                                    <input type="radio" id="hosting-no" name="hostingService" value="no" checked>
                                     <label for="hosting-no">
-                                        <strong>No, I'll use my own hosting</strong><br>
-                                        <small>You'll receive website files to upload to your hosting provider</small>
+                                        <strong>No hosting service needed</strong><br>
+                                        <small>I'll use my own hosting or get website files only</small>
+                                    </label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="hosting-monthly" name="hostingService" value="monthly">
+                                    <label for="hosting-monthly">
+                                        <strong>Monthly hosting (+€19/month)</strong><br>
+                                        <small>Premium SSD hosting, SSL, CDN, backups - billed monthly</small>
+                                    </label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="hosting-annual" name="hostingService" value="annual">
+                                    <label for="hosting-annual">
+                                        <strong>Annual hosting (+€190/year - Save €38!)</strong><br>
+                                        <small>Same premium hosting, paid annually with 2 months free</small>
                                     </label>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="form-group">
-                            <label>Professional Email Setup</label>
+                        <div class="optional-service">
+                            <h4>📧 Professional Email Service</h4>
+                            <div class="service-note">
+                                <strong>Note:</strong> Requires domain service or existing domain. Email is billed monthly/annually.
+                            </div>
                             <div class="radio-group">
                                 <div class="radio-item">
-                                    <input type="radio" id="email-yes" name="needsEmail" value="yes">
-                                    <label for="email-yes">
-                                        <strong>Yes, set up professional email</strong><br>
-                                        <small>Get contact@yourbusiness.com and other professional email addresses (+€5/month)</small>
+                                    <input type="radio" id="email-no" name="emailService" value="no" checked>
+                                    <label for="email-no">
+                                        <strong>No email service needed</strong><br>
+                                        <small>I'll handle email separately</small>
                                     </label>
                                 </div>
                                 <div class="radio-item">
-                                    <input type="radio" id="email-no" name="needsEmail" value="no" checked>
-                                    <label for="email-no">
-                                        <strong>No, I'll handle email separately</strong><br>
-                                        <small>You can set up email with your preferred provider later</small>
+                                    <input type="radio" id="email-monthly" name="emailService" value="monthly">
+                                    <label for="email-monthly">
+                                        <strong>Monthly email (+€5/month)</strong><br>
+                                        <small>Professional email addresses with your domain</small>
+                                    </label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="email-annual" name="emailService" value="annual">
+                                    <label for="email-annual">
+                                        <strong>Annual email (+€50/year - Save €10!)</strong><br>
+                                        <small>Same professional email, paid annually</small>
                                     </label>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="pricing-highlight" id="pricingBreakdown">
-                            <h4>💰 Your Total Investment</h4>
+                        <div class="pricing-highlight" id="optionalServicesTotal">
+                            <h4>💰 Optional Services Total</h4>
                             <div class="pricing-breakdown">
                                 <span>AI Website Package:</span>
                                 <span id="packagePrice">€260</span>
                             </div>
                             <div class="pricing-breakdown" id="domainCost" style="display: none;">
                                 <span>Domain Registration:</span>
-                                <span>€15</span>
+                                <span id="domainPrice">€15-25</span>
                             </div>
-                            <div class="pricing-breakdown" id="hostingCost">
-                                <span>Professional Hosting:</span>
-                                <span>€19/month</span>
+                            <div class="pricing-breakdown" id="hostingCost" style="display: none;">
+                                <span>Hosting Service:</span>
+                                <span id="hostingPrice">€19/month</span>
                             </div>
                             <div class="pricing-breakdown" id="emailCost" style="display: none;">
-                                <span>Professional Email:</span>
-                                <span>€5/month</span>
+                                <span>Email Service:</span>
+                                <span id="emailPrice">€5/month</span>
                             </div>
                             <hr style="margin: 10px 0; border-color: rgba(147, 51, 234, 0.3);">
                             <div class="pricing-breakdown" style="font-size: 1.2rem; font-weight: 800; color: #9333ea;">
                                 <span>Total One-time:</span>
-                                <span id="totalOneTime">€279</span>
+                                <span id="totalOneTime">€260</span>
                             </div>
-                            <div class="pricing-breakdown" style="font-size: 1.1rem; font-weight: 700; color: #a855f7;">
+                            <div class="pricing-breakdown" style="font-size: 1.1rem; font-weight: 700; color: #a855f7;" id="monthlyRecurring">
                                 <span>Monthly Recurring:</span>
-                                <span id="totalMonthly">€19</span>
+                                <span id="totalMonthly">None</span>
                             </div>
                         </div>
                     </div>
@@ -895,10 +923,10 @@
             
             document.getElementById('selectedPackage').textContent = packageNames[selectedPackage] || 'AI Professional - €260';
             document.getElementById('packagePrice').textContent = '€' + (packagePrices[selectedPackage] || 260);
-            updatePricingBreakdown();
+            updateOptionalServicesPricing();
         }
 
-        function updatePricingBreakdown() {
+        function updateOptionalServicesPricing() {
             const packagePrices = {
                 'starter': 150,
                 'professional': 260,
@@ -909,34 +937,51 @@
             let monthlyTotal = 0;
             
             // Domain cost
-            const needsDomain = document.querySelector('input[name="needsDomain"]:checked');
-            if (needsDomain && needsDomain.value === 'yes') {
-                oneTimeTotal += 15;
+            const domainService = document.querySelector('input[name="domainService"]:checked');
+            if (domainService && domainService.value === 'standard') {
+                oneTimeTotal += 20; // Average of €15-25
                 document.getElementById('domainCost').style.display = 'flex';
             } else {
                 document.getElementById('domainCost').style.display = 'none';
             }
             
             // Hosting cost
-            const needsHosting = document.querySelector('input[name="needsHosting"]:checked');
-            if (needsHosting && needsHosting.value === 'yes') {
+            const hostingService = document.querySelector('input[name="hostingService"]:checked');
+            if (hostingService && hostingService.value === 'monthly') {
                 monthlyTotal += 19;
                 document.getElementById('hostingCost').style.display = 'flex';
+                document.getElementById('hostingPrice').textContent = '€19/month';
+            } else if (hostingService && hostingService.value === 'annual') {
+                oneTimeTotal += 190;
+                document.getElementById('hostingCost').style.display = 'flex';
+                document.getElementById('hostingPrice').textContent = '€190/year';
             } else {
                 document.getElementById('hostingCost').style.display = 'none';
             }
             
             // Email cost
-            const needsEmail = document.querySelector('input[name="needsEmail"]:checked');
-            if (needsEmail && needsEmail.value === 'yes') {
+            const emailService = document.querySelector('input[name="emailService"]:checked');
+            if (emailService && emailService.value === 'monthly') {
                 monthlyTotal += 5;
                 document.getElementById('emailCost').style.display = 'flex';
+                document.getElementById('emailPrice').textContent = '€5/month';
+            } else if (emailService && emailService.value === 'annual') {
+                oneTimeTotal += 50;
+                document.getElementById('emailCost').style.display = 'flex';
+                document.getElementById('emailPrice').textContent = '€50/year';
             } else {
                 document.getElementById('emailCost').style.display = 'none';
             }
             
             document.getElementById('totalOneTime').textContent = '€' + oneTimeTotal;
-            document.getElementById('totalMonthly').textContent = monthlyTotal > 0 ? '€' + monthlyTotal : 'None';
+            
+            if (monthlyTotal > 0) {
+                document.getElementById('totalMonthly').textContent = '€' + monthlyTotal;
+                document.getElementById('monthlyRecurring').style.display = 'flex';
+            } else {
+                document.getElementById('totalMonthly').textContent = 'None';
+                document.getElementById('monthlyRecurring').style.display = 'flex';
+            }
         }
 
         // Multi-step form functionality
@@ -1031,57 +1076,36 @@
             submitBtn.style.display = currentStep === totalSteps ? 'block' : 'none';
         }
 
-        // Domain handling
-        function handleDomainSelection() {
-            const domainRadios = document.querySelectorAll('input[name="needsDomain"]');
+        // Domain and hosting service handling
+        function handleOptionalServices() {
+            const domainRadios = document.querySelectorAll('input[name="domainService"]');
+            const hostingRadios = document.querySelectorAll('input[name="hostingService"]');
+            const emailRadios = document.querySelectorAll('input[name="emailService"]');
             const domainPreferences = document.getElementById('domainPreferences');
             const existingDomain = document.getElementById('existingDomain');
             
             domainRadios.forEach(radio => {
                 radio.addEventListener('change', function() {
-                    if (this.value === 'yes') {
+                    if (this.value === 'standard') {
                         domainPreferences.style.display = 'block';
                         existingDomain.style.display = 'none';
-                    } else if (this.value === 'have') {
+                    } else if (this.value === 'existing') {
                         domainPreferences.style.display = 'none';
                         existingDomain.style.display = 'block';
                     } else {
                         domainPreferences.style.display = 'none';
                         existingDomain.style.display = 'none';
                     }
-                    updatePricingBreakdown();
+                    updateOptionalServicesPricing();
                 });
             });
-        }
-
-        // Domain suggestion
-        function generateDomainSuggestion() {
-            const businessName = document.getElementById('businessName').value;
-            const preferredDomainInput = document.getElementById('preferredDomain');
-            const domainSuggestion = document.getElementById('domainSuggestion');
-            const domainPreview = document.getElementById('domainPreview');
-            
-            if (businessName && !preferredDomainInput.value) {
-                const suggestion = businessName.toLowerCase()
-                    .replace(/[^a-z0-9]/g, '')
-                    .substring(0, 20) + '.com';
-                preferredDomainInput.value = suggestion;
-                domainSuggestion.textContent = suggestion;
-                domainPreview.classList.add('show');
-            }
-        }
-
-        // Hosting and email handling
-        function handleHostingEmailSelection() {
-            const hostingRadios = document.querySelectorAll('input[name="needsHosting"]');
-            const emailRadios = document.querySelectorAll('input[name="needsEmail"]');
             
             hostingRadios.forEach(radio => {
-                radio.addEventListener('change', updatePricingBreakdown);
+                radio.addEventListener('change', updateOptionalServicesPricing);
             });
             
             emailRadios.forEach(radio => {
-                radio.addEventListener('change', updatePricingBreakdown);
+                radio.addEventListener('change', updateOptionalServicesPricing);
             });
         }
 
@@ -1150,12 +1174,14 @@
             let oneTimeTotal = packagePrices[selectedPackage] || 260;
             let monthlyTotal = 0;
             
-            if (data.needsDomain === 'yes') oneTimeTotal += 15;
-            if (data.needsHosting === 'yes') monthlyTotal += 19;
-            if (data.needsEmail === 'yes') monthlyTotal += 5;
+            if (data.domainService === 'standard') oneTimeTotal += 20;
+            if (data.hostingService === 'monthly') monthlyTotal += 19;
+            if (data.hostingService === 'annual') oneTimeTotal += 190;
+            if (data.emailService === 'monthly') monthlyTotal += 5;
+            if (data.emailService === 'annual') oneTimeTotal += 50;
             
             // Create comprehensive consultation email
-            const subject = `🤖 COMPREHENSIVE AI CONSULTATION - ${data.businessName} - ${selectedPackage.toUpperCase()} Package`;
+            const subject = `🤖 AI WEBSITE CONSULTATION - ${data.businessName} - ${selectedPackage.toUpperCase()} Package`;
             const body = `AI WEBSITE BUILDER CONSULTATION
 Package Selected: ${selectedPackage.toUpperCase()}
 
@@ -1198,12 +1224,12 @@ Business Address: ${data.businessAddress}
 Social Media: ${data.socialMedia}
 Business Hours: ${data.businessHours}
 
-=== DOMAIN & HOSTING SETUP ===
-Domain Needed: ${data.needsDomain}
-${data.needsDomain === 'yes' ? 'Preferred Domain: ' + data.preferredDomain : ''}
-${data.needsDomain === 'have' ? 'Existing Domain: ' + data.currentDomain : ''}
-Professional Hosting: ${data.needsHosting}
-Professional Email: ${data.needsEmail}
+=== OPTIONAL SERVICES REQUESTED ===
+Domain Service: ${data.domainService}
+${data.domainService === 'standard' ? 'Preferred Domain: ' + data.preferredDomain : ''}
+${data.domainService === 'existing' ? 'Existing Domain: ' + data.currentDomain : ''}
+Hosting Service: ${data.hostingService}
+Email Service: ${data.emailService}
 
 === ADDITIONAL REQUIREMENTS ===
 SEO Keywords: ${data.seoKeywords}
@@ -1214,7 +1240,7 @@ Additional Budget: ${data.budget}
 
 ---
 READY FOR AI NEURAL PROCESSING
-Complete online presence setup requested.
+Website creation with optional services as requested.
 All comprehensive information provided for perfect website creation.
 
 Please note: Files have been selected but need to be sent separately. 
@@ -1224,19 +1250,15 @@ Client will follow up with file attachments.`;
             window.location.href = mailtoLink;
             
             // Show success message
-            alert('🤖 AI Consultation Submitted!\n\nOur neural networks are now processing your comprehensive requirements including domain and hosting setup. You\'ll receive a response within 2 hours with your complete online presence solution!\n\nDon\'t forget to send your uploaded files separately to contact@aiwebsitepro.com');
+            alert('🤖 AI Consultation Submitted!\n\nOur neural networks are now processing your comprehensive requirements with optional services. You\'ll receive a response within 2 hours with your complete solution!\n\nDon\'t forget to send your uploaded files separately to contact@aiwebsitepro.com');
         });
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             setupFileUploads();
-            handleDomainSelection();
-            handleHostingEmailSelection();
+            handleOptionalServices();
             updateProgressBar();
             updatePackageDisplay();
-            
-            // Auto-suggest domain when business name is entered
-            document.getElementById('businessName').addEventListener('blur', generateDomainSuggestion);
         });
     </script>
 </body>
