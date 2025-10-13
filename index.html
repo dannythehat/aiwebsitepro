@@ -714,8 +714,8 @@
             position: absolute;
             bottom: 70px;
             right: 0;
-            width: 350px;
-            height: 500px;
+            width: 380px;
+            height: 550px;
             background: linear-gradient(135deg, #1a1a1a 0%, #2a1a3a 100%);
             border: 2px solid rgba(147, 51, 234, 0.4);
             border-radius: 15px;
@@ -743,11 +743,12 @@
         }
         
         .chatbot-message {
-            max-width: 80%;
+            max-width: 85%;
             padding: 12px 16px;
             border-radius: 15px;
             font-weight: 600;
             line-height: 1.4;
+            font-size: 0.95rem;
         }
         
         .chatbot-message.bot {
@@ -852,8 +853,8 @@
             }
             
             .chatbot-window {
-                width: 300px;
-                height: 400px;
+                width: 320px;
+                height: 450px;
             }
         }
     </style>
@@ -1302,7 +1303,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Launch Your AI Website</h2>
-                <p>Choose your AI package and begin the neural consultation process. Our artificial intelligence will analyze your business and create your professional website in under 60 minutes.</p>
+                <p>Choose your AI package and begin the comprehensive neural consultation process. Our artificial intelligence will analyze your business and create your professional website in under 60 minutes.</p>
             </div>
 
             <div class="pricing-grid">
@@ -1372,13 +1373,13 @@
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🧠</div>
-                    <h3>2. AI Neural Consultation</h3>
-                    <p>Our <span class="tech-highlight">conversational AI engine</span> conducts intelligent business analysis, understanding your industry, audience, and goals through advanced natural language processing.</p>
+                    <h3>2. Comprehensive AI Consultation</h3>
+                    <p>Our <span class="tech-highlight">advanced consultation form</span> captures every detail - business goals, design preferences, brand materials, content, and technical requirements. Upload logos, images, and documents for perfect results.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">⚡</div>
                     <h3>3. Quantum Website Building</h3>
-                    <p>Watch as our <span class="tech-highlight">parallel processing algorithms</span> build your website in real-time. Design, content, SEO, and functionality created simultaneously through neural networks.</p>
+                    <p>Watch as our <span class="tech-highlight">parallel processing algorithms</span> build your website in real-time. Design, content, SEO, and functionality created simultaneously through neural networks using your exact specifications.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🚀</div>
@@ -1415,7 +1416,7 @@
         </div>
     </footer>
 
-    <!-- Custom AI Chatbot -->
+    <!-- Enhanced AI Chatbot -->
     <div class="ai-chatbot">
         <div class="chatbot-window" id="chatbotWindow">
             <div class="chatbot-header">
@@ -1425,10 +1426,12 @@
                 <div class="chatbot-message bot">
                     Hi! I'm your AI Website Builder assistant. I can help you with:
                     <br><br>
-                    • Website building process
-                    <br>• Pricing and packages
-                    <br>• AI technology questions
-                    <br>• Technical support
+                    • 💰 Pricing and packages
+                    <br>• 📋 Consultation form guidance
+                    <br>• 📎 File upload instructions
+                    <br>• 🔧 AI technology questions
+                    <br>• ⚡ Process and timeline
+                    <br>• 📞 Technical support
                     <br><br>
                     How can I help you today?
                 </div>
@@ -1513,29 +1516,15 @@
             }
         }
 
-        // Package Selection
+        // Package Selection - redirects to consultation form
         function selectPackage(packageType) {
-            showSection('get-started');
-            // Highlight selected package
-            setTimeout(() => {
-                const cards = document.querySelectorAll('#get-started .pricing-card');
-                cards.forEach(card => card.style.border = '2px solid transparent');
-                
-                if (packageType === 'starter') cards[0].style.border = '3px solid #9333ea';
-                if (packageType === 'professional') cards[1].style.border = '3px solid #9333ea';
-                if (packageType === 'enterprise') cards[2].style.border = '3px solid #9333ea';
-            }, 100);
+            window.location.href = `consultation.html?package=${packageType}`;
         }
 
-        // Stripe Payment Integration
-        const stripe = Stripe('pk_test_your_stripe_public_key_here'); // Replace with your Stripe public key
-
+        // Stripe Payment Integration - redirects to consultation form
         function startPayment(packageType, amount) {
-            alert(`🤖 AI Payment System Activated!\n\nYou selected ${packageType.toUpperCase()} package for €${amount}.\n\nOur neural payment processing is coming soon!\nPlease contact contact@aiwebsitepro.com to begin your AI consultation.`);
-            
-            // For now, redirect to contact form
-            showSection('contact');
-            document.getElementById('package').value = packageType;
+            // In production, you would process payment first, then redirect
+            window.location.href = `consultation.html?package=${packageType}`;
         }
 
         // Contact Form
@@ -1646,7 +1635,7 @@ Ready to begin neural consultation process.`;
             `).join('');
         }
 
-        // Chatbot Functionality
+        // Enhanced Chatbot Functionality
         function toggleChatbot() {
             const chatbotWindow = document.getElementById('chatbotWindow');
             if (chatbotWindow.style.display === 'flex') {
@@ -1687,31 +1676,55 @@ Ready to begin neural consultation process.`;
         function getAIResponse(message) {
             const lowerMessage = message.toLowerCase();
             
+            if (lowerMessage.includes('form') || lowerMessage.includes('consultation') || lowerMessage.includes('information')) {
+                return `Our comprehensive consultation form captures everything:<br><br>
+                📊 <strong>Business Information</strong> - Industry, description, audience<br>
+                🎯 <strong>Website Goals</strong> - Lead generation, sales, branding<br>
+                🎨 <strong>Design Preferences</strong> - Colors, fonts, style, inspiration<br>
+                📎 <strong>File Uploads</strong> - Logos, images, content documents<br>
+                📞 <strong>Contact Details</strong> - Full business information<br>
+                ⚙️ <strong>Special Requirements</strong> - SEO, competitors, timeline<br><br>
+                Ready to start your detailed consultation?`;
+            }
+            
+            if (lowerMessage.includes('upload') || lowerMessage.includes('file') || lowerMessage.includes('logo') || lowerMessage.includes('material')) {
+                return `You can upload comprehensive materials in our consultation form:<br><br>
+                🎨 <strong>Logo Files</strong>: PNG, JPG, SVG, AI, EPS, PDF<br>
+                🖼️ <strong>Brand Assets</strong>: Photos, graphics, videos<br>
+                📄 <strong>Content Files</strong>: Articles, brochures, documents<br>
+                🎯 <strong>Inspiration</strong>: Reference website URLs<br><br>
+                Our AI analyzes everything to create your perfect website!<br><br>
+                <strong>Click any "Pay & Launch" button to access the full consultation form!</strong>`;
+            }
+            
             if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('pricing')) {
-                return `Our AI-powered packages are:<br><br>
-                🚀 <strong>AI Starter</strong> - €150<br>
-                🧠 <strong>AI Professional</strong> - €260 (Most Popular)<br>
-                ⚡ <strong>AI Enterprise</strong> - €450<br><br>
-                All include AI consultation and 60-minute delivery! Which package interests you?`;
+                return `Our AI-powered packages with comprehensive consultation:<br><br>
+                🚀 <strong>AI Starter</strong> - €150 (5 pages, 60min delivery)<br>
+                🧠 <strong>AI Professional</strong> - €260 (10 pages, 45min delivery) ⭐<br>
+                ⚡ <strong>AI Enterprise</strong> - €450 (20 pages, 30min delivery)<br><br>
+                All include detailed consultation form with file uploads!<br><br>
+                <strong>Ready to select your package?</strong>`;
             }
             
             if (lowerMessage.includes('how') && (lowerMessage.includes('work') || lowerMessage.includes('process'))) {
-                return `Our AI works in 6 steps:<br><br>
-                1. 🧠 Neural Business Analysis<br>
-                2. 📊 Industry Intelligence Processing<br>
-                3. 🎨 Quantum Design Generation<br>
-                4. ✍️ Intelligent Content Creation<br>
-                5. ✅ Neural Quality Assurance<br>
-                6. 🚀 Autonomous Deployment<br><br>
-                The entire process takes under 60 minutes!`;
+                return `Our enhanced AI consultation process:<br><br>
+                1. 💳 <strong>Select & Pay</strong> for your package<br>
+                2. 📋 <strong>Complete detailed form</strong> (6 comprehensive steps)<br>
+                3. 📎 <strong>Upload materials</strong> (logos, images, content)<br>
+                4. 🧠 <strong>AI analyzes everything</strong> (business, design, content)<br>
+                5. ⚡ <strong>Website built</strong> using your exact specifications<br>
+                6. 🚀 <strong>Perfect website delivered</strong> in 30-60 minutes<br><br>
+                The consultation form ensures we get it right the first time!`;
             }
             
             if (lowerMessage.includes('time') || lowerMessage.includes('fast') || lowerMessage.includes('quick')) {
                 return `Our AI builds websites incredibly fast:<br><br>
-                ⚡ <strong>AI Starter</strong>: 60 minutes<br>
-                🧠 <strong>AI Professional</strong>: 45 minutes<br>
-                ⚡ <strong>AI Enterprise</strong>: 30 minutes<br><br>
-                This includes consultation, design, development, and deployment!`;
+                ⚡ <strong>AI Starter</strong>: 60 minutes total<br>
+                🧠 <strong>AI Professional</strong>: 45 minutes total<br>
+                ⚡ <strong>AI Enterprise</strong>: 30 minutes total<br><br>
+                <strong>Consultation form</strong>: 15-20 minutes to complete<br>
+                <strong>AI processing</strong>: Remaining time for perfect results<br><br>
+                The detailed form ensures perfect results on first delivery!`;
             }
             
             if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('support')) {
@@ -1719,36 +1732,47 @@ Ready to begin neural consultation process.`;
                 📧 <strong>contact@aiwebsitepro.com</strong><br>
                 ⚡ Response within 2 hours<br>
                 🧠 24/7 Neural Network Support<br><br>
-                Ready to start your AI consultation?`;
+                <strong>Best way to start:</strong> Complete our comprehensive consultation form by clicking any "Pay & Launch" button!`;
             }
             
             if (lowerMessage.includes('difference') || lowerMessage.includes('better') || lowerMessage.includes('why')) {
-                return `Our AI is different because:<br><br>
-                🧠 Uses deep learning, not templates<br>
-                ⚡ Quantum-speed parallel processing<br>
-                🎯 Industry-specific neural networks<br>
-                🔍 Advanced SEO optimization<br>
-                📱 Adaptive responsive design<br><br>
-                We create truly custom websites, not template variations!`;
+                return `Our AI is revolutionary because:<br><br>
+                🧠 <strong>Deep Learning</strong> - Not templates, true custom design<br>
+                📋 <strong>Comprehensive Consultation</strong> - Captures every detail<br>
+                📎 <strong>Material Analysis</strong> - Uses your actual brand assets<br>
+                ⚡ <strong>Quantum Processing</strong> - Parallel development<br>
+                🎯 <strong>Industry Intelligence</strong> - Specialized for your sector<br><br>
+                We create truly custom websites using your exact specifications!`;
             }
             
             if (lowerMessage.includes('mobile') || lowerMessage.includes('responsive')) {
                 return `Yes! Our AI automatically creates:<br><br>
-                📱 Fully responsive designs<br>
-                💻 Desktop optimization<br>
-                📲 Tablet adaptation<br>
-                👆 Touch-friendly interfaces<br>
-                ⚡ Fast mobile loading<br><br>
-                Your website will look perfect on every device!`;
+                📱 <strong>Fully responsive</strong> - Perfect on all devices<br>
+                💻 <strong>Desktop optimized</strong> - Professional appearance<br>
+                📲 <strong>Tablet adapted</strong> - Seamless experience<br>
+                👆 <strong>Touch-friendly</strong> - Mobile-first design<br>
+                ⚡ <strong>Fast loading</strong> - Optimized performance<br><br>
+                Your website will look perfect everywhere!`;
+            }
+            
+            if (lowerMessage.includes('start') || lowerMessage.includes('begin') || lowerMessage.includes('get started')) {
+                return `Ready to start? Here's how:<br><br>
+                1. 🎯 <strong>Choose your package</strong> (Starter/Professional/Enterprise)<br>
+                2. 💳 <strong>Click "Pay & Launch"</strong> button<br>
+                3. 📋 <strong>Complete consultation form</strong> (6 detailed steps)<br>
+                4. 📎 <strong>Upload your materials</strong> (logos, images, content)<br>
+                5. 🚀 <strong>Watch AI build your website!</strong><br><br>
+                <strong>Click "Get Started" in the menu to choose your package!</strong>`;
             }
             
             // Default response
             return `I'm here to help with your AI website needs! I can assist with:<br><br>
-            💰 Pricing and packages<br>
-            🔧 How our AI works<br>
-            ⏱️ Development timeline<br>
-            📱 Technical features<br>
-            📞 Contact information<br><br>
+            💰 <strong>Pricing</strong> and package selection<br>
+            📋 <strong>Consultation form</strong> guidance<br>
+            📎 <strong>File uploads</strong> and materials<br>
+            🔧 <strong>Technical questions</strong> about our AI<br>
+            ⏱️ <strong>Timeline</strong> and delivery process<br>
+            📞 <strong>Contact</strong> and support information<br><br>
             What would you like to know more about?`;
         }
 
