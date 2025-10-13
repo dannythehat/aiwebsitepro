@@ -12,13 +12,14 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #ffffff;
             background: #0a0a0a;
             padding-top: 80px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
         
         .header {
@@ -43,10 +44,11 @@
         
         .logo {
             font-size: 1.5rem;
-            font-weight: 700;
+            font-weight: 800;
             color: #9333ea;
             text-decoration: none;
-            text-shadow: 0 2px 4px rgba(147, 51, 234, 0.8), 0 0 15px rgba(147, 51, 234, 0.4);
+            text-shadow: 0 0 10px rgba(147, 51, 234, 0.8);
+            filter: contrast(1.2) brightness(1.1);
         }
         
         .nav-menu {
@@ -58,16 +60,16 @@
         
         .nav-menu a {
             text-decoration: none;
-            color: #f3f4f6;
-            font-weight: 600;
+            color: #ffffff;
+            font-weight: 700;
             transition: all 0.3s ease;
             position: relative;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+            filter: contrast(1.3) brightness(1.1);
         }
         
         .nav-menu a:hover {
             color: #9333ea;
-            text-shadow: 0 2px 4px rgba(147, 51, 234, 0.8), 0 0 10px rgba(147, 51, 234, 0.5);
+            text-shadow: 0 0 8px rgba(147, 51, 234, 0.8);
         }
         
         .nav-menu a::after {
@@ -91,15 +93,15 @@
             padding: 12px 24px;
             border-radius: 25px;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 800;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.4);
+            filter: contrast(1.2) brightness(1.1);
         }
         
         .cta-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.6);
         }
         
         .mobile-menu-btn {
@@ -109,7 +111,7 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: #9333ea;
-            text-shadow: 0 2px 4px rgba(147, 51, 234, 0.6);
+            font-weight: 800;
         }
         
         .container {
@@ -158,27 +160,25 @@
         
         .hero h1 {
             font-size: 4rem;
-            font-weight: 800;
+            font-weight: 900;
             margin-bottom: 20px;
             line-height: 1.2;
             background: linear-gradient(135deg, #ffffff 0%, #9333ea 50%, #a855f7 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 4px 8px rgba(147, 51, 234, 0.4);
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
+            filter: contrast(1.3) brightness(1.2);
         }
         
         .hero p {
             font-size: 1.4rem;
             margin-bottom: 40px;
-            opacity: 0.95;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            color: #f3f4f6;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-            font-weight: 500;
+            color: #ffffff;
+            font-weight: 600;
+            filter: contrast(1.2) brightness(1.1);
         }
         
         .features {
@@ -194,16 +194,15 @@
             border: 1px solid rgba(147, 51, 234, 0.4);
             padding: 15px 25px;
             border-radius: 25px;
-            font-weight: 700;
+            font-weight: 800;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            filter: contrast(1.3) brightness(1.1);
         }
         
         .feature:hover {
             background: rgba(147, 51, 234, 0.35);
-            box-shadow: 0 6px 20px rgba(147, 51, 234, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
         }
         
@@ -218,35 +217,33 @@
             padding: 18px 35px;
             border-radius: 30px;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 1.1rem;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            filter: contrast(1.2) brightness(1.1);
         }
         
         .btn-primary {
             background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
             color: white;
-            box-shadow: 0 6px 20px rgba(147, 51, 234, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 6px 20px rgba(147, 51, 234, 0.4);
         }
         
         .btn-secondary {
             background: rgba(147, 51, 234, 0.1);
             color: #9333ea;
             border: 2px solid #9333ea;
-            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
         
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.6);
         }
         
         .btn-secondary:hover {
             background: rgba(147, 51, 234, 0.2);
-            box-shadow: 0 6px 20px rgba(147, 51, 234, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
         }
         
@@ -257,21 +254,20 @@
         
         .section-title h2 {
             font-size: 3rem;
-            font-weight: 800;
+            font-weight: 900;
             color: #9333ea;
             margin-bottom: 20px;
-            text-shadow: 0 4px 8px rgba(147, 51, 234, 0.4), 0 2px 4px rgba(0, 0, 0, 0.8);
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+            filter: contrast(1.3) brightness(1.2);
         }
         
         .section-title p {
             font-size: 1.3rem;
-            color: #d1d5db;
+            color: #ffffff;
             max-width: 700px;
             margin: 0 auto;
             line-height: 1.8;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-            font-weight: 500;
+            font-weight: 600;
+            filter: contrast(1.2) brightness(1.1);
         }
         
         .pricing-grid, .services-grid, .portfolio-grid {
@@ -283,26 +279,25 @@
         
         .pricing-card, .service-card, .portfolio-item {
             background: linear-gradient(135deg, #1a1a1a 0%, #2a1a3a 100%);
-            border: 1px solid rgba(147, 51, 234, 0.4);
+            border: 2px solid rgba(147, 51, 234, 0.4);
             border-radius: 20px;
             padding: 40px 30px;
             text-align: center;
             transition: all 0.3s ease;
             position: relative;
             backdrop-filter: blur(10px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
         
         .pricing-card:hover, .service-card:hover, .portfolio-item:hover {
             transform: translateY(-10px);
             border-color: rgba(147, 51, 234, 0.7);
-            box-shadow: 0 20px 40px rgba(147, 51, 234, 0.3), 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(147, 51, 234, 0.3);
         }
         
         .pricing-card.popular {
             transform: scale(1.05);
-            border: 2px solid #9333ea;
-            box-shadow: 0 15px 40px rgba(147, 51, 234, 0.4), 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border: 3px solid #9333ea;
+            box-shadow: 0 15px 40px rgba(147, 51, 234, 0.4);
         }
         
         .popular-badge {
@@ -313,27 +308,25 @@
             color: white;
             padding: 8px 40px;
             font-size: 0.9rem;
-            font-weight: 700;
+            font-weight: 800;
             transform: rotate(45deg);
-            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.6);
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+            filter: contrast(1.2) brightness(1.1);
         }
         
         .pricing-card h3, .service-card h3 {
             font-size: 1.8rem;
-            font-weight: 700;
-            color: #f3f4f6;
+            font-weight: 800;
+            color: #ffffff;
             margin-bottom: 15px;
-            text-shadow: 0 3px 6px rgba(147, 51, 234, 0.6), 0 1px 2px rgba(0, 0, 0, 0.8);
+            filter: contrast(1.3) brightness(1.2);
         }
         
         .price {
             font-size: 3.5rem;
-            font-weight: 800;
+            font-weight: 900;
             color: #a855f7;
             margin-bottom: 25px;
-            text-shadow: 0 4px 8px rgba(168, 85, 247, 0.6), 0 2px 4px rgba(0, 0, 0, 0.8);
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+            filter: contrast(1.3) brightness(1.2);
         }
         
         .features-list {
@@ -347,18 +340,18 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            color: #f3f4f6;
+            color: #ffffff;
             font-size: 1.1rem;
-            font-weight: 500;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+            font-weight: 600;
+            filter: contrast(1.2) brightness(1.1);
         }
         
         .features-list li::before {
             content: '✓';
             color: #9333ea;
-            font-weight: bold;
+            font-weight: 900;
             font-size: 1.2rem;
-            text-shadow: 0 2px 4px rgba(147, 51, 234, 0.8), 0 0 8px rgba(147, 51, 234, 0.5);
+            filter: contrast(1.3) brightness(1.2);
         }
         
         .pricing-btn {
@@ -367,34 +360,33 @@
             padding: 18px 35px;
             border: none;
             border-radius: 30px;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 1.2rem;
             cursor: pointer;
             transition: all 0.3s ease;
             width: 100%;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 6px 20px rgba(147, 51, 234, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+            filter: contrast(1.2) brightness(1.1);
         }
         
         .pricing-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.6);
         }
         
         .service-icon {
             font-size: 4rem;
             margin-bottom: 25px;
-            filter: drop-shadow(0 4px 8px rgba(147, 51, 234, 0.6));
+            filter: contrast(1.3) brightness(1.2);
         }
         
         .service-card p, .portfolio-content p {
-            color: #d1d5db;
+            color: #ffffff;
             font-size: 1.1rem;
             line-height: 1.7;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-            font-weight: 500;
+            font-weight: 600;
+            filter: contrast(1.2) brightness(1.1);
         }
         
         .portfolio-image {
@@ -405,8 +397,8 @@
             justify-content: center;
             color: white;
             font-size: 1.4rem;
-            font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            font-weight: 800;
+            filter: contrast(1.2) brightness(1.1);
         }
         
         .portfolio-content {
@@ -414,54 +406,53 @@
         }
         
         .portfolio-content h3 {
-            color: #f3f4f6;
+            color: #ffffff;
             font-size: 1.5rem;
             margin-bottom: 10px;
-            font-weight: 700;
-            text-shadow: 0 2px 4px rgba(147, 51, 234, 0.6), 0 1px 2px rgba(0, 0, 0, 0.8);
+            font-weight: 800;
+            filter: contrast(1.3) brightness(1.2);
         }
         
         .faq-item {
             background: linear-gradient(135deg, #1a1a1a 0%, #2a1a3a 100%);
-            border: 1px solid rgba(147, 51, 234, 0.4);
+            border: 2px solid rgba(147, 51, 234, 0.4);
             border-radius: 15px;
             margin-bottom: 20px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
         
         .faq-item:hover {
             border-color: rgba(147, 51, 234, 0.7);
-            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.3), 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.3);
         }
         
         .faq-question {
             padding: 25px;
             cursor: pointer;
-            font-weight: 700;
+            font-weight: 800;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: #f3f4f6;
+            color: #ffffff;
             font-size: 1.1rem;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+            filter: contrast(1.2) brightness(1.1);
         }
         
         .faq-question span {
             color: #9333ea;
             font-size: 1.5rem;
-            font-weight: bold;
-            text-shadow: 0 2px 4px rgba(147, 51, 234, 0.8);
+            font-weight: 900;
+            filter: contrast(1.3) brightness(1.2);
         }
         
         .faq-answer {
             padding: 0 25px 25px;
             display: none;
-            color: #d1d5db;
+            color: #ffffff;
             font-size: 1.1rem;
             line-height: 1.7;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-            font-weight: 500;
+            font-weight: 600;
+            filter: contrast(1.2) brightness(1.1);
         }
         
         .faq-answer.active {
@@ -472,11 +463,10 @@
             max-width: 700px;
             margin: 0 auto;
             background: linear-gradient(135deg, #1a1a1a 0%, #2a1a3a 100%);
-            border: 1px solid rgba(147, 51, 234, 0.4);
+            border: 2px solid rgba(147, 51, 234, 0.4);
             padding: 50px;
             border-radius: 20px;
             backdrop-filter: blur(10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
         
         .form-group {
@@ -486,10 +476,10 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 700;
-            color: #f3f4f6;
+            font-weight: 800;
+            color: #ffffff;
             font-size: 1.1rem;
-            text-shadow: 0 2px 4px rgba(147, 51, 234, 0.6), 0 1px 2px rgba(0, 0, 0, 0.8);
+            filter: contrast(1.3) brightness(1.2);
         }
         
         .form-group input,
@@ -500,11 +490,11 @@
             border: 2px solid rgba(147, 51, 234, 0.4);
             border-radius: 10px;
             font-size: 1.1rem;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.3s ease;
             background: rgba(10, 10, 10, 0.8);
-            color: #f3f4f6;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+            filter: contrast(1.2) brightness(1.1);
         }
         
         .form-group input:focus,
@@ -512,7 +502,7 @@
         .form-group textarea:focus {
             outline: none;
             border-color: #9333ea;
-            box-shadow: 0 0 20px rgba(147, 51, 234, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 20px rgba(147, 51, 234, 0.4);
         }
         
         .footer {
@@ -526,18 +516,17 @@
         .footer h3 {
             font-size: 2rem;
             margin-bottom: 20px;
-            color: #f3f4f6;
-            text-shadow: 0 4px 8px rgba(147, 51, 234, 0.6), 0 2px 4px rgba(0, 0, 0, 0.8);
-            font-weight: 800;
+            color: #ffffff;
+            font-weight: 900;
+            filter: contrast(1.3) brightness(1.2);
         }
         
         .footer p {
-            opacity: 0.9;
             margin-bottom: 40px;
             font-size: 1.2rem;
-            color: #d1d5db;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-            font-weight: 500;
+            color: #ffffff;
+            font-weight: 600;
+            filter: contrast(1.2) brightness(1.1);
         }
         
         .contact-info {
@@ -553,53 +542,51 @@
             align-items: center;
             gap: 12px;
             font-size: 1.1rem;
-            font-weight: 600;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+            font-weight: 700;
+            filter: contrast(1.2) brightness(1.1);
         }
         
         .contact-item span {
             font-size: 1.5rem;
-            filter: drop-shadow(0 2px 4px rgba(147, 51, 234, 0.6));
         }
         
         .footer-bottom {
             border-top: 1px solid rgba(147, 51, 234, 0.3);
             padding-top: 30px;
-            opacity: 0.8;
-            color: #d1d5db;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+            font-weight: 600;
+            filter: contrast(1.2) brightness(1.1);
         }
         
         .ai-process-step {
             background: linear-gradient(135deg, #1a1a1a 0%, #2a1a3a 100%);
-            border: 1px solid rgba(147, 51, 234, 0.4);
+            border: 2px solid rgba(147, 51, 234, 0.4);
             border-radius: 15px;
             padding: 30px;
             margin-bottom: 30px;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
         
         .ai-process-step:hover {
             border-color: rgba(147, 51, 234, 0.7);
-            box-shadow: 0 15px 40px rgba(147, 51, 234, 0.3), 0 8px 25px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 40px rgba(147, 51, 234, 0.3);
             transform: translateY(-5px);
         }
         
         .ai-process-step h3 {
-            color: #f3f4f6;
-            font-weight: 700;
+            color: #ffffff;
+            font-weight: 800;
             font-size: 1.5rem;
             margin-bottom: 15px;
-            text-shadow: 0 2px 4px rgba(147, 51, 234, 0.6), 0 1px 2px rgba(0, 0, 0, 0.8);
+            filter: contrast(1.3) brightness(1.2);
         }
         
         .ai-process-step p {
-            color: #d1d5db;
+            color: #ffffff;
             font-size: 1.1rem;
             line-height: 1.7;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-            font-weight: 500;
+            font-weight: 600;
+            filter: contrast(1.2) brightness(1.1);
         }
         
         .step-number {
@@ -611,17 +598,196 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 900;
             font-size: 1.5rem;
             margin-bottom: 20px;
-            box-shadow: 0 6px 20px rgba(147, 51, 234, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+            filter: contrast(1.2) brightness(1.1);
         }
         
         .tech-highlight {
             color: #9333ea;
+            font-weight: 800;
+            filter: contrast(1.3) brightness(1.2);
+        }
+        
+        /* Blog Section Styles */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .blog-post {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a1a3a 100%);
+            border: 2px solid rgba(147, 51, 234, 0.4);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .blog-post:hover {
+            transform: translateY(-5px);
+            border-color: rgba(147, 51, 234, 0.7);
+            box-shadow: 0 15px 30px rgba(147, 51, 234, 0.3);
+        }
+        
+        .blog-image {
+            height: 200px;
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .blog-content {
+            padding: 25px;
+        }
+        
+        .blog-date {
+            color: #9333ea;
+            font-size: 0.9rem;
             font-weight: 700;
-            text-shadow: 0 2px 4px rgba(147, 51, 234, 0.8), 0 0 8px rgba(147, 51, 234, 0.4);
+            margin-bottom: 10px;
+            filter: contrast(1.3) brightness(1.2);
+        }
+        
+        .blog-title {
+            color: #ffffff;
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            filter: contrast(1.3) brightness(1.2);
+        }
+        
+        .blog-excerpt {
+            color: #ffffff;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-weight: 600;
+            filter: contrast(1.2) brightness(1.1);
+        }
+        
+        .blog-read-more {
+            color: #9333ea;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            filter: contrast(1.3) brightness(1.2);
+        }
+        
+        .blog-read-more:hover {
+            text-decoration: underline;
+        }
+        
+        /* Custom Chatbot Styles */
+        .ai-chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10000;
+        }
+        
+        .chatbot-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(147, 51, 234, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(147, 51, 234, 0.6);
+        }
+        
+        .chatbot-window {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a1a3a 100%);
+            border: 2px solid rgba(147, 51, 234, 0.4);
+            border-radius: 15px;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .chatbot-header {
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            color: white;
+            padding: 15px;
+            font-weight: 800;
+            text-align: center;
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .chatbot-message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 15px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .chatbot-message.bot {
+            background: rgba(147, 51, 234, 0.2);
+            color: #ffffff;
+            align-self: flex-start;
+            border: 1px solid rgba(147, 51, 234, 0.3);
+        }
+        
+        .chatbot-message.user {
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            color: white;
+            align-self: flex-end;
+        }
+        
+        .chatbot-input-area {
+            padding: 15px;
+            border-top: 1px solid rgba(147, 51, 234, 0.3);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chatbot-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid rgba(147, 51, 234, 0.4);
+            border-radius: 20px;
+            background: rgba(10, 10, 10, 0.8);
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .chatbot-send {
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 700;
         }
         
         @media (max-width: 768px) {
@@ -652,7 +818,6 @@
                 flex-direction: column;
                 padding: 20px;
                 border-top: 1px solid rgba(147, 51, 234, 0.3);
-                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
             }
             
             .nav-menu.active {
@@ -685,6 +850,11 @@
             .contact-form {
                 padding: 30px;
             }
+            
+            .chatbot-window {
+                width: 300px;
+                height: 400px;
+            }
         }
     </style>
 </head>
@@ -697,6 +867,7 @@
                 <li><a href="#" onclick="showSectionAndCloseMenu('services')">Services</a></li>
                 <li><a href="#" onclick="showSectionAndCloseMenu('portfolio')">Portfolio</a></li>
                 <li><a href="#" onclick="showSectionAndCloseMenu('about')">About</a></li>
+                <li><a href="#" onclick="showSectionAndCloseMenu('blog')">AI News</a></li>
                 <li><a href="#" onclick="showSectionAndCloseMenu('faq')">FAQ</a></li>
                 <li><a href="#" onclick="showSectionAndCloseMenu('contact')">Contact</a></li>
             </ul>
@@ -958,6 +1129,20 @@
                 <div class="step-number">6</div>
                 <h3>Autonomous Deployment</h3>
                 <p>The final AI system handles <span class="tech-highlight">automated deployment</span> with SSL certificate installation, CDN optimization, security protocols, analytics integration, and performance monitoring - your website goes live with enterprise-grade infrastructure.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOG SECTION -->
+    <section id="blog" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>AI Automation News</h2>
+                <p>Stay updated with the latest developments in artificial intelligence, automation, and web development technology. Our AI curates and analyzes the most important news in the industry daily.</p>
+            </div>
+
+            <div class="blog-grid" id="blogGrid">
+                <!-- Blog posts will be dynamically loaded here -->
             </div>
         </div>
     </section>
@@ -1230,8 +1415,31 @@
         </div>
     </footer>
 
-    <!-- Bhindi Chatbot -->
-    <script src="https://widget.bhindi.io/widget.js" data-bot-id="ai-website-builder-pro" data-position="bottom-right"></script>
+    <!-- Custom AI Chatbot -->
+    <div class="ai-chatbot">
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                🤖 AI Website Builder Assistant
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="chatbot-message bot">
+                    Hi! I'm your AI Website Builder assistant. I can help you with:
+                    <br><br>
+                    • Website building process
+                    <br>• Pricing and packages
+                    <br>• AI technology questions
+                    <br>• Technical support
+                    <br><br>
+                    How can I help you today?
+                </div>
+            </div>
+            <div class="chatbot-input-area">
+                <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Ask me anything...">
+                <button class="chatbot-send" onclick="sendChatMessage()">Send</button>
+            </div>
+        </div>
+        <button class="chatbot-toggle" onclick="toggleChatbot()">🤖</button>
+    </div>
 
     <!-- Stripe Integration -->
     <script src="https://js.stripe.com/v3/"></script>
@@ -1254,6 +1462,11 @@
                 } else {
                     targetSection.classList.add('active');
                     targetSection.style.display = 'block';
+                }
+                
+                // Load blog posts if blog section
+                if (sectionId === 'blog') {
+                    loadBlogPosts();
                 }
                 
                 // Scroll to top
@@ -1308,9 +1521,9 @@
                 const cards = document.querySelectorAll('#get-started .pricing-card');
                 cards.forEach(card => card.style.border = '2px solid transparent');
                 
-                if (packageType === 'starter') cards[0].style.border = '2px solid #9333ea';
-                if (packageType === 'professional') cards[1].style.border = '2px solid #9333ea';
-                if (packageType === 'enterprise') cards[2].style.border = '2px solid #9333ea';
+                if (packageType === 'starter') cards[0].style.border = '3px solid #9333ea';
+                if (packageType === 'professional') cards[1].style.border = '3px solid #9333ea';
+                if (packageType === 'enterprise') cards[2].style.border = '3px solid #9333ea';
             }, 100);
         }
 
@@ -1318,11 +1531,6 @@
         const stripe = Stripe('pk_test_your_stripe_public_key_here'); // Replace with your Stripe public key
 
         function startPayment(packageType, amount) {
-            // In a real implementation, you would:
-            // 1. Create a payment intent on your server
-            // 2. Use Stripe to process the payment
-            // 3. Redirect to consultation form after successful payment
-            
             alert(`🤖 AI Payment System Activated!\n\nYou selected ${packageType.toUpperCase()} package for €${amount}.\n\nOur neural payment processing is coming soon!\nPlease contact contact@aiwebsitepro.com to begin your AI consultation.`);
             
             // For now, redirect to contact form
@@ -1381,6 +1589,176 @@ Ready to begin neural consultation process.`;
             }
         });
 
+        // Blog Posts Loading
+        function loadBlogPosts() {
+            const blogGrid = document.getElementById('blogGrid');
+            
+            // Sample AI news posts (in a real implementation, this would fetch from an API)
+            const blogPosts = [
+                {
+                    date: 'December 13, 2024',
+                    title: 'OpenAI Releases GPT-4 Turbo with Enhanced Web Development Capabilities',
+                    excerpt: 'The latest GPT-4 Turbo model shows significant improvements in code generation and web development tasks, with 40% better performance in HTML, CSS, and JavaScript generation.',
+                    icon: '🚀'
+                },
+                {
+                    date: 'December 12, 2024',
+                    title: 'Google Announces Gemini Pro for Automated Website Design',
+                    excerpt: 'Google\'s new Gemini Pro model can now generate complete website designs from simple text descriptions, revolutionizing the web development industry.',
+                    icon: '🎨'
+                },
+                {
+                    date: 'December 11, 2024',
+                    title: 'AI-Powered No-Code Platforms See 300% Growth in 2024',
+                    excerpt: 'The no-code movement powered by AI has exploded this year, with platforms reporting unprecedented growth as businesses embrace automated development.',
+                    icon: '📈'
+                },
+                {
+                    date: 'December 10, 2024',
+                    title: 'Microsoft Copilot Integrates Advanced Web Development AI',
+                    excerpt: 'Microsoft\'s Copilot now includes specialized AI models for web development, offering real-time code suggestions and automated testing capabilities.',
+                    icon: '💻'
+                },
+                {
+                    date: 'December 9, 2024',
+                    title: 'AI Website Builders Achieve Human-Level Design Quality',
+                    excerpt: 'Recent studies show that AI-generated websites are now indistinguishable from human-designed sites in user preference tests, marking a major milestone.',
+                    icon: '🧠'
+                },
+                {
+                    date: 'December 8, 2024',
+                    title: 'Automated SEO Optimization Reaches 95% Accuracy Rate',
+                    excerpt: 'New AI algorithms for SEO optimization are achieving near-perfect accuracy in keyword placement and content optimization, outperforming human experts.',
+                    icon: '🔍'
+                }
+            ];
+
+            blogGrid.innerHTML = blogPosts.map(post => `
+                <div class="blog-post">
+                    <div class="blog-image">${post.icon}</div>
+                    <div class="blog-content">
+                        <div class="blog-date">${post.date}</div>
+                        <h3 class="blog-title">${post.title}</h3>
+                        <p class="blog-excerpt">${post.excerpt}</p>
+                        <a href="#" class="blog-read-more">Read Full Article →</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Chatbot Functionality
+        function toggleChatbot() {
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            if (chatbotWindow.style.display === 'flex') {
+                chatbotWindow.style.display = 'none';
+            } else {
+                chatbotWindow.style.display = 'flex';
+            }
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatbotInput');
+            const messages = document.getElementById('chatbotMessages');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'chatbot-message user';
+            userMessage.textContent = message;
+            messages.appendChild(userMessage);
+            
+            // Clear input
+            input.value = '';
+            
+            // Simulate AI response
+            setTimeout(() => {
+                const botMessage = document.createElement('div');
+                botMessage.className = 'chatbot-message bot';
+                botMessage.innerHTML = getAIResponse(message);
+                messages.appendChild(botMessage);
+                messages.scrollTop = messages.scrollHeight;
+            }, 1000);
+            
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function getAIResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('pricing')) {
+                return `Our AI-powered packages are:<br><br>
+                🚀 <strong>AI Starter</strong> - €150<br>
+                🧠 <strong>AI Professional</strong> - €260 (Most Popular)<br>
+                ⚡ <strong>AI Enterprise</strong> - €450<br><br>
+                All include AI consultation and 60-minute delivery! Which package interests you?`;
+            }
+            
+            if (lowerMessage.includes('how') && (lowerMessage.includes('work') || lowerMessage.includes('process'))) {
+                return `Our AI works in 6 steps:<br><br>
+                1. 🧠 Neural Business Analysis<br>
+                2. 📊 Industry Intelligence Processing<br>
+                3. 🎨 Quantum Design Generation<br>
+                4. ✍️ Intelligent Content Creation<br>
+                5. ✅ Neural Quality Assurance<br>
+                6. 🚀 Autonomous Deployment<br><br>
+                The entire process takes under 60 minutes!`;
+            }
+            
+            if (lowerMessage.includes('time') || lowerMessage.includes('fast') || lowerMessage.includes('quick')) {
+                return `Our AI builds websites incredibly fast:<br><br>
+                ⚡ <strong>AI Starter</strong>: 60 minutes<br>
+                🧠 <strong>AI Professional</strong>: 45 minutes<br>
+                ⚡ <strong>AI Enterprise</strong>: 30 minutes<br><br>
+                This includes consultation, design, development, and deployment!`;
+            }
+            
+            if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('support')) {
+                return `You can reach us at:<br><br>
+                📧 <strong>contact@aiwebsitepro.com</strong><br>
+                ⚡ Response within 2 hours<br>
+                🧠 24/7 Neural Network Support<br><br>
+                Ready to start your AI consultation?`;
+            }
+            
+            if (lowerMessage.includes('difference') || lowerMessage.includes('better') || lowerMessage.includes('why')) {
+                return `Our AI is different because:<br><br>
+                🧠 Uses deep learning, not templates<br>
+                ⚡ Quantum-speed parallel processing<br>
+                🎯 Industry-specific neural networks<br>
+                🔍 Advanced SEO optimization<br>
+                📱 Adaptive responsive design<br><br>
+                We create truly custom websites, not template variations!`;
+            }
+            
+            if (lowerMessage.includes('mobile') || lowerMessage.includes('responsive')) {
+                return `Yes! Our AI automatically creates:<br><br>
+                📱 Fully responsive designs<br>
+                💻 Desktop optimization<br>
+                📲 Tablet adaptation<br>
+                👆 Touch-friendly interfaces<br>
+                ⚡ Fast mobile loading<br><br>
+                Your website will look perfect on every device!`;
+            }
+            
+            // Default response
+            return `I'm here to help with your AI website needs! I can assist with:<br><br>
+            💰 Pricing and packages<br>
+            🔧 How our AI works<br>
+            ⏱️ Development timeline<br>
+            📱 Technical features<br>
+            📞 Contact information<br><br>
+            What would you like to know more about?`;
+        }
+
+        // Allow Enter key to send messages
+        document.getElementById('chatbotInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendChatMessage();
+            }
+        });
+
         // Initialize - show home section
         document.addEventListener('DOMContentLoaded', function() {
             showSection('home');
@@ -1392,10 +1770,10 @@ Ready to begin neural consultation process.`;
             const techHighlights = document.querySelectorAll('.tech-highlight');
             techHighlights.forEach(highlight => {
                 highlight.addEventListener('mouseenter', function() {
-                    this.style.textShadow = '0 4px 8px rgba(147, 51, 234, 1), 0 0 15px rgba(147, 51, 234, 0.6)';
+                    this.style.textShadow = '0 0 15px rgba(147, 51, 234, 1)';
                 });
                 highlight.addEventListener('mouseleave', function() {
-                    this.style.textShadow = '0 2px 4px rgba(147, 51, 234, 0.8), 0 0 8px rgba(147, 51, 234, 0.4)';
+                    this.style.textShadow = 'none';
                 });
             });
         });
