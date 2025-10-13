@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Consultation Form - AI Website Builder Pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: #0a0a0a;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #9333ea;
+            margin-bottom: 20px;
+            filter: contrast(1.3) brightness(1.2);
+        }
+        
+        .header p {
+            font-size: 1.3rem;
+            color: #ffffff;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-weight: 600;
+            filter: contrast(1.2) brightness(1.1);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(147, 51, 234, 0.2);
+            border-radius: 3px;
+            margin: 30px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            width: 16.67%;
+            transition: width 0.3s ease;
+        }
+        
+        .consultation-form {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a1a3a 100%);
+            border: 2px solid rgba(147, 51, 234, 0.4);
+            padding: 50px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .form-step {
+            display: none;
+        }
+        
+        .form-step.active {
+            display: block;
+        }
+        
+        .form-section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(147, 51, 234, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(147, 51, 234, 0.2);
+        }
+        
+        .form-section h3 {
+            color: #9333ea;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            filter: contrast(1.3) brightness(1.2);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 800;
+            color: #ffffff;
+            font-size: 1.1rem;
+            filter: contrast(1.3) brightness(1.2);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(147, 51, 234, 0.4);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: rgba(10, 10, 10, 0.8);
+            color: #ffffff;
+            filter: contrast(1.2) brightness(1.1);
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #9333ea;
+            box-shadow: 0 0 20px rgba(147, 51, 234, 0.4);
+        }
+        
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .file-upload-label {
+            display: block;
+            padding: 20px;
+            border: 2px dashed rgba(147, 51, 234, 0.4);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(10, 10, 10, 0.8);
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .file-upload-label:hover {
+            border-color: #9333ea;
+            background: rgba(147, 51, 234, 0.1);
+        }
+        
+        .file-list {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(147, 51, 234, 0.1);
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            color: #ffffff;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(147, 51, 234, 0.2);
+        }
+        
+        .file-item:last-child {
+            border-bottom: none;
+        }
+        
+        .remove-file {
+            color: #ff4444;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 5px;
+        }
+        
+        .color-picker-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .color-picker {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .color-picker input[type="color"] {
+            width: 50px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #9333ea;
+        }
+        
+        .step-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(147, 51, 234, 0.3);
+        }
+        
+        .step-btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .step-btn.prev {
+            background: rgba(147, 51, 234, 0.2);
+            color: #9333ea;
+        }
+        
+        .step-btn.next, .step-btn.submit {
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            color: white;
+        }
+        
+        .step-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .step-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .package-info {
+            background: rgba(147, 51, 234, 0.1);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .package-info h3 {
+            color: #9333ea;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .tech-highlight {
+            color: #9333ea;
+            font-weight: 800;
+            filter: contrast(1.3) brightness(1.2);
+        }
+        
+        @media (max-width: 768px) {
+            .consultation-form {
+                padding: 30px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .color-picker-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .step-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 AI Neural Consultation</h1>
+            <p>Our advanced AI needs comprehensive information about your business to create the perfect website. Please provide detailed information so we can deliver exactly what you envision.</p>
+        </div>
+
+        <div class="package-info" id="packageInfo">
+            <h3>Selected Package: <span id="selectedPackage">AI Professional - €260</span></h3>
+            <p>Complete this form to begin your <span class="tech-highlight">neural website creation process</span></p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="consultation-form">
+            <form id="consultationForm">
+                <!-- Step 1: Business Information -->
+                <div class="form-step active" id="step1">
+                    <div class="form-section">
+                        <h3>📊 Business Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="businessName">Business/Company Name *</label>
+                                <input type="text" id="businessName" name="businessName" required placeholder="Your Business Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="industry">Industry/Sector *</label>
+                                <select id="industry" name="industry" required>
+                                    <option value="">Select your industry</option>
+                                    <option value="technology">Technology & Software</option>
+                                    <option value="healthcare">Healthcare & Medical</option>
+                                    <option value="finance">Finance & Banking</option>
+                                    <option value="retail">Retail & E-commerce</option>
+                                    <option value="restaurant">Restaurant & Food</option>
+                                    <option value="real-estate">Real Estate</option>
+                                    <option value="legal">Legal Services</option>
+                                    <option value="education">Education & Training</option>
+                                    <option value="consulting">Consulting & Professional Services</option>
+                                    <option value="manufacturing">Manufacturing</option>
+                                    <option value="construction">Construction & Architecture</option>
+                                    <option value="automotive">Automotive</option>
+                                    <option value="beauty">Beauty & Wellness</option>
+                                    <option value="fitness">Fitness & Sports</option>
+                                    <option value="travel">Travel & Tourism</option>
+                                    <option value="entertainment">Entertainment & Media</option>
+                                    <option value="nonprofit">Non-Profit & Charity</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="businessDescription">Business Description *</label>
+                            <textarea id="businessDescription" name="businessDescription" rows="4" required placeholder="Describe your business, what you do, your unique value proposition, and what makes you different from competitors..."></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="targetAudience">Target Audience *</label>
+                                <input type="text" id="targetAudience" name="targetAudience" required placeholder="e.g., Small business owners, Young professionals, Families with children">
+                            </div>
+                            <div class="form-group">
+                                <label for="location">Business Location</label>
+                                <input type="text" id="location" name="location" placeholder="City, State/Country">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Website Goals & Features -->
+                <div class="form-step" id="step2">
+                    <div class="form-section">
+                        <h3>🎯 Website Goals & Features</h3>
+                        <div class="form-group">
+                            <label for="websiteGoals">Primary Website Goals *</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="goal-leads" name="websiteGoals" value="generate-leads">
+                                    <label for="goal-leads">Generate Leads</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="goal-sales" name="websiteGoals" value="online-sales">
+                                    <label for="goal-sales">Online Sales</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="goal-brand" name="websiteGoals" value="brand-awareness">
+                                    <label for="goal-brand">Brand Awareness</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="goal-info" name="websiteGoals" value="provide-information">
+                                    <label for="goal-info">Provide Information</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="goal-portfolio" name="websiteGoals" value="showcase-portfolio">
+                                    <label for="goal-portfolio">Showcase Portfolio</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="goal-booking" name="websiteGoals" value="online-booking">
+                                    <label for="goal-booking">Online Booking/Appointments</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="requiredFeatures">Required Features *</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="feature-contact" name="requiredFeatures" value="contact-form">
+                                    <label for="feature-contact">Contact Forms</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="feature-ecommerce" name="requiredFeatures" value="ecommerce">
+                                    <label for="feature-ecommerce">E-commerce/Online Store</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="feature-blog" name="requiredFeatures" value="blog">
+                                    <label for="feature-blog">Blog/News Section</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="feature-gallery" name="requiredFeatures" value="gallery">
+                                    <label for="feature-gallery">Photo/Video Gallery</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="feature-testimonials" name="requiredFeatures" value="testimonials">
+                                    <label for="feature-testimonials">Customer Testimonials</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="feature-social" name="requiredFeatures" value="social-media">
+                                    <label for="feature-social">Social Media Integration</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="feature-booking-system" name="requiredFeatures" value="booking-system">
+                                    <label for="feature-booking-system">Booking/Reservation System</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="feature-live-chat" name="requiredFeatures" value="live-chat">
+                                    <label for="feature-live-chat">Live Chat Support</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="specificRequirements">Specific Requirements</label>
+                            <textarea id="specificRequirements" name="specificRequirements" rows="3" placeholder="Any specific functionality, integrations, or features you need..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Design Preferences -->
+                <div class="form-step" id="step3">
+                    <div class="form-section">
+                        <h3>🎨 Design Preferences</h3>
+                        <div class="form-group">
+                            <label for="designStyle">Preferred Design Style *</label>
+                            <select id="designStyle" name="designStyle" required>
+                                <option value="">Select design style</option>
+                                <option value="modern-minimalist">Modern & Minimalist</option>
+                                <option value="professional-corporate">Professional & Corporate</option>
+                                <option value="creative-artistic">Creative & Artistic</option>
+                                <option value="bold-vibrant">Bold & Vibrant</option>
+                                <option value="elegant-luxury">Elegant & Luxury</option>
+                                <option value="fun-playful">Fun & Playful</option>
+                                <option value="clean-simple">Clean & Simple</option>
+                                <option value="tech-futuristic">Tech & Futuristic</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Brand Colors</label>
+                            <div class="color-picker-group">
+                                <div class="color-picker">
+                                    <input type="color" id="primaryColor" name="primaryColor" value="#9333ea">
+                                    <label for="primaryColor">Primary Color</label>
+                                </div>
+                                <div class="color-picker">
+                                    <input type="color" id="secondaryColor" name="secondaryColor" value="#a855f7">
+                                    <label for="secondaryColor">Secondary Color</label>
+                                </div>
+                                <div class="color-picker">
+                                    <input type="color" id="accentColor" name="accentColor" value="#c084fc">
+                                    <label for="accentColor">Accent Color</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fontPreference">Font Style Preference</label>
+                                <select id="fontPreference" name="fontPreference">
+                                    <option value="">Let AI choose</option>
+                                    <option value="modern-sans">Modern Sans-Serif</option>
+                                    <option value="classic-serif">Classic Serif</option>
+                                    <option value="elegant-script">Elegant Script</option>
+                                    <option value="tech-mono">Tech Monospace</option>
+                                    <option value="friendly-rounded">Friendly Rounded</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="layoutPreference">Layout Preference</label>
+                                <select id="layoutPreference" name="layoutPreference">
+                                    <option value="">Let AI decide</option>
+                                    <option value="single-page">Single Page</option>
+                                    <option value="multi-page">Multi-Page</option>
+                                    <option value="sidebar">With Sidebar</option>
+                                    <option value="full-width">Full Width</option>
+                                    <option value="boxed">Boxed Layout</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inspirationWebsites">Inspiration Websites</label>
+                            <textarea id="inspirationWebsites" name="inspirationWebsites" rows="3" placeholder="Share URLs of websites you like (design, layout, functionality). Our AI will analyze their structure without copying..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Content & Materials -->
+                <div class="form-step" id="step4">
+                    <div class="form-section">
+                        <h3>📝 Content & Materials</h3>
+                        <div class="form-group">
+                            <label for="logoUpload">Logo Files</label>
+                            <div class="file-upload">
+                                <input type="file" id="logoUpload" name="logoUpload" multiple accept="image/*,.svg,.ai,.eps,.pdf">
+                                <label for="logoUpload" class="file-upload-label">
+                                    📎 Click to Upload Logo Files<br>
+                                    <small>Supported: PNG, JPG, SVG, AI, EPS, PDF</small>
+                                </label>
+                            </div>
+                            <div class="file-list" id="logoFileList"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="brandAssets">Brand Assets & Images</label>
+                            <div class="file-upload">
+                                <input type="file" id="brandAssets" name="brandAssets" multiple accept="image/*,video/*">
+                                <label for="brandAssets" class="file-upload-label">
+                                    🖼️ Click to Upload Brand Images & Videos<br>
+                                    <small>Photos, graphics, videos, brand materials</small>
+                                </label>
+                            </div>
+                            <div class="file-list" id="brandFileList"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contentFiles">Content Files</label>
+                            <div class="file-upload">
+                                <input type="file" id="contentFiles" name="contentFiles" multiple accept=".pdf,.doc,.docx,.txt,.md">
+                                <label for="contentFiles" class="file-upload-label">
+                                    📄 Click to Upload Content Documents<br>
+                                    <small>Articles, brochures, text documents</small>
+                                </label>
+                            </div>
+                            <div class="file-list" id="contentFileList"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="existingContent">Existing Website Content</label>
+                            <textarea id="existingContent" name="existingContent" rows="4" placeholder="If you have existing website content, paste key text here or describe what content you want to include..."></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="companyTagline">Company Tagline/Slogan</label>
+                                <input type="text" id="companyTagline" name="companyTagline" placeholder="Your memorable tagline or slogan">
+                            </div>
+                            <div class="form-group">
+                                <label for="keyMessages">Key Messages</label>
+                                <input type="text" id="keyMessages" name="keyMessages" placeholder="Main messages you want to communicate">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5: Contact & Business Details -->
+                <div class="form-step" id="step5">
+                    <div class="form-section">
+                        <h3>📞 Contact & Business Details</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contactName">Contact Person *</label>
+                                <input type="text" id="contactName" name="contactName" required placeholder="Your full name">
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail">Email Address *</label>
+                                <input type="email" id="contactEmail" name="contactEmail" required placeholder="your@email.com">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contactPhone">Phone Number</label>
+                                <input type="tel" id="contactPhone" name="contactPhone" placeholder="+1 (555) 123-4567">
+                            </div>
+                            <div class="form-group">
+                                <label for="businessAddress">Business Address</label>
+                                <input type="text" id="businessAddress" name="businessAddress" placeholder="Full business address">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="socialMedia">Social Media Profiles</label>
+                                <textarea id="socialMedia" name="socialMedia" rows="3" placeholder="Facebook, Instagram, Twitter, LinkedIn URLs..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="businessHours">Business Hours</label>
+                                <textarea id="businessHours" name="businessHours" rows="3" placeholder="Mon-Fri: 9AM-5PM, Sat: 10AM-2PM, etc."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 6: Additional Requirements -->
+                <div class="form-step" id="step6">
+                    <div class="form-section">
+                        <h3>⚙️ Additional Requirements</h3>
+                        <div class="form-group">
+                            <label for="seoKeywords">SEO Keywords</label>
+                            <input type="text" id="seoKeywords" name="seoKeywords" placeholder="Important keywords for your business (comma-separated)">
+                        </div>
+                        <div class="form-group">
+                            <label for="competitors">Main Competitors</label>
+                            <textarea id="competitors" name="competitors" rows="3" placeholder="List your main competitors and their websites. Our AI will analyze the competitive landscape..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="specialRequests">Special Requests</label>
+                            <textarea id="specialRequests" name="specialRequests" rows="4" placeholder="Any special requirements, integrations, accessibility needs, or specific functionality you need..."></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="timeline">Preferred Timeline</label>
+                                <select id="timeline" name="timeline">
+                                    <option value="asap">ASAP (Standard AI Speed)</option>
+                                    <option value="1-week">Within 1 week</option>
+                                    <option value="2-weeks">Within 2 weeks</option>
+                                    <option value="1-month">Within 1 month</option>
+                                    <option value="flexible">Flexible</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="budget">Additional Budget for Extras</label>
+                                <select id="budget" name="budget">
+                                    <option value="package-only">Package price only</option>
+                                    <option value="under-500">Under €500 extra</option>
+                                    <option value="500-1000">€500 - €1,000 extra</option>
+                                    <option value="1000-2000">€1,000 - €2,000 extra</option>
+                                    <option value="over-2000">Over €2,000 extra</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="step-navigation">
+                    <button type="button" class="step-btn prev" id="prevBtn" onclick="changeStep(-1)" style="display: none;">← Previous</button>
+                    <button type="button" class="step-btn next" id="nextBtn" onclick="changeStep(1)">Next →</button>
+                    <button type="submit" class="step-btn submit" id="submitBtn" style="display: none;">🚀 Launch AI Website Creation</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 6;
+        let selectedPackage = 'professional'; // Default
+
+        // Get package from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const packageParam = urlParams.get('package');
+        if (packageParam) {
+            selectedPackage = packageParam;
+            updatePackageDisplay();
+        }
+
+        function updatePackageDisplay() {
+            const packageNames = {
+                'starter': 'AI Starter - €150',
+                'professional': 'AI Professional - €260',
+                'enterprise': 'AI Enterprise - €450'
+            };
+            document.getElementById('selectedPackage').textContent = packageNames[selectedPackage] || 'AI Professional - €260';
+        }
+
+        // Multi-step form functionality
+        function changeStep(direction) {
+            const currentStepElement = document.getElementById(`step${currentStep}`);
+            
+            if (direction === 1) {
+                // Validate current step before proceeding
+                if (!validateStep(currentStep)) {
+                    return;
+                }
+            }
+            
+            currentStepElement.classList.remove('active');
+            currentStep += direction;
+            
+            if (currentStep < 1) currentStep = 1;
+            if (currentStep > totalSteps) currentStep = totalSteps;
+            
+            const newStepElement = document.getElementById(`step${currentStep}`);
+            newStepElement.classList.add('active');
+            
+            updateProgressBar();
+            updateNavigationButtons();
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function validateStep(step) {
+            const stepElement = document.getElementById(`step${step}`);
+            const requiredFields = stepElement.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.style.borderColor = '#ff4444';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = 'rgba(147, 51, 234, 0.4)';
+                }
+            });
+            
+            // Special validation for checkboxes in step 2
+            if (step === 2) {
+                const goals = document.querySelectorAll('input[name="websiteGoals"]:checked');
+                const features = document.querySelectorAll('input[name="requiredFeatures"]:checked');
+                
+                if (goals.length === 0) {
+                    alert('Please select at least one website goal.');
+                    isValid = false;
+                }
+                if (features.length === 0) {
+                    alert('Please select at least one required feature.');
+                    isValid = false;
+                }
+            }
+            
+            if (!isValid && step !== 2) {
+                alert('Please fill in all required fields before proceeding.');
+            }
+            
+            return isValid;
+        }
+
+        function updateProgressBar() {
+            const progress = (currentStep / totalSteps) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+        }
+
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            prevBtn.style.display = currentStep === 1 ? 'none' : 'block';
+            nextBtn.style.display = currentStep === totalSteps ? 'none' : 'block';
+            submitBtn.style.display = currentStep === totalSteps ? 'block' : 'none';
+        }
+
+        // File upload handling
+        function setupFileUploads() {
+            const fileInputs = ['logoUpload', 'brandAssets', 'contentFiles'];
+            
+            fileInputs.forEach(inputId => {
+                const input = document.getElementById(inputId);
+                const listId = inputId.replace('Upload', 'FileList').replace('Assets', 'FileList').replace('Files', 'FileList');
+                const fileList = document.getElementById(listId);
+                
+                input.addEventListener('change', function() {
+                    displayFileList(this.files, fileList);
+                });
+            });
+        }
+
+        function displayFileList(files, container) {
+            container.innerHTML = '';
+            if (files.length > 0) {
+                container.style.display = 'block';
+                Array.from(files).forEach((file, index) => {
+                    const fileItem = document.createElement('div');
+                    fileItem.className = 'file-item';
+                    fileItem.innerHTML = `
+                        <span>${file.name} (${formatFileSize(file.size)})</span>
+                        <span class="remove-file" onclick="removeFile(this, ${index})">✕</span>
+                    `;
+                    container.appendChild(fileItem);
+                });
+            } else {
+                container.style.display = 'none';
+            }
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function removeFile(element, index) {
+            element.parentElement.remove();
+        }
+
+        // Form submission
+        document.getElementById('consultationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!validateStep(currentStep)) {
+                return;
+            }
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Collect checkbox values
+            const goals = Array.from(document.querySelectorAll('input[name="websiteGoals"]:checked')).map(cb => cb.value);
+            const features = Array.from(document.querySelectorAll('input[name="requiredFeatures"]:checked')).map(cb => cb.value);
+            
+            // Create comprehensive consultation email
+            const subject = `🤖 COMPREHENSIVE AI CONSULTATION - ${data.businessName} - ${selectedPackage.toUpperCase()} Package`;
+            const body = `AI WEBSITE BUILDER CONSULTATION
+Package Selected: ${selectedPackage.toUpperCase()}
+
+=== BUSINESS INFORMATION ===
+Business Name: ${data.businessName}
+Industry: ${data.industry}
+Description: ${data.businessDescription}
+Target Audience: ${data.targetAudience}
+Location: ${data.location}
+
+=== WEBSITE GOALS & FEATURES ===
+Primary Goals: ${goals.join(', ')}
+Required Features: ${features.join(', ')}
+Specific Requirements: ${data.specificRequirements}
+
+=== DESIGN PREFERENCES ===
+Design Style: ${data.designStyle}
+Primary Color: ${data.primaryColor}
+Secondary Color: ${data.secondaryColor}
+Accent Color: ${data.accentColor}
+Font Preference: ${data.fontPreference}
+Layout Preference: ${data.layoutPreference}
+Inspiration Websites: ${data.inspirationWebsites}
+
+=== CONTENT & MATERIALS ===
+Company Tagline: ${data.companyTagline}
+Key Messages: ${data.keyMessages}
+Existing Content: ${data.existingContent}
+[Files uploaded separately - please check attachments]
+
+=== CONTACT & BUSINESS DETAILS ===
+Contact Person: ${data.contactName}
+Email: ${data.contactEmail}
+Phone: ${data.contactPhone}
+Business Address: ${data.businessAddress}
+Social Media: ${data.socialMedia}
+Business Hours: ${data.businessHours}
+
+=== ADDITIONAL REQUIREMENTS ===
+SEO Keywords: ${data.seoKeywords}
+Competitors: ${data.competitors}
+Special Requests: ${data.specialRequests}
+Timeline: ${data.timeline}
+Additional Budget: ${data.budget}
+
+---
+READY FOR AI NEURAL PROCESSING
+All comprehensive information provided for perfect website creation.
+
+Please note: Files have been selected but need to be sent separately. 
+Client will follow up with file attachments.`;
+            
+            const mailtoLink = `mailto:contact@aiwebsitepro.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            alert('🤖 AI Consultation Submitted!\n\nOur neural networks are now processing your comprehensive requirements. You\'ll receive a response within 2 hours with your custom website preview!\n\nDon\'t forget to send your uploaded files separately to contact@aiwebsitepro.com');
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setupFileUploads();
+            updateProgressBar();
+            updatePackageDisplay();
+        });
+    </script>
+</body>
+</html>
