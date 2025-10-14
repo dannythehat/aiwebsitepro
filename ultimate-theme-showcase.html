@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Website Pro - Ultimate Theme Showcase</title>
+    
+    <!-- Theme Framework CSS -->
+    <link rel="stylesheet" href="themes/theme-framework.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .showcase-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .showcase-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .showcase-header h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .showcase-header p {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .showcase-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            display: block;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .industry-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .industry-tab {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 15px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .industry-tab:hover,
+        .industry-tab.active {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .themes-showcase {
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 25px 75px rgba(0,0,0,0.15);
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .showcase-section {
+            padding: 50px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .premium-themes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .premium-theme-card {
+            border: 3px solid transparent;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            background: white;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .premium-theme-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 75px rgba(0,0,0,0.2);
+            border-color: #D4AF37;
+        }
+
+        .premium-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #D4AF37, #B8941F);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            animation: premiumGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes premiumGlow {
+            0% { box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4); }
+            100% { box-shadow: 0 8px 30px rgba(212, 175, 55, 0.8); }
+        }
+
+        .theme-preview {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-preview::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+        }
+
+        .theme-info {
+            padding: 30px;
+        }
+
+        .theme-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .theme-description {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .color {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .theme-features {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .feature-tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .select-theme-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .select-theme-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .demo-section {
+            background: #f8f9fa;
+            padding: 50px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .live-demo {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+
+        .demo-toolbar {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .demo-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .demo-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .demo-dot.red { background: #ff5f56; }
+        .demo-dot.yellow { background: #ffbd2e; }
+        .demo-dot.green { background: #27ca3f; }
+
+        .demo-url {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 8px 15px;
+            margin-left: 20px;
+            flex: 1;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .demo-content {
+            height: 500px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .demo-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .ultimate-cta {
+            background: linear-gradient(135deg, #D4AF37, #B8941F);
+            color: white;
+            border: none;
+            padding: 25px 50px;
+            border-radius: 30px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 45px rgba(212, 175, 55, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ultimate-cta:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .showcase-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .premium-themes-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .showcase-stats {
+                gap: 20px;
+            }
+            
+            .industry-tabs {
+                gap: 10px;
+            }
+            
+            .industry-tab {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+        }
+
+        /* Theme-specific preview styles */
+        .luxury-steakhouse-preview { 
+            background: linear-gradient(45deg, #1A0E0A, #8B0000, #DAA520); 
+        }
+        .cyberpunk-tech-preview { 
+            background: linear-gradient(45deg, #0D1117, #00D4FF, #FF0080); 
+        }
+        .luxury-medical-spa-preview { 
+            background: linear-gradient(45deg, #FFFFFF, #4A90E2, #7ED321); 
+        }
+        .luxury-law-firm-preview { 
+            background: linear-gradient(45deg, #1B2951, #D4AF37, #2C3E50); 
+        }
+        .luxury-wedding-venue-preview { 
+            background: linear-gradient(45deg, #E8B4CB, #D4AF37, #F7E7CE); 
+        }
+        .premium-fitness-preview { 
+            background: linear-gradient(45deg, #FF6B35, #FF4757, #FFA726); 
+        }
+        .exclusive-art-gallery-preview { 
+            background: linear-gradient(45deg, #FFFFFF, #000000, #FF6B35); 
+        }
+        .luxury-ecommerce-preview { 
+            background: linear-gradient(45deg, #1C1C1C, #D4AF37, #C0C0C0); 
+        }
+        .elite-education-preview { 
+            background: linear-gradient(45deg, #003366, #D4AF37, #1E3A8A); 
+        }
+        .platinum-real-estate-preview { 
+            background: linear-gradient(45deg, #2C3E50, #D4AF37, #34495E); 
+        }
+    </style>
+</head>
+<body>
+    <div class="showcase-container">
+        <div class="showcase-header">
+            <h1>🎨 Ultimate Theme Showcase</h1>
+            <p>10 Breathtaking Premium Themes That Rival $15,000+ Custom Websites</p>
+            <p style="font-size: 1rem; opacity: 0.8;">Each theme is a masterpiece of design, animation, and industry expertise</p>
+            
+            <div class="showcase-stats">
+                <div class="stat-item">
+                    <span class="stat-number">10</span>
+                    <span class="stat-label">Premium Themes</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10</span>
+                    <span class="stat-label">Industries</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Animations</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">$15K</span>
+                    <span class="stat-label">Custom Quality</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="industry-tabs">
+            <button class="industry-tab active" data-industry="all">🎨 All Themes</button>
+            <button class="industry-tab" data-industry="restaurant">🥩 Restaurant</button>
+            <button class="industry-tab" data-industry="tech">💻 Tech</button>
+            <button class="industry-tab" data-industry="healthcare">🏥 Healthcare</button>
+            <button class="industry-tab" data-industry="law">⚖️ Law</button>
+            <button class="industry-tab" data-industry="events">💒 Events</button>
+            <button class="industry-tab" data-industry="fitness">🏋️ Fitness</button>
+            <button class="industry-tab" data-industry="art">🎭 Art</button>
+            <button class="industry-tab" data-industry="ecommerce">🛒 E-commerce</button>
+            <button class="industry-tab" data-industry="education">🎓 Education</button>
+            <button class="industry-tab" data-industry="realestate">🏠 Real Estate</button>
+        </div>
+
+        <div class="themes-showcase">
+            <div class="showcase-section">
+                <h2 class="section-title">Premium Theme Collection</h2>
+                
+                <div class="premium-themes-grid" id="themes-grid">
+                    <!-- Luxury Steakhouse -->
+                    <div class="premium-theme-card" data-theme="luxury-steakhouse" data-industry="restaurant">
+                        <div class="premium-badge">👑 ULTRA-PREMIUM</div>
+                        <div class="theme-preview luxury-steakhouse-preview"></div>
+                        <div class="theme-info">
+                            <h3 class="theme-name">The Gentleman's Choice</h3>
+                            <p class="theme-description">Ultra-premium steakhouse with dark luxury, leather textures, and masculine sophistication. Features animated fire glow, gold gradient typography, and leather texture overlays.</p>
+                            <div class="color-palette">
+                                <span class="color" style="background: #1A0E0A"></span>
+                                <span class="color" style="background: #8B0000"></span>
+                                <span class="color" style="background: #DAA520"></span>
+                                <span class="color" style="background: #F5F5DC"></span>
+                            </div>
+                            <div class="theme-features">
+                                <span class="feature-tag">Dark Luxury</span>
+                                <span class="feature-tag">Animated Effects</span>
+                                <span class="feature-tag">Leather Textures</span>
+                                <span class="feature-tag">Gold Typography</span>
+                            </div>
+                            <button class="select-theme-btn" onclick="selectAndDemo('luxury-steakhouse')">
+                                Experience This Masterpiece
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Cyberpunk Tech -->
+                    <div class="premium-theme-card" data-theme="cyberpunk-tech" data-industry="tech">
+                        <div class="premium-badge">👑 ULTRA-PREMIUM</div>
+                        <div class="theme-preview cyberpunk-tech-preview"></div>
+                        <div class="theme-info">
+                            <h3 class="theme-name">Neural Network</h3>
+                            <p class="theme-description">Futuristic cyberpunk design with neon glows, circuit animations, and cutting-edge tech aesthetics. Features holographic effects and matrix-style animations.</p>
+                            <div class="color-palette">
+                                <span class="color" style="background: #00D4FF"></span>
+                                <span class="color" style="background: #FF0080"></span>
+                                <span class="color" style="background: #00FF88"></span>
+                                <span class="color" style="background: #0D1117"></span>
+                            </div>
+                            <div class="theme-features">
+                                <span class="feature-tag">Neon Glows</span>
+                                <span class="feature-tag">Circuit Animations</span>
+                                <span class="feature-tag">Holographic Effects</span>
+                                <span class="feature-tag">Futuristic UI</span>
+                            </div>
+                            <button class="select-theme-btn" onclick="selectAndDemo('cyberpunk-tech')">
+                                Experience This Masterpiece
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Luxury Medical Spa -->
+                    <div class="premium-theme-card" data-theme="luxury-medical-spa" data-industry="healthcare">
+                        <div class="premium-badge">👑 ULTRA-PREMIUM</div>
+                        <div class="theme-preview luxury-medical-spa-preview"></div>
+                        <div class="theme-info">
+                            <h3 class="theme-name">Zen Sanctuary</h3>
+                            <p class="theme-description">Ultra-modern medical spa with healing aesthetics, zen minimalism, and floating organic elements. Features serene animations and wellness-focused design.</p>
+                            <div class="color-palette">
+                                <span class="color" style="background: #4A90E2"></span>
+                                <span class="color" style="background: #7ED321"></span>
+                                <span class="color" style="background: #D4AF37"></span>
+                                <span class="color" style="background: #FFFFFF"></span>
+                            </div>
+                            <div class="theme-features">
+                                <span class="feature-tag">Zen Aesthetics</span>
+                                <span class="feature-tag">Healing Colors</span>
+                                <span class="feature-tag">Organic Animations</span>
+                                <span class="feature-tag">Wellness Focus</span>
+                            </div>
+                            <button class="select-theme-btn" onclick="selectAndDemo('luxury-medical-spa')">
+                                Experience This Masterpiece
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Constitutional Elite Law -->
+                    <div class="premium-theme-card" data-theme="luxury-law-firm" data-industry="law">
+                        <div class="premium-badge">👑 ULTRA-PREMIUM</div>
+                        <div class="theme-preview luxury-law-firm-preview"></div>
+                        <div class="theme-info">
+                            <h3 class="theme-name">Constitutional Elite</h3>
+                            <p class="theme-description">Ultra-premium law firm with classical elegance, authoritative design, and distinguished sophistication. Features marble textures and legal authority styling.</p>
+                            <div class="color-palette">
+                                <span class="color" style="background: #1B2951"></span>
+                                <span class="color" style="background: #D4AF37"></span>
+                                <span class="color" style="background: #2C3E50"></span>
+                                <span class="color" style="background: #FFFFFF"></span>
+                            </div>
+                            <div class="theme-features">
+                                <span class="feature-tag">Classical Elegance</span>
+                                <span class="feature-tag">Authority Design</span>
+                                <span class="feature-tag">Marble Textures</span>
+                                <span class="feature-tag">Distinguished</span>
+                            </div>
+                            <button class="select-theme-btn" onclick="selectAndDemo('luxury-law-firm')">
+                                Experience This Masterpiece
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Eternal Romance Wedding -->
+                    <div class="premium-theme-card" data-theme="luxury-wedding-venue" data-industry="events">
+                        <div class="premium-badge">👑 ULTRA-PREMIUM</div>
+                        <div class="theme-preview luxury-wedding-venue-preview"></div>
+                        <div class="theme-info">
+                            <h3 class="theme-name">Eternal Romance</h3>
+                            <p class="theme-description">Ultra-romantic wedding venue with dreamy pastels, floating hearts, and fairytale elegance. Features romantic animations and love-inspired design.</p>
+                            <div class="color-palette">
+                                <span class="color" style="background: #E8B4CB"></span>
+                                <span class="color" style="background: #D4AF37"></span>
+                                <span class="color" style="background: #F7E7CE"></span>
+                                <span class="color" style="background: #FFFEF9"></span>
+                            </div>
+                            <div class="theme-features">
+                                <span class="feature-tag">Romantic Design</span>
+                                <span class="feature-tag">Dreamy Pastels</span>
+                                <span class="feature-tag">Floating Hearts</span>
+                                <span class="feature-tag">Fairytale Feel</span>
+                            </div>
+                            <button class="select-theme-btn" onclick="selectAndDemo('luxury-wedding-venue')">
+                                Experience This Masterpiece
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Power Elite Fitness -->
+                    <div class="premium-theme-card" data-theme="premium-fitness" data-industry="fitness">
+                        <div class="premium-badge">👑 ULTRA-PREMIUM</div>
+                        <div class="theme-preview premium-fitness-preview"></div>
+                        <div class="theme-info">
+                            <h3 class="theme-name">Power Elite</h3>
+                            <p class="theme-description">High-energy fitness studio with bold oranges, power animations, and motivational design. Features energy burst effects and dynamic typography.</p>
+                            <div class="color-palette">
+                                <span class="color" style="background: #FF6B35"></span>
+                                <span class="color" style="background: #FF4757"></span>
+                                <span class="color" style="background: #FFA726"></span>
+                                <span class="color" style="background: #1A1A1A"></span>
+                            </div>
+                            <div class="theme-features">
+                                <span class="feature-tag">High Energy</span>
+                                <span class="feature-tag">Power Animations</span>
+                                <span class="feature-tag">Bold Typography</span>
+                                <span class="feature-tag">Motivational</span>
+                            </div>
+                            <button class="select-theme-btn" onclick="selectAndDemo('premium-fitness')">
+                                Experience This Masterpiece
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Continue with other themes... -->
+                    <!-- Add remaining themes here -->
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h2 class="section-title">Live Theme Demo</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 30px;">
+                    Click any theme above to see it in action with real content
+                </p>
+                
+                <div class="live-demo">
+                    <div class="demo-toolbar">
+                        <div class="demo-dots">
+                            <div class="demo-dot red"></div>
+                            <div class="demo-dot yellow"></div>
+                            <div class="demo-dot green"></div>
+                        </div>
+                        <div class="demo-url" id="demo-url">https://your-breathtaking-website.com</div>
+                    </div>
+                    
+                    <div class="demo-content">
+                        <iframe class="demo-iframe" id="demo-iframe" src="theme-demo.html"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2 style="color: white; margin-bottom: 20px; font-size: 2.5rem;">Ready to Dominate Your Industry?</h2>
+            <p style="color: white; opacity: 0.9; margin-bottom: 30px; font-size: 1.2rem;">
+                Get your breathtaking website with custom AI logo in 2-5 minutes
+            </p>
+            <button class="ultimate-cta" onclick="startCreation()">
+                🚀 Create My Breathtaking Website Now
+            </button>
+        </div>
+    </div>
+
+    <!-- Load all theme scripts -->
+    <script src="themes/theme-manager.js"></script>
+    <script src="themes/all-breathtaking-themes.js"></script>
+    
+    <script>
+        let currentIndustry = 'all';
+        let selectedTheme = null;
+
+        // Theme data for showcase
+        const showcaseThemes = [
+            {
+                id: 'luxury-steakhouse',
+                name: 'The Gentleman\'s Choice',
+                industry: 'restaurant',
+                description: 'Ultra-premium steakhouse with dark luxury, leather textures, and masculine sophistication. Features animated fire glow, gold gradient typography, and leather texture overlays.',
+                colors: ['#1A0E0A', '#8B0000', '#DAA520', '#F5F5DC'],
+                features: ['Dark Luxury', 'Animated Effects', 'Leather Textures', 'Gold Typography']
+            },
+            {
+                id: 'cyberpunk-tech',
+                name: 'Neural Network',
+                industry: 'tech',
+                description: 'Futuristic cyberpunk design with neon glows, circuit animations, and cutting-edge tech aesthetics. Features holographic effects and matrix-style animations.',
+                colors: ['#00D4FF', '#FF0080', '#00FF88', '#0D1117'],
+                features: ['Neon Glows', 'Circuit Animations', 'Holographic Effects', 'Futuristic UI']
+            },
+            {
+                id: 'luxury-medical-spa',
+                name: 'Zen Sanctuary',
+                industry: 'healthcare',
+                description: 'Ultra-modern medical spa with healing aesthetics, zen minimalism, and floating organic elements. Features serene animations and wellness-focused design.',
+                colors: ['#4A90E2', '#7ED321', '#D4AF37', '#FFFFFF'],
+                features: ['Zen Aesthetics', 'Healing Colors', 'Organic Animations', 'Wellness Focus']
+            },
+            {
+                id: 'luxury-law-firm',
+                name: 'Constitutional Elite',
+                industry: 'law',
+                description: 'Ultra-premium law firm with classical elegance, authoritative design, and distinguished sophistication. Features marble textures and legal authority styling.',
+                colors: ['#1B2951', '#D4AF37', '#2C3E50', '#FFFFFF'],
+                features: ['Classical Elegance', 'Authority Design', 'Marble Textures', 'Distinguished']
+            },
+            {
+                id: 'luxury-wedding-venue',
+                name: 'Eternal Romance',
+                industry: 'events',
+                description: 'Ultra-romantic wedding venue with dreamy pastels, floating hearts, and fairytale elegance. Features romantic animations and love-inspired design.',
+                colors: ['#E8B4CB', '#D4AF37', '#F7E7CE', '#FFFEF9'],
+                features: ['Romantic Design', 'Dreamy Pastels', 'Floating Hearts', 'Fairytale Feel']
+            },
+            {
+                id: 'premium-fitness',
+                name: 'Power Elite',
+                industry: 'fitness',
+                description: 'High-energy fitness studio with bold oranges, power animations, and motivational design. Features energy burst effects and dynamic typography.',
+                colors: ['#FF6B35', '#FF4757', '#FFA726', '#1A1A1A'],
+                features: ['High Energy', 'Power Animations', 'Bold Typography', 'Motivational']
+            }
+            // Add more themes as needed
+        ];
+
+        // Industry tab switching
+        document.querySelectorAll('.industry-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.industry-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                currentIndustry = this.dataset.industry;
+                filterThemes(currentIndustry);
+                updateSectionTitle();
+            });
+        });
+
+        function updateSectionTitle() {
+            const titles = {
+                all: 'Premium Theme Collection',
+                restaurant: 'Restaurant Masterpieces',
+                tech: 'Tech Innovation Themes',
+                healthcare: 'Healthcare Excellence',
+                law: 'Legal Authority Themes',
+                events: 'Event Elegance',
+                fitness: 'Fitness Power Themes',
+                art: 'Artistic Sophistication',
+                ecommerce: 'E-commerce Luxury',
+                education: 'Academic Prestige',
+                realestate: 'Real Estate Premium'
+            };
+            document.querySelector('.section-title').textContent = titles[currentIndustry] || 'Premium Themes';
+        }
+
+        function filterThemes(industry) {
+            const cards = document.querySelectorAll('.premium-theme-card');
+            
+            cards.forEach(card => {
+                const cardIndustry = card.dataset.industry;
+                if (industry === 'all' || cardIndustry === industry) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeInUp 0.6s ease-out';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function selectAndDemo(themeId) {
+            selectedTheme = themeId;
+            
+            // Update demo iframe
+            const iframe = document.getElementById('demo-iframe');
+            const demoUrl = document.getElementById('demo-url');
+            
+            // Send message to iframe to change theme
+            iframe.contentWindow.postMessage({
+                type: 'changeTheme',
+                themeId: themeId
+            }, '*');
+            
+            // Update URL display
+            const theme = showcaseThemes.find(t => t.id === themeId);
+            if (theme) {
+                demoUrl.textContent = `https://${theme.name.toLowerCase().replace(/\s+/g, '-')}.ai-website-pro.com`;
+            }
+            
+            // Visual feedback
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = '✅ Theme Applied to Demo!';
+            button.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = '';
+            }, 3000);
+            
+            // Scroll to demo
+            document.querySelector('.demo-section').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        function startCreation() {
+            if (selectedTheme) {
+                // Redirect to theme selector with pre-selected theme
+                window.location.href = `theme-selector.html?theme=${selectedTheme}`;
+            } else {
+                // Redirect to theme selector
+                window.location.href = 'theme-selector.html';
+            }
+        }
+
+        // Add entrance animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.premium-theme-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease-out';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+            
+            // Add hover effects
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+        });
+
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            @keyframes premiumPulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+            }
+            
+            .premium-theme-card:hover .premium-badge {
+                animation: premiumPulse 1s ease-in-out infinite;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
