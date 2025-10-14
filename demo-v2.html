@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Website Generator - Live Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+        }
+        
+        .demo-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .demo-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a1a3a 100%);
+            border-radius: 15px;
+            border: 2px solid rgba(147, 51, 234, 0.3);
+        }
+        
+        .demo-header h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .demo-interface {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+            min-height: 700px;
+        }
+        
+        .demo-input {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a1a3a 100%);
+            border: 2px solid rgba(147, 51, 234, 0.4);
+            border-radius: 15px;
+            padding: 25px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .demo-output {
+            background: #ffffff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid rgba(147, 51, 234, 0.3);
+            border-radius: 8px;
+            background: rgba(10, 10, 10, 0.8);
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #9333ea;
+            box-shadow: 0 0 10px rgba(147, 51, 234, 0.3);
+        }
+        
+        .demo-btn {
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.6);
+        }
+        
+        .demo-btn.secondary {
+            background: rgba(147, 51, 234, 0.2);
+            margin-top: 8px;
+        }
+        
+        /* AI THINKING */
+        .ai-thinking {
+            display: none;
+            text-align: center;
+            padding: 50px;
+            background: #f8f9fa;
+            color: #333;
+        }
+        
+        .ai-brain {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .ai-progress {
+            width: 100%;
+            max-width: 300px;
+            height: 6px;
+            background: rgba(147, 51, 234, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 15px auto;
+        }
+        
+        .ai-progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        /* REAL WEBSITE STYLES */
+        .website-preview {
+            display: none;
+            height: 100%;
+            background: #ffffff;
+            color: #000000;
+        }
+        
+        .preview-header {
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            color: white;
+            padding: 10px 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+        
+        .preview-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: 5px;
+        }
+        
+        .website-content {
+            background: #ffffff;
+            height: calc(100% - 40px);
+            overflow-y: auto;
+        }
+        
+        .website-nav {
+            background: #ffffff;
+            padding: 15px 30px;
+            border-bottom: 1px solid #e5e5e5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .website-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #9333ea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        
+        .website-menu {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+        
+        .website-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .website-menu a:hover,
+        .website-menu a.active {
+            background: #9333ea;
+            color: white;
+        }
+        
+        .page-content {
+            display: none;
+            min-height: 600px;
+        }
+        
+        .page-content.active {
+            display: block;
+        }
+        
+        .hero-section {
+            text-align: center;
+            padding: 60px 30px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+        }
+        
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+        
+        .hero-image {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.4);
+        }
+        
+        .content-section {
+            padding: 50px 30px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .feature-desc {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* INDUSTRY SPECIFIC STYLES */
+        .menu-grid, .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .menu-item, .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .menu-item:hover, .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .item-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .item-info {
+            padding: 25px;
+        }
+        
+        .item-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .item-price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #9333ea;
+            margin-bottom: 10px;
+        }
+        
+        .item-description {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 15px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-field {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-field label {
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            padding: 12px;
+            border: 2px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .time-slot {
+            background: white;
+            border: 2px solid #e5e5e5;
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .time-slot:hover,
+        .time-slot.selected {
+            border-color: #9333ea;
+            background: #9333ea;
+            color: white;
+        }
+        
+        .success-message {
+            background: #10b981;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+        
+        .cart-icon {
+            position: relative;
+            background: #9333ea;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        .initial-state {
+            text-align: center;
+            padding: 80px 30px;
+            background: #f8f9fa;
+            color: #333;
+        }
+        
+        .initial-state .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+        
+        /* FULLSCREEN */
+        .fullscreen-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+        }
+        
+        .fullscreen-content {
+            width: 98%;
+            height: 98%;
+            margin: 1%;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .fullscreen-header {
+            background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .close-fullscreen {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 50%;
+        }
+        
+        .fullscreen-website {
+            height: calc(100% - 50px);
+            overflow-y: auto;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+            .demo-interface {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-input {
+                position: relative;
+                top: 0;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .website-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .website-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1>🤖 AI Website Generator</h1>
+            <p>Watch AI create fully functional, professional websites tailored to your industry</p>
+        </div>
+
+        <div class="demo-interface">
+            <div class="demo-input">
+                <h3 style="color: #9333ea; margin-bottom: 20px;">⚙️ Business Setup</h3>
+                
+                <div class="form-group">
+                    <label for="businessName">Business Name *</label>
+                    <input type="text" id="businessName" placeholder="e.g., Bella's Restaurant">
+                </div>
+                
+                <div class="form-group">
+                    <label for="industry">Industry *</label>
+                    <select id="industry">
+                        <option value="">Select Industry</option>
+                        <option value="restaurant">🍝 Restaurant</option>
+                        <option value="healthcare">🏥 Healthcare</option>
+                        <option value="retail">🛍️ Retail</option>
+                        <option value="fitness">💪 Fitness</option>
+                        <option value="beauty">💄 Beauty & Spa</option>
+                        <option value="technology">💻 Technology</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" rows="3" placeholder="Describe your business..."></textarea>
+                </div>
+                
+                <button class="demo-btn" id="generateBtn" onclick="startDemo()">
+                    🚀 Generate Website
+                </button>
+                
+                <button class="demo-btn secondary" onclick="fillSample()">
+                    ⚡ Try Sample
+                </button>
+            </div>
+
+            <div class="demo-output">
+                <div class="ai-thinking" id="aiThinking">
+                    <div class="ai-brain">🧠</div>
+                    <div style="font-size: 1.1rem; font-weight: 700; color: #9333ea; margin-bottom: 10px;" id="aiStatus">Generating your website...</div>
+                    <div class="ai-progress">
+                        <div class="ai-progress-bar" id="progressBar"></div>
+                    </div>
+                    <div style="font-size: 0.9rem; color: #666;">Creating industry-specific content and features</div>
+                </div>
+
+                <div class="website-preview" id="websitePreview">
+                    <div class="preview-header">
+                        <div>🌐 AI-Generated Website</div>
+                        <div>
+                            <button class="preview-btn" onclick="resetDemo()">🔄 New</button>
+                            <button class="preview-btn" onclick="openFullscreen()">⛶ Full</button>
+                        </div>
+                    </div>
+                    
+                    <div class="website-content" id="websiteContent">
+                        <!-- Dynamic content -->
+                    </div>
+                </div>
+
+                <div class="initial-state" id="initialState">
+                    <div class="icon">🤖</div>
+                    <h3 style="color: #9333ea; margin-bottom: 10px;">AI Ready</h3>
+                    <p>Fill in your business details and watch AI create a professional website</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fullscreen-modal" id="fullscreenModal">
+        <div class="fullscreen-content">
+            <div class="fullscreen-header">
+                <div>🌐 <span id="fullscreenTitle">AI Website</span></div>
+                <button class="close-fullscreen" onclick="closeFullscreen()">×</button>
+            </div>
+            <div class="fullscreen-website" id="fullscreenWebsite"></div>
+        </div>
+    </div>
+
+    <script>
+        const templates = {
+            restaurant: {
+                title: "Authentic Italian Cuisine",
+                subtitle: "Experience the finest Italian dining with fresh ingredients and traditional recipes",
+                heroImage: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=300&fit=crop",
+                logoImage: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=50&h=50&fit=crop",
+                features: [
+                    { icon: "🍝", title: "Fresh Pasta", desc: "Made daily with authentic Italian recipes" },
+                    { icon: "🍷", title: "Wine Selection", desc: "Curated Italian wines" },
+                    { icon: "👨‍🍳", title: "Expert Chefs", desc: "Trained in traditional methods" }
+                ],
+                menu: [
+                    { name: "Spaghetti Carbonara", price: "$18.99", desc: "Classic Roman pasta with eggs and pancetta", image: "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=300&h=200&fit=crop" },
+                    { name: "Margherita Pizza", price: "$16.99", desc: "Traditional pizza with fresh mozzarella", image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=300&h=200&fit=crop" },
+                    { name: "Tiramisu", price: "$8.99", desc: "Classic Italian dessert", image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=300&h=200&fit=crop" }
+                ]
+            },
+            healthcare: {
+                title: "Comprehensive Healthcare Services",
+                subtitle: "Quality medical care with compassionate service and advanced treatments",
+                heroImage: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=300&fit=crop",
+                logoImage: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=50&h=50&fit=crop",
+                features: [
+                    { icon: "🏥", title: "Modern Facilities", desc: "State-of-the-art equipment" },
+                    { icon: "👩‍⚕️", title: "Expert Staff", desc: "Board-certified physicians" },
+                    { icon: "📅", title: "Easy Scheduling", desc: "Online appointment booking" }
+                ],
+                services: [
+                    { name: "General Consultation", price: "$150", desc: "Comprehensive health assessment" },
+                    { name: "Specialist Care", price: "$200", desc: "Expert specialist consultations" },
+                    { name: "Health Screening", price: "$250", desc: "Complete health checkup" }
+                ]
+            },
+            retail: {
+                title: "Premium Fashion Collection",
+                subtitle: "Discover quality products with exceptional service and competitive prices",
+                heroImage: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=300&fit=crop",
+                logoImage: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=50&h=50&fit=crop",
+                features: [
+                    { icon: "🛍️", title: "Quality Products", desc: "Carefully curated selection" },
+                    { icon: "🚚", title: "Fast Shipping", desc: "Quick delivery nationwide" },
+                    { icon: "💳", title: "Secure Checkout", desc: "Safe payment options" }
+                ],
+                products: [
+                    { name: "Premium T-Shirt", price: "$29.99", desc: "Soft cotton with modern fit", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop" },
+                    { name: "Designer Jeans", price: "$89.99", desc: "Slim fit with stretch comfort", image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=300&h=300&fit=crop" },
+                    { name: "Luxury Sneakers", price: "$129.99", desc: "Premium comfort technology", image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=300&h=300&fit=crop" }
+                ]
+            },
+            fitness: {
+                title: "Transform Your Fitness Journey",
+                subtitle: "Professional training and wellness programs to achieve your health goals",
+                heroImage: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=300&fit=crop",
+                logoImage: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=50&h=50&fit=crop",
+                features: [
+                    { icon: "💪", title: "Personal Training", desc: "One-on-one coaching" },
+                    { icon: "🏋️", title: "Modern Equipment", desc: "State-of-the-art facilities" },
+                    { icon: "📱", title: "Fitness Tracking", desc: "Progress monitoring" }
+                ]
+            },
+            beauty: {
+                title: "Luxury Beauty & Wellness",
+                subtitle: "Premium treatments in a relaxing environment designed for your well-being",
+                heroImage: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&h=300&fit=crop",
+                logoImage: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=50&h=50&fit=crop",
+                features: [
+                    { icon: "💆", title: "Spa Treatments", desc: "Relaxing therapeutic treatments" },
+                    { icon: "💄", title: "Beauty Services", desc: "Professional makeup and skincare" },
+                    { icon: "✨", title: "Wellness Programs", desc: "Holistic self-care packages" }
+                ]
+            },
+            technology: {
+                title: "Innovative Tech Solutions",
+                subtitle: "Cutting-edge technology services to transform your business operations",
+                heroImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=300&fit=crop",
+                logoImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=50&h=50&fit=crop",
+                features: [
+                    { icon: "💻", title: "Custom Software", desc: "Tailored business solutions" },
+                    { icon: "☁️", title: "Cloud Services", desc: "Scalable infrastructure" },
+                    { icon: "🔒", title: "Cybersecurity", desc: "Advanced protection" }
+                ]
+            }
+        };
+
+        let currentData = null;
+
+        function startDemo() {
+            const name = document.getElementById('businessName').value;
+            const industry = document.getElementById('industry').value;
+            
+            if (!name || !industry) {
+                alert('Please fill in business name and industry!');
+                return;
+            }
+
+            document.getElementById('initialState').style.display = 'none';
+            document.getElementById('aiThinking').style.display = 'block';
+            document.getElementById('generateBtn').disabled = true;
+            document.getElementById('generateBtn').textContent = '🤖 Generating...';
+
+            simulateAI(name, industry);
+        }
+
+        function simulateAI(name, industry) {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 20 + 10;
+                if (progress > 100) progress = 100;
+                
+                document.getElementById('progressBar').style.width = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => showWebsite(name, industry), 500);
+                }
+            }, 300);
+        }
+
+        function showWebsite(name, industry) {
+            document.getElementById('aiThinking').style.display = 'none';
+            
+            const template = templates[industry] || templates.restaurant;
+            currentData = { name, industry, template };
+            
+            generateWebsite(currentData);
+            
+            document.getElementById('websitePreview').style.display = 'block';
+            document.getElementById('generateBtn').disabled = false;
+            document.getElementById('generateBtn').textContent = '🚀 Generate Website';
+        }
+
+        function generateWebsite(data) {
+            const { name, industry, template } = data;
+            
+            const nav = getNavigation(industry);
+            const pages = getPages(industry, template);
+            
+            const html = `
+                <div class="website-nav">
+                    <div class="website-logo">
+                        <img src="${template.logoImage}" alt="${name}" class="logo-image">
+                        ${name}
+                    </div>
+                    <div class="website-menu">
+                        <a href="#" class="nav-link active" data-page="home">Home</a>
+                        ${nav}
+                        <a href="#" class="nav-link" data-page="contact">Contact</a>
+                        ${industry === 'retail' ? '<div class="cart-icon" onclick="showCart()">🛒<span class="cart-count">3</span></div>' : ''}
+                    </div>
+                </div>
+
+                <div class="page-content active" id="page-home">
+                    <div class="hero-section">
+                        <h1 class="hero-title">${template.title}</h1>
+                        <p class="hero-subtitle">${template.subtitle}</p>
+                        <img src="${template.heroImage}" alt="${name}" class="hero-image">
+                        <br>
+                        <button class="cta-button" onclick="showMainPage('${industry}')">${getCTA(industry)}</button>
+                    </div>
+                    
+                    <div class="content-section">
+                        <div class="features-grid">
+                            ${template.features.map(f => `
+                                <div class="feature-card">
+                                    <div class="feature-icon">${f.icon}</div>
+                                    <h3 class="feature-title">${f.title}</h3>
+                                    <p class="feature-desc">${f.desc}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+
+                ${pages}
+
+                <div class="page-content" id="page-contact">
+                    <div class="content-section">
+                        <h2 style="text-align: center; color: #9333ea; margin-bottom: 30px;">Contact Us</h2>
+                        <div class="form-container">
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label>Name</label>
+                                    <input type="text" placeholder="Your name">
+                                </div>
+                                <div class="form-field">
+                                    <label>Email</label>
+                                    <input type="email" placeholder="your@email.com">
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label>Message</label>
+                                <textarea rows="4" placeholder="Your message..."></textarea>
+                            </div>
+                            <button class="cta-button" style="width: 100%; margin-top: 20px;" onclick="submitForm()">Send Message</button>
+                            <div class="success-message" id="contactSuccess">✅ Message sent successfully!</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('websiteContent').innerHTML = html;
+
+            // Add navigation handlers
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.dataset.page;
+                    showPage(page);
+                    setActiveNav(page);
+                });
+            });
+        }
+
+        function getNavigation(industry) {
+            const navs = {
+                restaurant: '<a href="#" class="nav-link" data-page="menu">Menu</a><a href="#" class="nav-link" data-page="reservations">Reservations</a>',
+                healthcare: '<a href="#" class="nav-link" data-page="services">Services</a><a href="#" class="nav-link" data-page="appointments">Appointments</a>',
+                retail: '<a href="#" class="nav-link" data-page="products">Products</a>',
+                fitness: '<a href="#" class="nav-link" data-page="classes">Classes</a>',
+                beauty: '<a href="#" class="nav-link" data-page="treatments">Treatments</a>',
+                technology: '<a href="#" class="nav-link" data-page="services">Services</a>'
+            };
+            return navs[industry] || '<a href="#" class="nav-link" data-page="services">Services</a>';
+        }
+
+        function getCTA(industry) {
+            const ctas = {
+                restaurant: 'View Menu & Reserve',
+                healthcare: 'Book Appointment',
+                retail: 'Shop Now',
+                fitness: 'View Classes',
+                beauty: 'Book Treatment',
+                technology: 'Our Services'
+            };
+            return ctas[industry] || 'Learn More';
+        }
+
+        function getPages(industry, template) {
+            switch(industry) {
+                case 'restaurant':
+                    return `
+                        <div class="page-content" id="page-menu">
+                            <div class="content-section">
+                                <h2 style="text-align: center; color: #9333ea; margin-bottom: 30px;">Our Menu</h2>
+                                <div class="menu-grid">
+                                    ${template.menu.map(item => `
+                                        <div class="menu-item">
+                                            <img src="${item.image}" alt="${item.name}" class="item-image">
+                                            <div class="item-info">
+                                                <h3 class="item-name">${item.name}</h3>
+                                                <div class="item-price">${item.price}</div>
+                                                <p class="item-description">${item.desc}</p>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-content" id="page-reservations">
+                            <div class="content-section">
+                                <h2 style="text-align: center; color: #9333ea; margin-bottom: 30px;">Make Reservation</h2>
+                                <div class="form-container">
+                                    <div class="form-row">
+                                        <div class="form-field">
+                                            <label>Date</label>
+                                            <input type="date">
+                                        </div>
+                                        <div class="form-field">
+                                            <label>Time</label>
+                                            <select>
+                                                <option>6:00 PM</option>
+                                                <option>7:00 PM</option>
+                                                <option>8:00 PM</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-field">
+                                            <label>Party Size</label>
+                                            <select>
+                                                <option>2 people</option>
+                                                <option>4 people</option>
+                                                <option>6 people</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-field">
+                                            <label>Name</label>
+                                            <input type="text" placeholder="Your name">
+                                        </div>
+                                    </div>
+                                    <button class="cta-button" style="width: 100%; margin-top: 20px;" onclick="makeReservation()">Reserve Table</button>
+                                    <div class="success-message" id="reservationSuccess">🎉 Reservation confirmed!</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                case 'healthcare':
+                    return `
+                        <div class="page-content" id="page-services">
+                            <div class="content-section">
+                                <h2 style="text-align: center; color: #9333ea; margin-bottom: 30px;">Our Services</h2>
+                                <div class="features-grid">
+                                    ${template.services.map(service => `
+                                        <div class="feature-card">
+                                            <div class="feature-icon">🏥</div>
+                                            <h3 class="feature-title">${service.name}</h3>
+                                            <p class="feature-desc">${service.desc}</p>
+                                            <div style="font-weight: 700; color: #9333ea; margin-top: 10px;">${service.price}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-content" id="page-appointments">
+                            <div class="content-section">
+                                <h2 style="text-align: center; color: #9333ea; margin-bottom: 30px;">Book Appointment</h2>
+                                <div class="form-container">
+                                    <div class="form-row">
+                                        <div class="form-field">
+                                            <label>Service</label>
+                                            <select>
+                                                <option>General Consultation</option>
+                                                <option>Specialist Care</option>
+                                                <option>Health Screening</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-field">
+                                            <label>Date</label>
+                                            <input type="date">
+                                        </div>
+                                    </div>
+                                    <div class="form-field">
+                                        <label>Available Times</label>
+                                        <div class="time-slots">
+                                            <div class="time-slot" onclick="selectTime(this)">9:00 AM</div>
+                                            <div class="time-slot" onclick="selectTime(this)">10:00 AM</div>
+                                            <div class="time-slot" onclick="selectTime(this)">2:00 PM</div>
+                                            <div class="time-slot" onclick="selectTime(this)">3:00 PM</div>
+                                        </div>
+                                    </div>
+                                    <button class="cta-button" style="width: 100%; margin-top: 20px;" onclick="bookAppointment()">Book Appointment</button>
+                                    <div class="success-message" id="appointmentSuccess">✅ Appointment booked!</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                case 'retail':
+                    return `
+                        <div class="page-content" id="page-products">
+                            <div class="content-section">
+                                <h2 style="text-align: center; color: #9333ea; margin-bottom: 30px;">Our Products</h2>
+                                <div class="products-grid">
+                                    ${template.products.map(product => `
+                                        <div class="product-card">
+                                            <img src="${product.image}" alt="${product.name}" class="item-image">
+                                            <div class="item-info">
+                                                <h3 class="item-name">${product.name}</h3>
+                                                <div class="item-price">${product.price}</div>
+                                                <p class="item-description">${product.desc}</p>
+                                                <button style="width: 100%; background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%); color: white; border: none; padding: 10px; border-radius: 20px; font-weight: 700; cursor: pointer;" onclick="addToCart('${product.name}')">Add to Cart</button>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                default:
+                    return `
+                        <div class="page-content" id="page-services">
+                            <div class="content-section">
+                                <h2 style="text-align: center; color: #9333ea; margin-bottom: 30px;">Our Services</h2>
+                                <div class="features-grid">
+                                    ${template.features.map(feature => `
+                                        <div class="feature-card">
+                                            <div class="feature-icon">${feature.icon}</div>
+                                            <h3 class="feature-title">${feature.title}</h3>
+                                            <p class="feature-desc">${feature.desc}</p>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+            }
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            const targetPage = document.getElementById(`page-${pageId}`);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+        }
+
+        function setActiveNav(pageId) {
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            const navLink = document.querySelector(`[data-page="${pageId}"]`);
+            if (navLink) {
+                navLink.classList.add('active');
+            }
+        }
+
+        function showMainPage(industry) {
+            const pageMap = {
+                restaurant: 'menu',
+                healthcare: 'appointments',
+                retail: 'products',
+                fitness: 'classes',
+                beauty: 'treatments',
+                technology: 'services'
+            };
+            const targetPage = pageMap[industry] || 'services';
+            showPage(targetPage);
+            setActiveNav(targetPage);
+        }
+
+        function makeReservation() {
+            document.getElementById('reservationSuccess').classList.add('show');
+            setTimeout(() => {
+                document.getElementById('reservationSuccess').classList.remove('show');
+            }, 3000);
+        }
+
+        function bookAppointment() {
+            document.getElementById('appointmentSuccess').classList.add('show');
+            setTimeout(() => {
+                document.getElementById('appointmentSuccess').classList.remove('show');
+            }, 3000);
+        }
+
+        function submitForm() {
+            document.getElementById('contactSuccess').classList.add('show');
+            setTimeout(() => {
+                document.getElementById('contactSuccess').classList.remove('show');
+            }, 3000);
+        }
+
+        function selectTime(element) {
+            document.querySelectorAll('.time-slot').forEach(slot => slot.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function addToCart(productName) {
+            alert(`✅ ${productName} added to cart!\n\n🛒 Full e-commerce functionality\n💳 Secure checkout ready\n📦 Inventory management\n🚚 Shipping integration`);
+        }
+
+        function showCart() {
+            alert(`🛒 Shopping Cart (3 items)\n\n• Premium T-Shirt - $29.99\n• Designer Jeans - $89.99\n• Luxury Sneakers - $129.99\n\nTotal: $249.97\n\n✅ Ready for checkout!`);
+        }
+
+        function openFullscreen() {
+            if (currentData) {
+                const modal = document.getElementById('fullscreenModal');
+                const fullscreenWebsite = document.getElementById('fullscreenWebsite');
+                const fullscreenTitle = document.getElementById('fullscreenTitle');
+                
+                fullscreenWebsite.innerHTML = document.getElementById('websiteContent').innerHTML;
+                fullscreenTitle.textContent = currentData.name;
+                
+                // Re-add event listeners
+                setupFullscreenEvents(fullscreenWebsite);
+                
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function setupFullscreenEvents(container) {
+            container.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.dataset.page;
+                    
+                    container.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+                    container.querySelector(`#page-${page}`).classList.add('active');
+                    
+                    container.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            container.querySelectorAll('.time-slot').forEach(slot => {
+                slot.addEventListener('click', function() {
+                    container.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        }
+
+        function closeFullscreen() {
+            document.getElementById('fullscreenModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function resetDemo() {
+            document.getElementById('websitePreview').style.display = 'none';
+            document.getElementById('aiThinking').style.display = 'none';
+            document.getElementById('initialState').style.display = 'block';
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('generateBtn').disabled = false;
+            document.getElementById('generateBtn').textContent = '🚀 Generate Website';
+            currentData = null;
+        }
+
+        function fillSample() {
+            const samples = [
+                { name: "Bella's Italian Bistro", industry: "restaurant", desc: "Authentic Italian restaurant with fresh pasta and traditional recipes" },
+                { name: "HealthFirst Medical", industry: "healthcare", desc: "Comprehensive healthcare with experienced physicians" },
+                { name: "StyleHub Fashion", industry: "retail", desc: "Premium fashion retailer with curated collections" },
+                { name: "FitLife Gym", industry: "fitness", desc: "Modern fitness center with personal training" },
+                { name: "Serenity Spa", industry: "beauty", desc: "Luxury spa with rejuvenating treatments" },
+                { name: "TechFlow Solutions", industry: "technology", desc: "Software development and cloud solutions" }
+            ];
+            
+            const sample = samples[Math.floor(Math.random() * samples.length)];
+            document.getElementById('businessName').value = sample.name;
+            document.getElementById('industry').value = sample.industry;
+            document.getElementById('description').value = sample.desc;
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeFullscreen();
+            }
+        });
+    </script>
+</body>
+</html>
