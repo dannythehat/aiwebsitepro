@@ -58,8 +58,8 @@ AIWebsitePro.demo = {
                     <h3 style="margin-bottom: 20px; color: #333;">🚀 Ready to Build Your Website?</h3>
                     <p style="margin-bottom: 30px; color: #666;">Get your professional website in just 2-5 minutes!</p>
                     <div style="margin-bottom: 20px;">
-                        <strong style="font-size: 24px; color: #3B82F6;">$297</strong>
-                        <span style="color: #666;"> - One-time payment</span>
+                        <strong style="font-size: 24px; color: #3B82F6;">Professional Pricing</strong>
+                        <span style="color: #666;"> - Contact for details</span>
                     </div>
                     <button onclick="this.parentElement.parentElement.remove()" style="background: #3B82F6; color: white; border: none; padding: 15px 30px; border-radius: 8px; cursor: pointer; margin-right: 10px;">Get Started Now</button>
                     <button onclick="this.parentElement.parentElement.remove()" style="background: #f0f0f0; color: #333; border: none; padding: 15px 30px; border-radius: 8px; cursor: pointer;">Close</button>
