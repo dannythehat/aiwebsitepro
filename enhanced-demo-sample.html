@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Vista Ristorante - Authentic Italian Cuisine Since 1987</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #2c1810;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200') center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+        
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .cta-btn {
+            background: #d4a574;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-btn:hover {
+            background: #c19660;
+            transform: translateY(-2px);
+        }
+        
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #2c1810;
+        }
+        
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .story-image {
+            height: 400px;
+            background: url('https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=600') center/cover;
+            border-radius: 10px;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .menu-category {
+            background: #f8f6f3;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        
+        .menu-category h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #d4a574;
+            border-bottom: 2px solid #d4a574;
+            padding-bottom: 10px;
+        }
+        
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dotted #ccc;
+        }
+        
+        .menu-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .item-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .item-description {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .item-price {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #d4a574;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .member-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: url('https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=300') center/cover;
+            margin: 0 auto 20px;
+        }
+        
+        .member-name {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        
+        .member-title {
+            color: #d4a574;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .member-bio {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .reservation-form {
+            background: #f8f6f3;
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .story-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Bella Vista Ristorante</h1>
+            <p>Experience the authentic flavors of Northern Italy in the heart of downtown Portland. Family-owned and operated since 1987, we bring you traditional recipes passed down through four generations.</p>
+            <button class="cta-btn">Make a Reservation</button>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="section">
+        <h2>Our Story</h2>
+        <div class="story-grid">
+            <div class="story-text">
+                <p>In 1987, Giuseppe and Maria Rossi left their small village in Tuscany with nothing but a dream and their grandmother's recipe book. They opened Bella Vista in a modest 30-seat space, serving authentic Northern Italian cuisine to Portland's growing food scene.</p>
+                
+                <p>Today, their son Marco continues the family tradition as head chef, having trained at the prestigious Culinary Institute of Florence. Our pasta is made fresh daily, our sauces simmer for hours using San Marzano tomatoes imported directly from Italy, and our wine list features over 150 selections from small Italian vineyards.</p>
+                
+                <p>We believe that dining is about more than just food – it's about family, tradition, and creating memories that last a lifetime. Every dish tells a story, every meal is a celebration.</p>
+            </div>
+            <div class="story-image"></div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="section">
+        <h2>Featured Menu</h2>
+        <div class="menu-grid">
+            <div class="menu-category">
+                <h3>Antipasti</h3>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Antipasto della Casa</h4>
+                        <p class="item-description">Selection of imported Italian meats, aged cheeses, marinated vegetables, and house-made focaccia</p>
+                    </div>
+                    <div class="item-price">$18</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Burrata con Prosciutto</h4>
+                        <p class="item-description">Creamy burrata cheese with 18-month aged Prosciutto di Parma, arugula, and balsamic reduction</p>
+                    </div>
+                    <div class="item-price">$16</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Bruschetta Trio</h4>
+                        <p class="item-description">Three varieties: classic tomato basil, wild mushroom, and ricotta with honey</p>
+                    </div>
+                    <div class="item-price">$14</div>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <h3>Primi Piatti</h3>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Pappardelle Bolognese</h4>
+                        <p class="item-description">House-made wide ribbon pasta with our signature meat sauce, slow-cooked for 6 hours</p>
+                    </div>
+                    <div class="item-price">$24</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Risotto ai Porcini</h4>
+                        <p class="item-description">Creamy Arborio rice with wild porcini mushrooms, truffle oil, and Parmigiano-Reggiano</p>
+                    </div>
+                    <div class="item-price">$22</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Gnocchi Gorgonzola</h4>
+                        <p class="item-description">Handmade potato gnocchi in creamy gorgonzola sauce with toasted walnuts</p>
+                    </div>
+                    <div class="item-price">$20</div>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <h3>Secondi Piatti</h3>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Osso Buco alla Milanese</h4>
+                        <p class="item-description">Braised veal shanks with saffron risotto, gremolata, and seasonal vegetables</p>
+                    </div>
+                    <div class="item-price">$38</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Branzino in Crosta</h4>
+                        <p class="item-description">Mediterranean sea bass baked in sea salt crust with lemon, herbs, and roasted potatoes</p>
+                    </div>
+                    <div class="item-price">$32</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Bistecca alla Fiorentina</h4>
+                        <p class="item-description">Dry-aged T-bone steak grilled over olive wood, served with rosemary roasted potatoes</p>
+                    </div>
+                    <div class="item-price">$45</div>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <h3>Dolci</h3>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Tiramisu della Nonna</h4>
+                        <p class="item-description">Traditional recipe with espresso-soaked ladyfingers, mascarpone, and cocoa</p>
+                    </div>
+                    <div class="item-price">$12</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Panna Cotta ai Frutti di Bosco</h4>
+                        <p class="item-description">Vanilla bean panna cotta with mixed berry compote and amaretti crumble</p>
+                    </div>
+                    <div class="item-price">$10</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Cannoli Siciliani</h4>
+                        <p class="item-description">Crispy shells filled with sweet ricotta, chocolate chips, and pistachios</p>
+                    </div>
+                    <div class="item-price">$11</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section">
+        <h2>Meet Our Team</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-photo"></div>
+                <h3 class="member-name">Marco Rossi</h3>
+                <p class="member-title">Executive Chef & Owner</p>
+                <p class="member-bio">Trained at the Culinary Institute of Florence, Marco brings 20 years of experience and a passion for authentic Italian cuisine. He sources ingredients directly from Italy and creates seasonal menus that honor traditional recipes while embracing modern techniques.</p>
+            </div>
+            <div class="team-member">
+                <div class="member-photo" style="background-image: url('https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=300')"></div>
+                <h3 class="member-name">Sofia Benedetti</h3>
+                <p class="member-title">Sous Chef</p>
+                <p class="member-bio">A graduate of the Rome Culinary Academy, Sofia specializes in handmade pasta and traditional sauces. Her attention to detail and creative flair have earned recognition from Portland's food critics and loyal customers alike.</p>
+            </div>
+            <div class="team-member">
+                <div class="member-photo" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300')"></div>
+                <h3 class="member-name">Antonio Moretti</h3>
+                <p class="member-title">Wine Director</p>
+                <p class="member-bio">With over 15 years in the wine industry, Antonio curates our extensive Italian wine collection. He travels to Italy twice yearly to discover small-production wines that perfectly complement our cuisine.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section class="section">
+        <h2>Make a Reservation</h2>
+        <form class="reservation-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="date">Preferred Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Preferred Time</label>
+                    <select id="time" name="time" required>
+                        <option value="">Select Time</option>
+                        <option value="5:00 PM">5:00 PM</option>
+                        <option value="5:30 PM">5:30 PM</option>
+                        <option value="6:00 PM">6:00 PM</option>
+                        <option value="6:30 PM">6:30 PM</option>
+                        <option value="7:00 PM">7:00 PM</option>
+                        <option value="7:30 PM">7:30 PM</option>
+                        <option value="8:00 PM">8:00 PM</option>
+                        <option value="8:30 PM">8:30 PM</option>
+                        <option value="9:00 PM">9:00 PM</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="party-size">Party Size</label>
+                    <select id="party-size" name="party-size" required>
+                        <option value="">Select Size</option>
+                        <option value="1">1 person</option>
+                        <option value="2">2 people</option>
+                        <option value="3">3 people</option>
+                        <option value="4">4 people</option>
+                        <option value="5">5 people</option>
+                        <option value="6">6 people</option>
+                        <option value="7">7 people</option>
+                        <option value="8">8 people</option>
+                        <option value="large">Large party (8+)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="occasion">Special Occasion</label>
+                    <select id="occasion" name="occasion">
+                        <option value="">None</option>
+                        <option value="birthday">Birthday</option>
+                        <option value="anniversary">Anniversary</option>
+                        <option value="business">Business Dinner</option>
+                        <option value="date">Date Night</option>
+                        <option value="celebration">Celebration</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="dietary">Dietary Restrictions or Special Requests</label>
+                <textarea id="dietary" name="dietary" rows="3" placeholder="Please let us know about any allergies, dietary restrictions, or special requests..."></textarea>
+            </div>
+            <button type="submit" class="cta-btn" style="width: 100%; margin-top: 20px;">Request Reservation</button>
+        </form>
+    </section>
+</body>
+</html>
