@@ -1,0 +1,35 @@
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const originalText = stat.textContent;
+                if (originalText.includes('.')) {
+                    const num = parseFloat(originalText);
+                    const increment = (Math.random() * 0.3) + 0.1;
+                    const newNum = num + increment;
+                    stat.textContent = newNum.toFixed(1);
+                } else if (originalText.includes(',')) {
+                    const num = parseInt(originalText.replace(',', ''));
+                    const increment = Math.floor(Math.random() * 50) + 10;
+                    const newNum = num + increment;
+                    stat.textContent = newNum.toLocaleString();
+                } else if (originalText.includes('%')) {
+                    const num = parseFloat(originalText.replace('%', ''));
+                    const increment = (Math.random() * 0.2) + 0.1;
+                    const newNum = Math.min(99.9, num + increment);
+                    stat.textContent = newNum.toFixed(1) + '%';
+                } else if (originalText.includes('+')) {
+                    const num = parseInt(originalText.replace('+', ''));
+                    const increment = Math.floor(Math.random() * 3) + 1;
+                    const newNum = num + increment;
+                    stat.textContent = newNum + '+';
+                }
+            });
+        }
+
+        // Update stats every 60 seconds
+        setInterval(animateStats, 60000);
+    </script>
+    
+    <!-- ENHANCED DEMO WITH 60+ LOGOS AND THEMES -->
+    <script src="demo-enhancements.js"></script>
+</body>
+</html>
