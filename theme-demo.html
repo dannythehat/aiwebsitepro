@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Website Pro - Theme System Demo</title>
+    <title>AI Website Pro - Breathtaking Theme Demo</title>
     
     <!-- Theme Framework CSS -->
     <link rel="stylesheet" href="themes/theme-framework.css">
@@ -20,13 +20,16 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(10px);
             z-index: 1000;
-            max-width: 300px;
+            max-width: 320px;
+            max-height: 80vh;
+            overflow-y: auto;
         }
         
         .demo-controls h3 {
             margin-bottom: 15px;
             color: #333;
             font-size: 1.1rem;
+            text-align: center;
         }
         
         .theme-buttons {
@@ -36,32 +39,83 @@
         }
         
         .theme-btn {
-            padding: 8px 12px;
+            padding: 12px 16px;
             border: 1px solid #ddd;
             background: white;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 0.9rem;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
         }
         
         .theme-btn:hover {
-            background: #f0f0f0;
+            background: #f8f9fa;
             transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
         .theme-btn.active {
             background: var(--theme-primary, #667eea);
             color: white;
             border-color: var(--theme-primary, #667eea);
+            transform: translateX(8px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        
+        .theme-btn.premium {
+            border: 2px solid #DAA520;
+            background: linear-gradient(135deg, #fff, #fffef7);
+            font-weight: 600;
+        }
+        
+        .theme-btn.premium::before {
+            content: '👑';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            font-size: 0.8rem;
+        }
+        
+        .theme-btn.premium:hover {
+            background: linear-gradient(135deg, #DAA520, #B8860B);
+            color: white;
+        }
+        
+        .theme-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .theme-desc {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            line-height: 1.3;
         }
         
         .current-theme {
             margin-top: 15px;
-            padding: 10px;
+            padding: 12px;
             background: rgba(0, 0, 0, 0.05);
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 0.8rem;
+        }
+        
+        .theme-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 8px;
+        }
+        
+        .feature-tag {
+            background: rgba(0,0,0,0.1);
+            color: #666;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.7rem;
         }
         
         /* Sample website content */
@@ -92,6 +146,11 @@
             padding: 1.5rem;
             border-radius: var(--theme-border-radius-lg);
             border-left: 4px solid var(--theme-accent);
+            transition: var(--theme-transition);
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
         }
         
         .menu-item h4 {
@@ -106,6 +165,59 @@
             margin-top: 1rem;
         }
         
+        /* Wine list styling */
+        .wine-section {
+            margin-top: 4rem;
+        }
+        
+        .wine-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .wine-category {
+            background: var(--theme-background);
+            border: 1px solid var(--theme-light);
+            border-radius: var(--theme-border-radius-lg);
+            padding: 2rem;
+            transition: var(--theme-transition);
+        }
+        
+        .wine-category:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--theme-shadow-lg);
+        }
+        
+        .wine-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1rem 0;
+            border-bottom: 1px dotted var(--theme-accent);
+        }
+        
+        .wine-item:last-child {
+            border-bottom: none;
+        }
+        
+        .wine-info h5 {
+            color: var(--theme-primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .wine-vintage {
+            font-size: 0.9rem;
+            color: var(--theme-text);
+            opacity: 0.7;
+        }
+        
+        .wine-price {
+            color: var(--theme-accent);
+            font-weight: bold;
+        }
+        
         @media (max-width: 768px) {
             .demo-controls {
                 position: relative;
@@ -113,6 +225,7 @@
                 right: 0;
                 margin-bottom: 2rem;
                 max-width: 100%;
+                max-height: none;
             }
             
             .sample-content {
@@ -124,12 +237,12 @@
 <body>
     <!-- Demo Controls -->
     <div class="demo-controls">
-        <h3>🎨 Try Different Themes</h3>
+        <h3>🎨 Breathtaking Themes</h3>
         <div class="theme-buttons" id="theme-buttons">
             <!-- Theme buttons will be populated by JavaScript -->
         </div>
         <div class="current-theme" id="current-theme">
-            Current: Default Theme
+            Current: Loading...
         </div>
     </div>
 
@@ -139,9 +252,10 @@
         <section class="hero">
             <div class="container">
                 <div class="hero-content">
-                    <h1 class="hero-title">Bella Vista Ristorante</h1>
-                    <p class="hero-subtitle">Experience authentic Italian cuisine in the heart of the city. Family recipes passed down through generations, served with love and passion.</p>
-                    <button class="btn btn-primary btn-lg">Make a Reservation</button>
+                    <h1 class="hero-title">Prime Cut Steakhouse</h1>
+                    <p class="hero-subtitle">Where tradition meets perfection. Experience the finest cuts of aged beef, expertly prepared and served in an atmosphere of timeless elegance.</p>
+                    <button class="btn btn-primary btn-lg">Reserve Your Table</button>
+                    <button class="btn btn-secondary btn-lg" style="margin-left: 1rem;">View Wine List</button>
                 </div>
             </div>
         </section>
@@ -149,20 +263,26 @@
         <!-- About Section -->
         <section class="section">
             <div class="container">
-                <h2 class="section-title">Our Story</h2>
-                <p class="section-subtitle">A family tradition since 1987</p>
+                <h2 class="section-title">The Art of Steakcraft</h2>
+                <p class="section-subtitle">Master butchers, premium cuts, timeless tradition</p>
                 
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="card">
-                            <h3 class="card-title">🍝 Authentic Recipes</h3>
-                            <p class="card-text">Every dish is prepared using traditional recipes passed down through four generations of Italian chefs. We source our ingredients directly from Italy to ensure authenticity.</p>
+                            <h3 class="card-title">🥩 Prime Aged Beef</h3>
+                            <p class="card-text">Our steaks are dry-aged for 28 days in our custom aging room, developing the deep, complex flavors that define exceptional beef. Only USDA Prime grade cuts make it to your plate.</p>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="card">
-                            <h3 class="card-title">👨‍🍳 Expert Chefs</h3>
-                            <p class="card-text">Our head chef trained at the Culinary Institute of Florence and brings 20 years of experience creating memorable dining experiences for our guests.</p>
+                            <h3 class="card-title">🔥 Master Grillmasters</h3>
+                            <p class="card-text">Our executive chef trained under legendary steakhouse masters, perfecting the art of high-heat searing and precise temperature control for the perfect crust and tender interior.</p>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <h3 class="card-title">🏛️ Timeless Atmosphere</h3>
+                            <p class="card-text">Rich mahogany, hand-stitched leather, and warm candlelight create an atmosphere of masculine sophistication that has defined great steakhouses for generations.</p>
                         </div>
                     </div>
                 </div>
@@ -172,31 +292,137 @@
         <!-- Menu Section -->
         <section class="section menu-section">
             <div class="container">
-                <h2 class="section-title">Featured Menu</h2>
+                <h2 class="section-title">Signature Steaks</h2>
                 
                 <div class="menu-items">
                     <div class="menu-item">
-                        <h4>Margherita Pizza</h4>
-                        <p>Fresh mozzarella, basil, and our signature tomato sauce on hand-tossed dough baked in our wood-fired oven.</p>
-                        <div class="menu-item-price">$18.99</div>
+                        <h4>Dry-Aged Ribeye</h4>
+                        <p>28-day dry-aged USDA Prime ribeye, 16oz of marbled perfection. Served with roasted bone marrow and our signature steak sauce.</p>
+                        <div class="menu-item-price">$68</div>
                     </div>
                     
                     <div class="menu-item">
-                        <h4>Osso Buco alla Milanese</h4>
-                        <p>Braised veal shanks with saffron risotto, gremolata, and seasonal vegetables. A true Northern Italian classic.</p>
-                        <div class="menu-item-price">$32.99</div>
+                        <h4>Porterhouse for Two</h4>
+                        <p>The king of steaks - 32oz of dry-aged perfection combining the best of filet mignon and New York strip. Carved tableside with ceremony.</p>
+                        <div class="menu-item-price">$125</div>
                     </div>
                     
                     <div class="menu-item">
-                        <h4>Seafood Risotto</h4>
-                        <p>Creamy Arborio rice with fresh seafood, white wine, and herbs. Finished with Parmigiano-Reggiano and truffle oil.</p>
-                        <div class="menu-item-price">$28.99</div>
+                        <h4>Wagyu Filet Mignon</h4>
+                        <p>8oz of Japanese A5 Wagyu, the pinnacle of beef luxury. Butter-tender with unparalleled marbling. Simply seasoned and perfectly seared.</p>
+                        <div class="menu-item-price">$95</div>
                     </div>
                     
                     <div class="menu-item">
-                        <h4>Tiramisu della Nonna</h4>
-                        <p>Traditional recipe with espresso-soaked ladyfingers, mascarpone, and cocoa. Made fresh daily by our pastry chef.</p>
-                        <div class="menu-item-price">$9.99</div>
+                        <h4>Tomahawk Ribeye</h4>
+                        <p>40oz bone-in ribeye, dry-aged and frenched for dramatic presentation. A showstopper that feeds 2-3 guests. Carved with theatrical flair.</p>
+                        <div class="menu-item-price">$145</div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <h4>Lobster Tail Addition</h4>
+                        <p>8oz cold-water lobster tail, butter-poached to perfection. The classic surf and turf companion to any of our premium steaks.</p>
+                        <div class="menu-item-price">$38</div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <h4>Truffle Mac & Cheese</h4>
+                        <p>Decadent five-cheese blend with black truffle shavings and crispy pancetta. The ultimate steakhouse side dish.</p>
+                        <div class="menu-item-price">$24</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wine Section -->
+        <section class="section wine-section">
+            <div class="container">
+                <h2 class="section-title">Sommelier's Selection</h2>
+                <p class="section-subtitle">Curated wines to complement the perfect steak</p>
+                
+                <div class="wine-categories">
+                    <div class="wine-category">
+                        <h3 style="color: var(--theme-accent); margin-bottom: 1.5rem;">🍷 Bold Reds</h3>
+                        
+                        <div class="wine-item">
+                            <div class="wine-info">
+                                <h5>Caymus Cabernet Sauvignon</h5>
+                                <div class="wine-vintage">Napa Valley 2020</div>
+                            </div>
+                            <div class="wine-price">$85</div>
+                        </div>
+                        
+                        <div class="wine-item">
+                            <div class="wine-info">
+                                <h5>Opus One</h5>
+                                <div class="wine-vintage">Napa Valley 2019</div>
+                            </div>
+                            <div class="wine-price">$425</div>
+                        </div>
+                        
+                        <div class="wine-item">
+                            <div class="wine-info">
+                                <h5>Barolo Brunate</h5>
+                                <div class="wine-vintage">Piedmont 2018</div>
+                            </div>
+                            <div class="wine-price">$165</div>
+                        </div>
+                    </div>
+                    
+                    <div class="wine-category">
+                        <h3 style="color: var(--theme-accent); margin-bottom: 1.5rem;">🥃 Premium Spirits</h3>
+                        
+                        <div class="wine-item">
+                            <div class="wine-info">
+                                <h5>Macallan 18 Year</h5>
+                                <div class="wine-vintage">Single Malt Scotch</div>
+                            </div>
+                            <div class="wine-price">$45</div>
+                        </div>
+                        
+                        <div class="wine-item">
+                            <div class="wine-info">
+                                <h5>Pappy Van Winkle 15</h5>
+                                <div class="wine-vintage">Kentucky Bourbon</div>
+                            </div>
+                            <div class="wine-price">$125</div>
+                        </div>
+                        
+                        <div class="wine-item">
+                            <div class="wine-info">
+                                <h5>Hennessy Paradis</h5>
+                                <div class="wine-vintage">Cognac</div>
+                            </div>
+                            <div class="wine-price">$85</div>
+                        </div>
+                    </div>
+                    
+                    <div class="wine-category">
+                        <h3 style="color: var(--theme-accent); margin-bottom: 1.5rem;">🍾 Champagne</h3>
+                        
+                        <div class="wine-item">
+                            <div class="wine-info">
+                                <h5>Dom Pérignon</h5>
+                                <div class="wine-vintage">Vintage 2013</div>
+                            </div>
+                            <div class="wine-price">$285</div>
+                        </div>
+                        
+                        <div class="wine-item">
+                            <div class="wine-info">
+                                <h5>Krug Grande Cuvée</h5>
+                                <div class="wine-vintage">Champagne</div>
+                            </div>
+                            <div class="wine-price">$195</div>
+                        </div>
+                        
+                        <div class="wine-item">
+                            <div class="wine-info">
+                                <h5>Cristal Brut</h5>
+                                <div class="wine-vintage">Vintage 2014</div>
+                            </div>
+                            <div class="wine-price">$385</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -205,22 +431,37 @@
         <!-- Features Section -->
         <section class="section">
             <div class="container">
-                <h2 class="section-title">Why Choose Us</h2>
+                <h2 class="section-title">The Prime Cut Experience</h2>
                 
                 <div class="features-grid">
                     <div class="card">
-                        <h3 class="card-title">🏆 Award Winning</h3>
-                        <p class="card-text">Recognized by the Italian Culinary Association and featured in Food & Wine magazine for our authentic approach to Italian cuisine.</p>
+                        <h3 class="card-title">🏆 Award Winning Excellence</h3>
+                        <p class="card-text">Recognized by Wine Spectator's Grand Award and James Beard Foundation. Our commitment to excellence has earned us a place among America's finest steakhouses.</p>
                     </div>
                     
                     <div class="card">
-                        <h3 class="card-title">🌿 Fresh Ingredients</h3>
-                        <p class="card-text">We source our ingredients daily from local farmers and import specialty items directly from Italy to ensure the highest quality.</p>
+                        <h3 class="card-title">👨‍🍳 Master Butchers</h3>
+                        <p class="card-text">Our in-house butchers hand-select each cut, ensuring only the finest marbling and perfect aging. Every steak is a masterpiece of the butcher's craft.</p>
                     </div>
                     
                     <div class="card">
-                        <h3 class="card-title">🍷 Extensive Wine List</h3>
-                        <p class="card-text">Our sommelier has curated over 150 Italian wines to perfectly complement our menu, from everyday favorites to rare vintages.</p>
+                        <h3 class="card-title">🔥 Custom Dry-Aging</h3>
+                        <p class="card-text">Our temperature and humidity-controlled aging room develops the deep, complex flavors that separate great steaks from ordinary ones.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="card-title">🍷 Sommelier Curated</h3>
+                        <p class="card-text">Our master sommelier has assembled over 500 wines, with particular strength in bold reds that complement our premium steaks perfectly.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="card-title">🎩 White Glove Service</h3>
+                        <p class="card-text">Our professional service team provides the attentive, knowledgeable service that defines the great steakhouse tradition.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="card-title">🏛️ Private Dining</h3>
+                        <p class="card-text">Elegant private dining rooms for business dinners, celebrations, and special occasions. Accommodating 8-50 guests in sophisticated comfort.</p>
                     </div>
                 </div>
             </div>
@@ -229,10 +470,10 @@
         <!-- CTA Section -->
         <section class="section">
             <div class="container text-center">
-                <h2 class="section-title">Ready to Dine With Us?</h2>
-                <p class="section-subtitle">Experience the taste of Italy in every bite</p>
-                <button class="btn btn-primary btn-lg">Book Your Table</button>
-                <button class="btn btn-outline btn-lg" style="margin-left: 1rem;">View Full Menu</button>
+                <h2 class="section-title">Reserve Your Experience</h2>
+                <p class="section-subtitle">Where every meal is a celebration of the finest things in life</p>
+                <button class="btn btn-primary btn-lg">Make Reservation</button>
+                <button class="btn btn-outline btn-lg" style="margin-left: 1rem;">Private Events</button>
             </div>
         </section>
     </div>
@@ -240,27 +481,29 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Bella Vista Ristorante. All rights reserved.</p>
-            <p>123 Italian Street, Foodie District | (555) 123-4567</p>
+            <p>&copy; 2024 Prime Cut Steakhouse. All rights reserved.</p>
+            <p>1847 Steakhouse Row, Financial District | (555) PRIME-CUT</p>
         </div>
     </footer>
 
     <!-- JavaScript -->
     <script src="themes/theme-manager.js"></script>
     <script src="themes/restaurant-themes.js"></script>
+    <script src="themes/luxury-steakhouse-theme.js"></script>
     
     <script>
         // Wait for theme manager to initialize
         document.addEventListener('DOMContentLoaded', function() {
-            // Give theme manager time to initialize
-            setTimeout(initializeDemo, 100);
+            setTimeout(initializeDemo, 200);
         });
         
         function initializeDemo() {
-            console.log('🎨 Initializing theme demo...');
+            console.log('🎨 Initializing breathtaking theme demo...');
             
-            // Get restaurant themes
-            const restaurantThemes = window.themeManager.getThemesByIndustry('restaurant');
+            // Get all restaurant themes
+            const allThemes = window.themeManager.getAllThemes();
+            const restaurantThemes = allThemes.filter(theme => theme.industry === 'restaurant');
+            
             console.log('Found themes:', restaurantThemes.length);
             
             // Populate theme buttons
@@ -272,15 +515,37 @@
                 return;
             }
             
+            // Sort themes - put luxury steakhouse first
+            restaurantThemes.sort((a, b) => {
+                if (a.id === 'luxury-steakhouse') return -1;
+                if (b.id === 'luxury-steakhouse') return 1;
+                return 0;
+            });
+            
             // Create theme buttons
             restaurantThemes.forEach((theme, index) => {
                 const button = document.createElement('button');
                 button.className = 'theme-btn';
-                button.textContent = theme.name;
+                
+                // Mark premium themes
+                if (theme.id === 'luxury-steakhouse' || theme.features?.includes('Ultra-Premium')) {
+                    button.classList.add('premium');
+                }
+                
+                button.innerHTML = `
+                    <div class="theme-name">${theme.name}</div>
+                    <div class="theme-desc">${theme.description}</div>
+                    <div class="theme-features">
+                        ${(theme.features || []).slice(0, 3).map(feature => 
+                            `<span class="feature-tag">${feature}</span>`
+                        ).join('')}
+                    </div>
+                `;
+                
                 button.onclick = () => applyThemeDemo(theme.id, button);
                 
-                // Make first theme active by default
-                if (index === 0) {
+                // Make luxury steakhouse active by default
+                if (theme.id === 'luxury-steakhouse') {
                     button.classList.add('active');
                     window.themeManager.applyTheme(theme.id);
                     updateCurrentTheme(theme);
@@ -294,7 +559,7 @@
                 updateCurrentTheme(event.detail.theme);
             });
             
-            console.log('✅ Theme demo initialized');
+            console.log('✅ Breathtaking theme demo initialized');
         }
         
         function applyThemeDemo(themeId, buttonElement) {
@@ -307,32 +572,57 @@
             buttonElement.classList.add('active');
             
             // Apply theme
-            window.themeManager.applyTheme(themeId);
+            const success = window.themeManager.applyTheme(themeId);
             
-            // Add visual feedback
-            buttonElement.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                buttonElement.style.transform = '';
-            }, 150);
+            if (success) {
+                // Add visual feedback
+                buttonElement.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    buttonElement.style.transform = '';
+                }, 150);
+                
+                // Add custom CSS if theme has it
+                const theme = window.themeManager.getTheme(themeId);
+                if (theme && theme.customCSS) {
+                    addCustomCSS(theme.customCSS, themeId);
+                }
+            }
+        }
+        
+        function addCustomCSS(css, themeId) {
+            // Remove existing custom CSS
+            const existingStyle = document.querySelector(`#custom-theme-${themeId}`);
+            if (existingStyle) {
+                existingStyle.remove();
+            }
+            
+            // Add new custom CSS
+            const style = document.createElement('style');
+            style.id = `custom-theme-${themeId}`;
+            style.textContent = css;
+            document.head.appendChild(style);
         }
         
         function updateCurrentTheme(theme) {
             const currentThemeDiv = document.getElementById('current-theme');
             if (currentThemeDiv && theme) {
+                const isPremium = theme.id === 'luxury-steakhouse' || theme.features?.includes('Ultra-Premium');
                 currentThemeDiv.innerHTML = `
-                    <strong>Current:</strong> ${theme.name}<br>
+                    <strong>${isPremium ? '👑 ' : ''}Current:</strong> ${theme.name}<br>
                     <small>${theme.description}</small>
+                    ${theme.mood ? `<br><small style="opacity: 0.6;">Mood: ${theme.mood}</small>` : ''}
                 `;
             }
         }
         
-        // Add some interactive effects
+        // Add enhanced interactive effects
         document.addEventListener('DOMContentLoaded', function() {
-            // Add hover effects to cards
+            // Enhanced card hover effects
             const cards = document.querySelectorAll('.card');
             cards.forEach(card => {
                 card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                    this.style.transform = 'translateY(-8px) rotateX(5deg)';
+                    this.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
                 });
                 
                 card.addEventListener('mouseleave', function() {
@@ -340,11 +630,19 @@
                 });
             });
             
-            // Add click effects to buttons
+            // Enhanced button effects
             const buttons = document.querySelectorAll('.btn');
             buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.05)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+                
                 button.addEventListener('click', function(e) {
-                    // Create ripple effect
+                    // Enhanced ripple effect
                     const ripple = document.createElement('span');
                     const rect = this.getBoundingClientRect();
                     const size = Math.max(rect.width, rect.height);
@@ -357,10 +655,10 @@
                         height: ${size}px;
                         left: ${x}px;
                         top: ${y}px;
-                        background: rgba(255, 255, 255, 0.3);
+                        background: rgba(255, 255, 255, 0.4);
                         border-radius: 50%;
                         transform: scale(0);
-                        animation: ripple 0.6s ease-out;
+                        animation: ripple 0.8s ease-out;
                         pointer-events: none;
                     `;
                     
@@ -368,19 +666,36 @@
                     this.style.overflow = 'hidden';
                     this.appendChild(ripple);
                     
-                    setTimeout(() => ripple.remove(), 600);
+                    setTimeout(() => ripple.remove(), 800);
+                });
+            });
+            
+            // Menu item hover effects
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
                 });
             });
         });
         
-        // Add ripple animation
+        // Enhanced ripple animation
         const style = document.createElement('style');
         style.textContent = `
             @keyframes ripple {
                 to {
-                    transform: scale(2);
+                    transform: scale(2.5);
                     opacity: 0;
                 }
+            }
+            
+            /* Smooth theme transitions */
+            * {
+                transition: color 0.4s ease, background-color 0.4s ease, border-color 0.4s ease !important;
             }
         `;
         document.head.appendChild(style);
