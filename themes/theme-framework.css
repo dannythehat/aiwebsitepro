@@ -1,0 +1,521 @@
+/* AI Website Pro - Theme Framework CSS */
+/* Dynamic theming system using CSS custom properties */
+
+:root {
+  /* Default Theme Colors */
+  --theme-primary: #667eea;
+  --theme-secondary: #764ba2;
+  --theme-accent: #f093fb;
+  --theme-background: #ffffff;
+  --theme-text: #333333;
+  --theme-light: #f8f9fa;
+  --theme-dark: #2c3e50;
+  --theme-white: #ffffff;
+  
+  /* Typography */
+  --theme-font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --theme-font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --theme-font-accent: 'Playfair Display', Georgia, serif;
+  
+  /* Layout */
+  --theme-border-radius: 8px;
+  --theme-border-radius-lg: 15px;
+  --theme-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --theme-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+  --theme-transition: all 0.3s ease;
+  
+  /* Spacing */
+  --theme-spacing-xs: 0.5rem;
+  --theme-spacing-sm: 1rem;
+  --theme-spacing-md: 2rem;
+  --theme-spacing-lg: 4rem;
+  --theme-spacing-xl: 6rem;
+}
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--theme-font-body);
+  color: var(--theme-text);
+  background-color: var(--theme-background);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--theme-font-heading);
+  color: var(--theme-primary);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2.5rem; }
+h3 { font-size: 2rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+a {
+  color: var(--theme-primary);
+  text-decoration: none;
+  transition: var(--theme-transition);
+}
+
+a:hover {
+  color: var(--theme-secondary);
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--theme-border-radius);
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--theme-transition);
+  text-decoration: none;
+  font-family: var(--theme-font-body);
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: var(--theme-primary);
+  color: var(--theme-white);
+}
+
+.btn-primary:hover {
+  background: var(--theme-secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--theme-shadow);
+}
+
+.btn-secondary {
+  background: var(--theme-secondary);
+  color: var(--theme-white);
+}
+
+.btn-secondary:hover {
+  background: var(--theme-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--theme-shadow);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--theme-primary);
+  border: 2px solid var(--theme-primary);
+}
+
+.btn-outline:hover {
+  background: var(--theme-primary);
+  color: var(--theme-white);
+}
+
+.btn-lg {
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  border-radius: var(--theme-border-radius-lg);
+}
+
+/* Cards */
+.card {
+  background: var(--theme-white);
+  border-radius: var(--theme-border-radius-lg);
+  box-shadow: var(--theme-shadow);
+  padding: var(--theme-spacing-md);
+  transition: var(--theme-transition);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--theme-shadow-lg);
+}
+
+.card-header {
+  margin-bottom: var(--theme-spacing-sm);
+  padding-bottom: var(--theme-spacing-sm);
+  border-bottom: 1px solid var(--theme-light);
+}
+
+.card-title {
+  color: var(--theme-primary);
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  color: var(--theme-text);
+  opacity: 0.8;
+}
+
+/* Layout Components */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--theme-spacing-sm);
+}
+
+.container-fluid {
+  width: 100%;
+  padding: 0 var(--theme-spacing-sm);
+}
+
+.section {
+  padding: var(--theme-spacing-xl) 0;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: var(--theme-primary);
+  text-align: center;
+  margin-bottom: var(--theme-spacing-lg);
+  font-family: var(--theme-font-heading);
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  color: var(--theme-text);
+  text-align: center;
+  margin-bottom: var(--theme-spacing-md);
+  opacity: 0.8;
+}
+
+/* Grid System */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+}
+
+.col {
+  flex: 1;
+  padding: 0 15px;
+}
+
+.col-1 { flex: 0 0 8.333333%; }
+.col-2 { flex: 0 0 16.666667%; }
+.col-3 { flex: 0 0 25%; }
+.col-4 { flex: 0 0 33.333333%; }
+.col-6 { flex: 0 0 50%; }
+.col-8 { flex: 0 0 66.666667%; }
+.col-9 { flex: 0 0 75%; }
+.col-12 { flex: 0 0 100%; }
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+  color: var(--theme-white);
+  padding: var(--theme-spacing-xl) 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  margin-bottom: var(--theme-spacing-sm);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: var(--theme-white);
+}
+
+.hero-subtitle {
+  font-size: 1.3rem;
+  margin-bottom: var(--theme-spacing-md);
+  opacity: 0.9;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Navigation */
+.navbar {
+  background: var(--theme-white);
+  box-shadow: var(--theme-shadow);
+  padding: var(--theme-spacing-sm) 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--theme-primary);
+  font-family: var(--theme-font-heading);
+}
+
+.navbar-nav {
+  display: flex;
+  list-style: none;
+  gap: var(--theme-spacing-md);
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--theme-text);
+  font-weight: 500;
+  transition: var(--theme-transition);
+}
+
+.nav-link:hover {
+  color: var(--theme-primary);
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: var(--theme-spacing-sm);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--theme-spacing-xs);
+  font-weight: 500;
+  color: var(--theme-text);
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--theme-light);
+  border-radius: var(--theme-border-radius);
+  font-size: 1rem;
+  transition: var(--theme-transition);
+  font-family: var(--theme-font-body);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--theme-primary);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Footer */
+.footer {
+  background: var(--theme-dark);
+  color: var(--theme-white);
+  padding: var(--theme-spacing-lg) 0;
+  text-align: center;
+}
+
+.footer a {
+  color: var(--theme-white);
+  opacity: 0.8;
+}
+
+.footer a:hover {
+  opacity: 1;
+  color: var(--theme-accent);
+}
+
+/* Utilities */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mb-1 { margin-bottom: var(--theme-spacing-xs); }
+.mb-2 { margin-bottom: var(--theme-spacing-sm); }
+.mb-3 { margin-bottom: var(--theme-spacing-md); }
+.mb-4 { margin-bottom: var(--theme-spacing-lg); }
+
+.mt-1 { margin-top: var(--theme-spacing-xs); }
+.mt-2 { margin-top: var(--theme-spacing-sm); }
+.mt-3 { margin-top: var(--theme-spacing-md); }
+.mt-4 { margin-top: var(--theme-spacing-lg); }
+
+.p-1 { padding: var(--theme-spacing-xs); }
+.p-2 { padding: var(--theme-spacing-sm); }
+.p-3 { padding: var(--theme-spacing-md); }
+.p-4 { padding: var(--theme-spacing-lg); }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .row {
+    flex-direction: column;
+  }
+  
+  .col-1, .col-2, .col-3, .col-4, .col-6, .col-8, .col-9 {
+    flex: 0 0 100%;
+  }
+  
+  .navbar-nav {
+    flex-direction: column;
+    gap: var(--theme-spacing-sm);
+  }
+}
+
+/* Industry-Specific Components */
+
+/* Restaurant Styles */
+.restaurant-menu {
+  background: var(--theme-light);
+  border-radius: var(--theme-border-radius-lg);
+  padding: var(--theme-spacing-md);
+}
+
+.menu-category {
+  margin-bottom: var(--theme-spacing-md);
+}
+
+.menu-category-title {
+  color: var(--theme-primary);
+  font-size: 1.5rem;
+  margin-bottom: var(--theme-spacing-sm);
+  border-bottom: 2px solid var(--theme-accent);
+  padding-bottom: var(--theme-spacing-xs);
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: var(--theme-spacing-sm) 0;
+  border-bottom: 1px dotted var(--theme-accent);
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item-info h4 {
+  color: var(--theme-text);
+  margin-bottom: 0.25rem;
+}
+
+.menu-item-description {
+  font-size: 0.9rem;
+  color: var(--theme-text);
+  opacity: 0.7;
+  font-style: italic;
+}
+
+.menu-item-price {
+  color: var(--theme-accent);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* Tech Styles */
+.tech-feature {
+  background: linear-gradient(135deg, var(--theme-dark), var(--theme-primary));
+  color: var(--theme-white);
+  padding: var(--theme-spacing-md);
+  border-radius: var(--theme-border-radius-lg);
+  border: 1px solid var(--theme-accent);
+  transition: var(--theme-transition);
+}
+
+.tech-feature:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  border-color: var(--theme-accent);
+}
+
+.tech-feature h3 {
+  color: var(--theme-accent);
+  margin-bottom: var(--theme-spacing-sm);
+}
+
+.tech-feature p {
+  opacity: 0.9;
+}
+
+/* Healthcare Styles */
+.healthcare-service {
+  background: var(--theme-white);
+  border: 2px solid var(--theme-light);
+  border-radius: var(--theme-border-radius-lg);
+  padding: var(--theme-spacing-md);
+  text-align: center;
+  transition: var(--theme-transition);
+}
+
+.healthcare-service:hover {
+  border-color: var(--theme-primary);
+  transform: translateY(-5px);
+  box-shadow: var(--theme-shadow-lg);
+}
+
+.service-icon {
+  font-size: 3rem;
+  color: var(--theme-primary);
+  margin-bottom: var(--theme-spacing-sm);
+  display: block;
+}
+
+.healthcare-service h3 {
+  color: var(--theme-primary);
+  margin-bottom: var(--theme-spacing-sm);
+}
+
+.healthcare-service p {
+  color: var(--theme-text);
+  opacity: 0.8;
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.6s ease-in;
+}
+
+.slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Theme-specific overrides will be applied via JavaScript */
