@@ -1,0 +1,224 @@
+{
+  "name": "AI Website Pro - Enhanced Theme & Logo Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "create-website",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-receive",
+      "name": "Receive Theme & Logo Data",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Extract and validate theme/logo data\nconst data = items[0].json;\n\n// Validate required fields\nif (!data.theme || !data.logo || !data.businessName || !data.industry) {\n  throw new Error('Missing required fields: theme, logo, businessName, or industry');\n}\n\n// Structure the data for processing\nconst processedData = {\n  businessName: data.businessName,\n  industry: data.industry,\n  theme: {\n    id: data.theme.id,\n    name: data.theme.name,\n    industry: data.theme.industry\n  },\n  logo: {\n    id: data.logo.id,\n    style: data.logoStyle,\n    icon: data.logo.icon\n  },\n  businessDescription: data.businessDescription || '',\n  timestamp: new Date().toISOString()\n};\n\nconsole.log('Processing website creation with theme:', processedData.theme.name);\n\nreturn [{ json: processedData }];"
+      },
+      "id": "process-data",
+      "name": "Process Theme & Logo Data",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "prompt": "=Create a professional logo for \"{{ $json.businessName }}\", a {{ $json.industry }} business. Style: {{ $json.logo.style }}. Theme: {{ $json.theme.name }}. Requirements: Clean, scalable, professional, industry-appropriate, vector-style. Colors should match the selected theme. High quality, modern design.",
+        "size": "1024x1024",
+        "quality": "hd",
+        "style": "vivid"
+      },
+      "id": "generate-logo",
+      "name": "Generate Custom Logo",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [680, 200]
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "model": "gpt-4",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are an expert web developer and content creator specializing in {{ $json.industry }} businesses. Create comprehensive, professional website content that matches the selected theme: {{ $json.theme.name }}. The content should be industry-specific, detailed, and authentic."
+            },
+            {
+              "role": "user", 
+              "content": "Create comprehensive website content for \"{{ $json.businessName }}\", a {{ $json.industry }} business using the {{ $json.theme.name }} theme. Include:\n\n1. Compelling hero section with tagline\n2. Detailed about section with backstory\n3. Comprehensive services/products with descriptions and realistic pricing\n4. Professional team member profiles (3-4 people)\n5. Customer testimonials (4-5 realistic ones)\n6. Contact information and call-to-action\n\nBusiness description: {{ $json.businessDescription }}\n\nMake it sound authentic, professional, and specific to the {{ $json.industry }} industry. Use the {{ $json.theme.name }} theme aesthetic in the tone and style."
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.7,
+          "maxTokens": 3000
+        }
+      },
+      "id": "generate-content",
+      "name": "Generate Industry-Specific Content",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [680, 400]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Load theme configuration based on selected theme\nconst themeConfigs = {\n  'rustic-charm': {\n    colors: {\n      primary: '#8B4513',\n      secondary: '#D2691E',\n      accent: '#F4A460',\n      background: '#FFF8DC',\n      text: '#2F1B14'\n    },\n    fonts: {\n      heading: 'Georgia, serif',\n      body: 'Crimson Text, serif'\n    },\n    style: 'farmhouse',\n    mood: 'warm, cozy, traditional'\n  },\n  'modern-elegance': {\n    colors: {\n      primary: '#2C3E50',\n      secondary: '#34495E',\n      accent: '#BDC3C7',\n      background: '#FFFFFF',\n      text: '#2C3E50'\n    },\n    fonts: {\n      heading: 'Helvetica Neue, sans-serif',\n      body: 'Arial, sans-serif'\n    },\n    style: 'minimalist',\n    mood: 'clean, sophisticated, professional'\n  },\n  'italian-classic': {\n    colors: {\n      primary: '#C0392B',\n      secondary: '#E74C3C',\n      accent: '#F1C40F',\n      background: '#FFFEF7',\n      text: '#2C1810'\n    },\n    fonts: {\n      heading: 'Playfair Display, serif',\n      body: 'Georgia, serif'\n    },\n    style: 'traditional',\n    mood: 'authentic, warm, European'\n  },\n  'silicon-valley': {\n    colors: {\n      primary: '#3498DB',\n      secondary: '#2980B9',\n      accent: '#E74C3C',\n      background: '#FFFFFF',\n      text: '#2C3E50'\n    },\n    fonts: {\n      heading: 'Inter, sans-serif',\n      body: 'Roboto, sans-serif'\n    },\n    style: 'corporate',\n    mood: 'professional, clean, trustworthy'\n  },\n  'medical-professional': {\n    colors: {\n      primary: '#3498DB',\n      secondary: '#2980B9',\n      accent: '#27AE60',\n      background: '#FFFFFF',\n      text: '#2C3E50'\n    },\n    fonts: {\n      heading: 'Lato, sans-serif',\n      body: 'Open Sans, sans-serif'\n    },\n    style: 'clinical',\n    mood: 'clean, trustworthy, professional'\n  }\n};\n\nconst data = items[0].json;\nconst themeConfig = themeConfigs[data.theme.id] || themeConfigs['modern-elegance'];\n\nreturn [{\n  json: {\n    ...data,\n    themeConfig: themeConfig\n  }\n}];"
+      },
+      "id": "load-theme-config",
+      "name": "Load Theme Configuration",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "prompt": "=Professional {{ $json.industry }} business photography for {{ $json.businessName }}. Style: {{ $json.themeConfig.mood }}. High quality, {{ $json.themeConfig.style }} aesthetic. Industry-appropriate imagery that matches the {{ $json.theme.name }} theme. Professional, clean, modern.",
+        "size": "1024x1024",
+        "quality": "hd",
+        "n": 3
+      },
+      "id": "generate-images",
+      "name": "Generate Contextual Images",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [1120, 200]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Assemble complete website with theme, content, logo, and images\nconst data = items[0].json;\nconst logoData = items[1].json; // From logo generation\nconst contentData = items[2].json; // From content generation\nconst imagesData = items[3].json; // From image generation\n\n// Create complete website structure\nconst website = {\n  metadata: {\n    businessName: data.businessName,\n    industry: data.industry,\n    theme: data.theme,\n    createdAt: new Date().toISOString()\n  },\n  \n  branding: {\n    logo: logoData.data?.[0]?.url || '',\n    colors: data.themeConfig.colors,\n    fonts: data.themeConfig.fonts\n  },\n  \n  content: {\n    raw: contentData.choices?.[0]?.message?.content || '',\n    parsed: parseContent(contentData.choices?.[0]?.message?.content || '')\n  },\n  \n  images: {\n    hero: imagesData.data?.[0]?.url || '',\n    gallery: imagesData.data?.map(img => img.url) || []\n  },\n  \n  theme: data.themeConfig\n};\n\n// Parse content into structured sections\nfunction parseContent(content) {\n  const sections = {\n    hero: extractSection(content, 'hero', 'tagline'),\n    about: extractSection(content, 'about', 'story'),\n    services: extractSection(content, 'services', 'products'),\n    team: extractSection(content, 'team', 'staff'),\n    testimonials: extractSection(content, 'testimonials', 'reviews'),\n    contact: extractSection(content, 'contact', 'information')\n  };\n  \n  return sections;\n}\n\nfunction extractSection(content, ...keywords) {\n  // Simple content extraction logic\n  const lines = content.split('\\n');\n  const sectionLines = [];\n  let capturing = false;\n  \n  for (const line of lines) {\n    const lowerLine = line.toLowerCase();\n    if (keywords.some(keyword => lowerLine.includes(keyword))) {\n      capturing = true;\n    }\n    \n    if (capturing) {\n      sectionLines.push(line);\n      if (line.trim() === '' && sectionLines.length > 3) {\n        break;\n      }\n    }\n  }\n  \n  return sectionLines.join('\\n').trim();\n}\n\nconsole.log('Website assembled successfully for:', data.businessName);\n\nreturn [{ json: website }];"
+      },
+      "id": "assemble-website",
+      "name": "Assemble Complete Website",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1340, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Generate final HTML website with theme styling\nconst website = items[0].json;\nconst { metadata, branding, content, images, theme } = website;\n\nconst html = `\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>${metadata.businessName} - Professional ${metadata.industry} Services</title>\n    <style>\n        * { margin: 0; padding: 0; box-sizing: border-box; }\n        \n        body {\n            font-family: ${theme.fonts.body};\n            line-height: 1.6;\n            color: ${theme.colors.text};\n            background: ${theme.colors.background};\n        }\n        \n        .container {\n            max-width: 1200px;\n            margin: 0 auto;\n            padding: 0 20px;\n        }\n        \n        header {\n            background: ${theme.colors.primary};\n            color: white;\n            padding: 1rem 0;\n            position: sticky;\n            top: 0;\n            z-index: 100;\n        }\n        \n        .header-content {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n        }\n        \n        .logo {\n            font-size: 1.5rem;\n            font-weight: bold;\n            font-family: ${theme.fonts.heading};\n        }\n        \n        nav ul {\n            display: flex;\n            list-style: none;\n            gap: 2rem;\n        }\n        \n        nav a {\n            color: white;\n            text-decoration: none;\n            transition: color 0.3s ease;\n        }\n        \n        nav a:hover {\n            color: ${theme.colors.accent};\n        }\n        \n        .hero {\n            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${images.hero}');\n            background-size: cover;\n            background-position: center;\n            height: 80vh;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            text-align: center;\n            color: white;\n        }\n        \n        .hero h1 {\n            font-size: 3.5rem;\n            margin-bottom: 1rem;\n            font-family: ${theme.fonts.heading};\n            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);\n        }\n        \n        .hero p {\n            font-size: 1.3rem;\n            margin-bottom: 2rem;\n            max-width: 600px;\n        }\n        \n        .cta-button {\n            background: ${theme.colors.accent};\n            color: white;\n            padding: 15px 30px;\n            border: none;\n            border-radius: 5px;\n            font-size: 1.1rem;\n            cursor: pointer;\n            transition: all 0.3s ease;\n            text-decoration: none;\n            display: inline-block;\n        }\n        \n        .cta-button:hover {\n            background: ${theme.colors.secondary};\n            transform: translateY(-2px);\n        }\n        \n        .section {\n            padding: 80px 0;\n        }\n        \n        .section h2 {\n            font-size: 2.5rem;\n            text-align: center;\n            margin-bottom: 3rem;\n            color: ${theme.colors.primary};\n            font-family: ${theme.fonts.heading};\n        }\n        \n        .content-grid {\n            display: grid;\n            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n            gap: 2rem;\n            margin-top: 2rem;\n        }\n        \n        .card {\n            background: white;\n            padding: 2rem;\n            border-radius: 10px;\n            box-shadow: 0 5px 15px rgba(0,0,0,0.1);\n            transition: transform 0.3s ease;\n        }\n        \n        .card:hover {\n            transform: translateY(-5px);\n        }\n        \n        .card h3 {\n            color: ${theme.colors.primary};\n            margin-bottom: 1rem;\n            font-family: ${theme.fonts.heading};\n        }\n        \n        footer {\n            background: ${theme.colors.primary};\n            color: white;\n            text-align: center;\n            padding: 2rem 0;\n        }\n        \n        @media (max-width: 768px) {\n            .hero h1 { font-size: 2.5rem; }\n            .header-content { flex-direction: column; gap: 1rem; }\n            nav ul { flex-direction: column; text-align: center; }\n        }\n    </style>\n</head>\n<body>\n    <header>\n        <div class=\"container\">\n            <div class=\"header-content\">\n                <div class=\"logo\">${metadata.businessName}</div>\n                <nav>\n                    <ul>\n                        <li><a href=\"#home\">Home</a></li>\n                        <li><a href=\"#about\">About</a></li>\n                        <li><a href=\"#services\">Services</a></li>\n                        <li><a href=\"#contact\">Contact</a></li>\n                    </ul>\n                </nav>\n            </div>\n        </div>\n    </header>\n    \n    <section class=\"hero\" id=\"home\">\n        <div class=\"hero-content\">\n            <h1>${metadata.businessName}</h1>\n            <p>Professional ${metadata.industry} services tailored to your needs</p>\n            <a href=\"#contact\" class=\"cta-button\">Get Started Today</a>\n        </div>\n    </section>\n    \n    <section class=\"section\" id=\"about\">\n        <div class=\"container\">\n            <h2>About Us</h2>\n            <div class=\"content\">\n                <p>${content.parsed.about || 'We are dedicated to providing exceptional service and results for our clients.'}</p>\n            </div>\n        </div>\n    </section>\n    \n    <section class=\"section\" id=\"services\">\n        <div class=\"container\">\n            <h2>Our Services</h2>\n            <div class=\"content-grid\">\n                <div class=\"card\">\n                    <h3>Service 1</h3>\n                    <p>Professional service description with detailed information about what we offer.</p>\n                </div>\n                <div class=\"card\">\n                    <h3>Service 2</h3>\n                    <p>Another professional service with comprehensive details and benefits.</p>\n                </div>\n                <div class=\"card\">\n                    <h3>Service 3</h3>\n                    <p>Additional service offering with complete information and value proposition.</p>\n                </div>\n            </div>\n        </div>\n    </section>\n    \n    <section class=\"section\" id=\"contact\">\n        <div class=\"container\">\n            <h2>Contact Us</h2>\n            <div class=\"content\" style=\"text-align: center;\">\n                <p>Ready to get started? Contact us today for a consultation.</p>\n                <div style=\"margin-top: 2rem;\">\n                    <p><strong>Phone:</strong> (555) 123-4567</p>\n                    <p><strong>Email:</strong> info@${metadata.businessName.toLowerCase().replace(/\\s+/g, '')}.com</p>\n                </div>\n            </div>\n        </div>\n    </section>\n    \n    <footer>\n        <div class=\"container\">\n            <p>&copy; 2024 ${metadata.businessName}. All rights reserved.</p>\n        </div>\n    </footer>\n</body>\n</html>\n`;\n\nreturn [{\n  json: {\n    website: website,\n    html: html,\n    filename: `${metadata.businessName.toLowerCase().replace(/\\s+/g, '-')}-website.html`\n  }\n}];"
+      },
+      "id": "generate-html",
+      "name": "Generate Final HTML",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1560, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": true,\n  \"message\": \"Website created successfully!\",\n  \"businessName\": \"{{ $json.website.metadata.businessName }}\",\n  \"theme\": \"{{ $json.website.metadata.theme.name }}\",\n  \"industry\": \"{{ $json.website.metadata.industry }}\",\n  \"websiteUrl\": \"https://your-domain.com/websites/{{ $json.filename }}\",\n  \"downloadUrl\": \"https://your-domain.com/download/{{ $json.filename }}\",\n  \"createdAt\": \"{{ $json.website.metadata.createdAt }}\"\n}"
+      },
+      "id": "respond-success",
+      "name": "Send Success Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1780, 300]
+    }
+  ],
+  "connections": {
+    "Receive Theme & Logo Data": {
+      "main": [
+        [
+          {
+            "node": "Process Theme & Logo Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Theme & Logo Data": {
+      "main": [
+        [
+          {
+            "node": "Generate Custom Logo",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate Industry-Specific Content",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Load Theme Configuration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Theme Configuration": {
+      "main": [
+        [
+          {
+            "node": "Generate Contextual Images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Custom Logo": {
+      "main": [
+        [
+          {
+            "node": "Assemble Complete Website",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Generate Industry-Specific Content": {
+      "main": [
+        [
+          {
+            "node": "Assemble Complete Website",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Generate Contextual Images": {
+      "main": [
+        [
+          {
+            "node": "Assemble Complete Website",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Assemble Complete Website": {
+      "main": [
+        [
+          {
+            "node": "Generate Final HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Final HTML": {
+      "main": [
+        [
+          {
+            "node": "Send Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
