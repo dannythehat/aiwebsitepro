@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Logo Generator - AI Website Pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .logo-generator {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        .generator-form {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(20px);
+        }
+        
+        .generator-form h2 {
+            color: #9333ea;
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #cccccc;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: #2a2a2a;
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .generate-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #9333ea, #7c3aed);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .logo-preview {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-generator">
+        <div class="generator-form">
+            <h2>🎨 AI Logo Generator</h2>
+            
+            <div class="form-group">
+                <label for="businessName">Business Name *</label>
+                <input type="text" id="businessName" placeholder="Enter your business name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="industry">Industry *</label>
+                <select id="industry" required>
+                    <option value="">Select Industry</option>
+                    <option value="restaurant">Restaurant & Food</option>
+                    <option value="healthcare">Healthcare & Medical</option>
+                    <option value="retail">Retail & E-commerce</option>
+                    <option value="fitness">Fitness & Wellness</option>
+                    <option value="beauty">Beauty & Spa</option>
+                    <option value="technology">Technology & Software</option>
+                    <option value="legal">Legal & Professional</option>
+                    <option value="realestate">Real Estate</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Logo Style</label>
+                <div class="style-options">
+                    <div class="style-option" data-style="minimalist">Minimalist</div>
+                    <div class="style-option" data-style="modern">Modern</div>
+                    <div class="style-option" data-style="creative">Creative</div>
+                    <div class="style-option" data-style="corporate">Corporate</div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="description">Additional Details</label>
+                <textarea id="description" placeholder="Describe your vision for the logo..." rows="3"></textarea>
+            </div>
+            
+            <button class="generate-btn" onclick="generateLogo()">🚀 Generate AI Logo</button>
+        </div>
+        
+        <div class="logo-preview">
+            <div class="preview-placeholder">
+                <h3>Your AI-Generated Logo Will Appear Here</h3>
+                <p>Fill out the form and click generate to see your custom logo!</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        async function generateLogo() {
+            const businessName = document.getElementById('businessName').value;
+            const industry = document.getElementById('industry').value;
+            const description = document.getElementById('description').value;
+            const selectedStyle = document.querySelector('.style-option.selected')?.dataset.style || 'modern';
+            
+            if (!businessName || !industry) {
+                alert('Please fill in business name and industry');
+                return;
+            }
+            
+            // Show loading
+            const preview = document.querySelector('.logo-preview');
+            preview.innerHTML = '<div class="loading"><div class="spinner"></div>Generating your logo...</div>';
+            
+            // This would connect to your n8n workflow
+            console.log('Generating logo for:', { businessName, industry, selectedStyle, description });
+            
+            // Simulate logo generation (replace with actual API call)
+            setTimeout(() => {
+                preview.innerHTML = `
+                    <img src="https://via.placeholder.com/300x300/9333ea/ffffff?text=${businessName}" class="generated-logo" alt="Generated Logo">
+                    <button class="download-btn" onclick="downloadLogo()">📥 Download Logo</button>
+                `;
+            }, 3000);
+        }
+        
+        // Style selection
+        document.querySelectorAll('.style-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.style-option').forEach(o => o.classList.remove('selected'));
+                option.classList.add('selected');
+            });
+        });
+        
+        function downloadLogo() {
+            alert('Logo download functionality - connect to your backend!');
+        }
+    </script>
+</body>
+</html>
